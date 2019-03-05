@@ -1,0 +1,53 @@
+
+PROG_DIR=/usr/bin/8100gc
+
+$PROG_DIR/./i2cset -y 0 0x40 0x0b 0x5a i
+$PROG_DIR/./i2cset -y 0 0x40 0x0f 0x55 i
+#turn on
+usleep 3000
+$PROG_DIR/./i2cset -y 0 0x40 0x04 0x01 i
+usleep 3000
+$PROG_DIR/./i2cset -y 0 0x40 0x3e 0x01 i
+usleep 3000
+$PROG_DIR/./i2cset -y 0 0x40 0x3f 0x01 i
+usleep 3000
+
+while :
+do
+usleep 300000
+printf "\r\n"
+event1=$( $PROG_DIR/./i2cget -y 0 0x40 0x2d b )
+usleep 3000
+event2=$( $PROG_DIR/./i2cget -y 0 0x40 0x2c b )
+usleep 3000
+printf " $event1 :  $event2   "
+
+if [ "$event1" = "0x01" ]
+then
+printf "  IN1 High : "
+$PROG_DIR/./i2cset -y 0 0x40 0x3f 0x00 i
+printf " De-Activate Valve 1  " 
+fi
+
+if [ "$event1" = "0x00" ]
+then
+printf "  IN1 Low : "
+$PROG_DIR/./i2cset -y 0 0x40 0x3f 0x01 i
+printf " Activate Valve 1  "
+fi
+
+if [ "$event2" = "0x01" ]
+then
+printf "  IN2 High : "
+$PROG_DIR/./i2cset -y 0 0x40 0x3e 0x00 i
+printf " De-Activate Valve 2  " 
+fi
+
+if [ "$event2" = "0x00" ]
+then
+printf "  IN2 Low  : "
+$PROG_DIR/./i2cset -y 0 0x40 0x3e 0x01 i
+printf " Activate Valve 2  "
+fi
+
+done

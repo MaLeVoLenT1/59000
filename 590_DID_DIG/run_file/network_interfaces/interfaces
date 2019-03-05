@@ -1,0 +1,13 @@
+# /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
+ 
+# The loopback interface
+auto lo
+iface lo inet loopback
+
+allow-hotplug eth0
+#iface eth0 inet dhcp
+iface eth0 inet static
+address 10.0.0.245
+gateway 10.0.0.5
+netmask 255.255.255.0
+broadcast 10.0.0.255

@@ -1,0 +1,3 @@
+echo 4 > /sys/class/gpio/rs232_4xx/data
+echo 2 > /sys/class/gpio/rtsctl/data
+./tha2300 -qws -display transformed:rot180

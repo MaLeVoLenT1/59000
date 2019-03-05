@@ -1,0 +1,1010 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>event_ioClass</class>
+ <widget class="QDialog" name="event_ioClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>480</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="palette">
+   <palette>
+    <active>
+     <colorrole role="WindowText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Button">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>170</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Light">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Midlight">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>212</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Dark">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>85</red>
+        <green>127</green>
+        <blue>127</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Mid">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>113</red>
+        <green>170</green>
+        <blue>170</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Text">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="BrightText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ButtonText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>170</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Shadow">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="AlternateBase">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>212</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ToolTipBase">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>220</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ToolTipText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </active>
+    <inactive>
+     <colorrole role="WindowText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Button">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>170</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Light">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Midlight">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>212</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Dark">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>85</red>
+        <green>127</green>
+        <blue>127</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Mid">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>113</red>
+        <green>170</green>
+        <blue>170</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Text">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="BrightText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ButtonText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>170</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Shadow">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="AlternateBase">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>212</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ToolTipBase">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>220</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ToolTipText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </inactive>
+    <disabled>
+     <colorrole role="WindowText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>85</red>
+        <green>127</green>
+        <blue>127</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Button">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>170</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Light">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Midlight">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>212</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Dark">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>85</red>
+        <green>127</green>
+        <blue>127</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Mid">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>113</red>
+        <green>170</green>
+        <blue>170</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Text">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>85</red>
+        <green>127</green>
+        <blue>127</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="BrightText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ButtonText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>85</red>
+        <green>127</green>
+        <blue>127</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>170</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>170</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Shadow">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="AlternateBase">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>170</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ToolTipBase">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>220</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ToolTipText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </disabled>
+   </palette>
+  </property>
+  <property name="windowTitle">
+   <string>event_io</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="2">
+    <spacer name="horizontalSpacer_8">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>64</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="2">
+    <widget class="QLabel" name="eventOnlabel">
+     <property name="maximumSize">
+      <size>
+       <width>38</width>
+       <height>19</height>
+      </size>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::NoContextMenu</enum>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="text">
+      <string>ON</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="3" colspan="7">
+    <spacer name="horizontalSpacer_9">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>235</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="10">
+    <widget class="QLabel" name="label_2">
+     <property name="maximumSize">
+      <size>
+       <width>38</width>
+       <height>19</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="text">
+      <string>OFF</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="11" colspan="2">
+    <spacer name="horizontalSpacer_10">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>60</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton">
+     <property name="text">
+      <string>IO - 1 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="6" rowspan="2">
+    <widget class="QPushButton" name="configioButton">
+     <property name="minimumSize">
+      <size>
+       <width>91</width>
+       <height>61</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Configure IO</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="7" colspan="2">
+    <spacer name="horizontalSpacer_7">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>39</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton">
+     <property name="text">
+      <string>IO - 1 b</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton_2">
+     <property name="text">
+      <string>IO - 2 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="4" colspan="2">
+    <spacer name="horizontalSpacer_6">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton_2">
+     <property name="text">
+      <string>IO - 2 b</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton_3">
+     <property name="text">
+      <string>IO - 3 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton_3">
+     <property name="text">
+      <string>IO - 3 b</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton_4">
+     <property name="text">
+      <string>IO - 4 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton_4">
+     <property name="text">
+      <string>IO - 4 b</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton_5">
+     <property name="text">
+      <string>IO - 5 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton_5">
+     <property name="text">
+      <string>IO - 5 b</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="6" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton_6">
+     <property name="text">
+      <string>IO - 6 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="4" colspan="5">
+    <spacer name="horizontalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>179</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="6" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton_6">
+     <property name="text">
+      <string>IO - 6 b</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="12">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="7" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton_7">
+     <property name="text">
+      <string>IO - 7 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton_7">
+     <property name="text">
+      <string>IO - 7 b</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton_8">
+     <property name="text">
+      <string>IO - 8 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton_8">
+     <property name="text">
+      <string>IO - 8 b</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton_9">
+     <property name="text">
+      <string>IO - 9 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton_9">
+     <property name="text">
+      <string>IO - 9 b</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton_10">
+     <property name="text">
+      <string>IO - 10 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="4">
+    <spacer name="horizontalSpacer_11">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>29</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="10" column="5" rowspan="2" colspan="3">
+    <widget class="QPushButton" name="EeventpushButton">
+     <property name="minimumSize">
+      <size>
+       <width>112</width>
+       <height>61</height>
+      </size>
+     </property>
+     <property name="palette">
+      <palette>
+       <active>
+        <colorrole role="Button">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>85</red>
+           <green>85</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </active>
+       <inactive>
+        <colorrole role="Button">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>85</red>
+           <green>85</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </inactive>
+       <disabled>
+        <colorrole role="Button">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>85</red>
+           <green>85</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </disabled>
+      </palette>
+     </property>
+     <property name="text">
+      <string>Start EXT EVENT</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="8">
+    <spacer name="horizontalSpacer_12">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>29</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="10" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton_10">
+     <property name="text">
+      <string>IO - 10 b</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton_11">
+     <property name="text">
+      <string>IO - 11 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton_11">
+     <property name="text">
+      <string>IO - 11 b</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton_12">
+     <property name="text">
+      <string>IO - 12 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton_12">
+     <property name="text">
+      <string>IO - 12 b</string>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton_13">
+     <property name="text">
+      <string>IO - 13 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton_13">
+     <property name="text">
+      <string>IO - 13 b</string>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton_14">
+     <property name="text">
+      <string>IO - 14 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton_14">
+     <property name="text">
+      <string>IO - 14 b</string>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton_15">
+     <property name="text">
+      <string>IO - 15 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton_15">
+     <property name="text">
+      <string>IO - 15 b</string>
+     </property>
+    </widget>
+   </item>
+   <item row="16" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton_16">
+     <property name="text">
+      <string>IO - 16 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="16" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton_16">
+     <property name="text">
+      <string>IO - 16 b</string>
+     </property>
+    </widget>
+   </item>
+   <item row="17" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton_17">
+     <property name="text">
+      <string>IO - 17 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="17" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton_17">
+     <property name="text">
+      <string>IO - 17 b</string>
+     </property>
+    </widget>
+   </item>
+   <item row="18" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton_18">
+     <property name="text">
+      <string>IO - 18 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="18" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton_18">
+     <property name="text">
+      <string>IO - 18 b</string>
+     </property>
+    </widget>
+   </item>
+   <item row="19" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton_19">
+     <property name="text">
+      <string>IO - 19 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="19" column="4" colspan="2">
+    <spacer name="horizontalSpacer_4">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="19" column="6" rowspan="2">
+    <widget class="QPushButton" name="OkButton_2">
+     <property name="minimumSize">
+      <size>
+       <width>81</width>
+       <height>61</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>OK</string>
+     </property>
+    </widget>
+   </item>
+   <item row="19" column="7" colspan="2">
+    <spacer name="horizontalSpacer_5">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>39</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="19" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton_19">
+     <property name="text">
+      <string>IO - 19 b</string>
+     </property>
+    </widget>
+   </item>
+   <item row="20" column="1" colspan="3">
+    <widget class="QPushButton" name="IOapushButton_20">
+     <property name="text">
+      <string>IO - 20 a</string>
+     </property>
+    </widget>
+   </item>
+   <item row="20" column="9" colspan="3">
+    <widget class="QPushButton" name="IObpushButton_20">
+     <property name="text">
+      <string>IO - 20 b</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>OkButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>event_ioClass</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>280</x>
+     <y>743</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>265</x>
+     <y>669</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
