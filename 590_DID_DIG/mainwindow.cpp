@@ -310,6 +310,7 @@ void MainWindow::changeSerialPort( int temp)
 	int portIndex = 0;
     int i = 0;
     int test;
+    int portNum = 2;
 
     test = temp;
 
@@ -328,12 +329,12 @@ void MainWindow::changeSerialPort( int temp)
 
 #ifdef Q_OS_WIN32
                 //const int iface = 0;
-        		const int iface = 2;//added wtr not called anyway 2 for emac, 4 for bbrs485
+        		const int iface = portNum;//added wtr not called anyway 2 for emac, 4 for bbrs485
                 const QString port = embracedString( ports[iface].friendName ) +
                                                                         ":";
 #else
                 //const int iface = 1;
-                const int iface = 2;// USB 4;2 emac - change name in qxternal.cpp ttyS2 for emac, ttyUSB0 for bbrs483
+                const int iface = portNum;// USB 4;2 emac - change name in qxternal.cpp ttyS2 for emac, ttyUSB0 for bbrs483
                 const QString port = ports[iface].physName;
 #endif
 
@@ -549,7 +550,80 @@ void MainWindow::writeRecipeSetpoint(int slaveID, int addr, double recipeSP)
         }
         modbus_close(m_modbus);
 }
+// ReadTrueValue made by Dione 5/13/2019
+int MainWindow::readTrueValue(int slaveID){
+	changeSerialPort(5);
 
+	delay(200);
+
+	if( m_modbus == NULL ){
+	   qDebug() << "WHOOPS!";
+	   return 0;
+	}
+
+	int tempPV = 999;
+	const int addr = 0;
+	int num;
+	int ret = -1;
+
+	num = 1;
+	uint8_t dest[32];// 1024
+	uint16_t * dest16 = (uint16_t *) dest;//wtr removed 1-21-13 for test was removed above
+
+	memset( dest, 0, 32 );//1024
+
+	bool is16Bit = false;
+	modbus_set_slave( m_modbus, slaveID );
+
+	modbus_rtu_set_echohw_mode(m_modbus, 0x01);
+
+	ret = modbus_read_registers( m_modbus, addr, num, dest16 );
+	is16Bit = true;
+
+	if( ret == num  ){
+
+	   for( int i = 0; i < num; ++i ){
+	       int data = is16Bit ? dest16[i] : dest[i];
+	       tempPV = data;
+	   }
+
+
+	}
+	else{
+	   if( ret < 0 ){
+	       if(
+	    		   #ifdef WIN32
+	                                        errno == WSAETIMEDOUT ||
+					#endif
+	                                        errno == EIO
+	                                                                                                                                        )
+	                        {
+	                                QMessageBox::critical( this, tr( "I/O error" ),
+	                                        tr( "I/O error: did not receive any data from slave." ) );
+	                        }
+	                        else
+	                        {
+	                        	qDebug() << "FIX Error Condition - Read Temp value";
+	/*                        		QMessageBox::critical( this, tr( "Protocol error" ),
+	                                        tr( "Slave threw exception \"%1\" or "
+	                                                "function not implemented." ).
+	                                                                arg( modbus_strerror( errno ) ) );//9-11-14*/
+	                        }
+	                }
+	                else
+	                {
+	                        QMessageBox::critical( this, tr( "Protocol error" ),
+	                                tr( "Number of registers returned does not "
+	                                        "match number of registers "
+	                                                        "requested!" ) );
+	                }
+	        }
+
+
+	qDebug() << "readTrueValue() Finished.";
+	    return tempPV;
+
+}
 void MainWindow::readTempValue(int slaveID)// Read temp process value from ram addr 0
 {
 	changeSerialPort(2);//
@@ -1976,7 +2050,40 @@ void MainWindow::heatersOff(void){// ok // Need relay to cut power, normally ope
 	delay(MDT);
 	writeRecipeSetpoint(0x04, 0x01, 25);
 }
+void MainWindow::setCollumnTemp(QString txt){
+		double val3;
+		bool okv[1];
+		int tempVar;
 
+		val3 = txt.toDouble(okv);
+
+
+
+		qDebug("detConfigure delete PolPop val3  = %f", val3);
+
+		//ui.didPolVCtlSpinBox->setValue(val3);
+
+		tempVar = txt.toInt();
+		qDebug() << "OVEN TEMP SET TO: %d" << tempVar;
+		//ui.column_temp_box->display(txt_dc.toInt());
+
+		//test.
+		writeTempSetpoint(1,tempVar);
+}
+
+void MainWindow::setDetectorTemp(QString txt){
+		double val3;
+		bool okv[1];
+		int tempVar;
+
+		val3 = txt.toDouble(okv);
+
+		qDebug("detConfigure deleteNuMPop val3  = %f", val3);
+		tempVar = txt.toInt();
+
+		qDebug() << "********OVEN TEMP SET TO: %d" << tempVar;
+		writeTempSetpoint(2,tempVar);
+}
 ////////////////////////////////////////////SPI/////////////////////END
 //*************** END MainWindow initialization FUNCTIONS ************************
 

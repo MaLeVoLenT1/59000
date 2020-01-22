@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'gainpopup.ui'
 **
-** Created: Tue Mar 5 14:05:07 2019
+** Created: Mon Aug 19 13:25:32 2019
 **      by: Qt User Interface Compiler version 4.6.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -16,6 +16,7 @@
 #include <QtGui/QButtonGroup>
 #include <QtGui/QDialog>
 #include <QtGui/QHeaderView>
+#include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
 #include <QtGui/QPushButton>
 
@@ -40,16 +41,17 @@ public:
     QPushButton *pushButton_8;
     QPushButton *pushButton_2;
     QPushButton *pushButton_4;
+    QLabel *rangelabel;
 
     void setupUi(QDialog *gainPopUpClass)
     {
         if (gainPopUpClass->objectName().isEmpty())
             gainPopUpClass->setObjectName(QString::fromUtf8("gainPopUpClass"));
-        gainPopUpClass->resize(329, 177);
+        gainPopUpClass->resize(358, 233);
         pushButton_10 = new QPushButton(gainPopUpClass);
         pushButton_10->setObjectName(QString::fromUtf8("pushButton_10"));
         pushButton_10->setEnabled(false);
-        pushButton_10->setGeometry(QRect(10, 130, 40, 40));
+        pushButton_10->setGeometry(QRect(10, 180, 40, 40));
         pushButton_10->setCursor(QCursor(Qt::BlankCursor));
         pushButton_Clear = new QPushButton(gainPopUpClass);
         pushButton_Clear->setObjectName(QString::fromUtf8("pushButton_Clear"));
@@ -57,7 +59,7 @@ public:
         pushButton_Clear->setCursor(QCursor(Qt::BlankCursor));
         pushButton_1 = new QPushButton(gainPopUpClass);
         pushButton_1->setObjectName(QString::fromUtf8("pushButton_1"));
-        pushButton_1->setGeometry(QRect(10, 10, 40, 40));
+        pushButton_1->setGeometry(QRect(10, 30, 40, 40));
         pushButton_1->setCursor(QCursor(Qt::BlankCursor));
         enterButton = new QPushButton(gainPopUpClass);
         enterButton->setObjectName(QString::fromUtf8("enterButton"));
@@ -68,35 +70,35 @@ public:
         pushButton_11 = new QPushButton(gainPopUpClass);
         pushButton_11->setObjectName(QString::fromUtf8("pushButton_11"));
         pushButton_11->setEnabled(false);
-        pushButton_11->setGeometry(QRect(60, 130, 40, 40));
+        pushButton_11->setGeometry(QRect(70, 180, 40, 40));
         pushButton_11->setCursor(QCursor(Qt::BlankCursor));
         pushButton_7 = new QPushButton(gainPopUpClass);
         pushButton_7->setObjectName(QString::fromUtf8("pushButton_7"));
         pushButton_7->setEnabled(false);
-        pushButton_7->setGeometry(QRect(10, 90, 40, 40));
+        pushButton_7->setGeometry(QRect(10, 130, 40, 40));
         pushButton_7->setCursor(QCursor(Qt::BlankCursor));
         lineEdit = new QLineEdit(gainPopUpClass);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setGeometry(QRect(170, 10, 151, 40));
+        lineEdit->setGeometry(QRect(190, 10, 151, 40));
         pushButton_9 = new QPushButton(gainPopUpClass);
         pushButton_9->setObjectName(QString::fromUtf8("pushButton_9"));
         pushButton_9->setEnabled(false);
-        pushButton_9->setGeometry(QRect(110, 90, 40, 40));
+        pushButton_9->setGeometry(QRect(130, 130, 40, 40));
         pushButton_9->setCursor(QCursor(Qt::BlankCursor));
         pushButton_12 = new QPushButton(gainPopUpClass);
         pushButton_12->setObjectName(QString::fromUtf8("pushButton_12"));
         pushButton_12->setEnabled(false);
-        pushButton_12->setGeometry(QRect(110, 130, 40, 40));
+        pushButton_12->setGeometry(QRect(130, 180, 40, 40));
         pushButton_12->setCursor(QCursor(Qt::BlankCursor));
         pushButton_6 = new QPushButton(gainPopUpClass);
         pushButton_6->setObjectName(QString::fromUtf8("pushButton_6"));
         pushButton_6->setEnabled(false);
-        pushButton_6->setGeometry(QRect(110, 50, 40, 40));
+        pushButton_6->setGeometry(QRect(130, 80, 40, 40));
         pushButton_6->setCursor(QCursor(Qt::BlankCursor));
         pushButton_5 = new QPushButton(gainPopUpClass);
         pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
         pushButton_5->setEnabled(false);
-        pushButton_5->setGeometry(QRect(60, 50, 40, 40));
+        pushButton_5->setGeometry(QRect(70, 80, 40, 40));
         pushButton_5->setCursor(QCursor(Qt::BlankCursor));
         detOkButton = new QPushButton(gainPopUpClass);
         detOkButton->setObjectName(QString::fromUtf8("detOkButton"));
@@ -106,21 +108,27 @@ public:
         detOkButton->setFocusPolicy(Qt::NoFocus);
         pushButton_3 = new QPushButton(gainPopUpClass);
         pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
-        pushButton_3->setGeometry(QRect(110, 10, 40, 40));
+        pushButton_3->setGeometry(QRect(130, 30, 40, 40));
         pushButton_3->setCursor(QCursor(Qt::BlankCursor));
         pushButton_8 = new QPushButton(gainPopUpClass);
         pushButton_8->setObjectName(QString::fromUtf8("pushButton_8"));
         pushButton_8->setEnabled(false);
-        pushButton_8->setGeometry(QRect(60, 90, 40, 40));
+        pushButton_8->setGeometry(QRect(70, 130, 40, 40));
         pushButton_8->setCursor(QCursor(Qt::BlankCursor));
         pushButton_2 = new QPushButton(gainPopUpClass);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-        pushButton_2->setGeometry(QRect(60, 10, 40, 40));
+        pushButton_2->setGeometry(QRect(70, 30, 40, 40));
         pushButton_2->setCursor(QCursor(Qt::BlankCursor));
         pushButton_4 = new QPushButton(gainPopUpClass);
         pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
-        pushButton_4->setGeometry(QRect(10, 50, 40, 40));
+        pushButton_4->setGeometry(QRect(10, 80, 40, 40));
         pushButton_4->setCursor(QCursor(Qt::BlankCursor));
+        rangelabel = new QLabel(gainPopUpClass);
+        rangelabel->setObjectName(QString::fromUtf8("rangelabel"));
+        rangelabel->setGeometry(QRect(10, 0, 161, 31));
+        QFont font;
+        font.setPointSize(9);
+        rangelabel->setFont(font);
 
         retranslateUi(gainPopUpClass);
         QObject::connect(enterButton, SIGNAL(pressed()), gainPopUpClass, SLOT(processNumIn()));
@@ -160,6 +168,14 @@ public:
         pushButton_8->setText(QApplication::translate("gainPopUpClass", "8", 0, QApplication::UnicodeUTF8));
         pushButton_2->setText(QApplication::translate("gainPopUpClass", "2", 0, QApplication::UnicodeUTF8));
         pushButton_4->setText(QApplication::translate("gainPopUpClass", "4", 0, QApplication::UnicodeUTF8));
+        rangelabel->setText(QApplication::translate("gainPopUpClass", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+"<tr>\n"
+"<td style=\"border: none;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt; font-weight:600;\">Gain Adjust Input</span></p></td></tr></table></body></html>", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

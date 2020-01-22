@@ -61,11 +61,16 @@ public slots:
     void writeTempSetpoint(int slaveID, int tempSP);
     void writeRecipeSetpoint(int slaveID, int addr, double recipeSP);
     void readTempValue(int slaveID);
+    int readTrueValue(int slaveID);
     int readRecipeValue(int slaveID, int addr);//const int addr
     int readRetry(int slaveID, int addr);
 //    void ReadZoneRampSoakParameters(void);
     void sendRampParameters(void);
     void testMainSlot(int a, int b);//01/12/14
+
+    //Added by Dione from detconfigure
+    void setCollumnTemp(QString txt);
+    void setDetectorTemp(QString txt);
 
     // i2c prototypes //
 	int init_i2c(void);

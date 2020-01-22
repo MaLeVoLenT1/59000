@@ -4,6 +4,7 @@
 #include <QtGui/QDialog>
 #include "ui_gainpopup.h"
 #include "detconfigure.h"
+#include "_590_did_dig.h"
 
 class gainPopUp : public QDialog
 {
@@ -29,6 +30,7 @@ public slots:
     void num_minus(void);
     void num_period(void);
     void num_Clear(void);
+    void detectRange(int Range);
 
 private:
     Ui::gainPopUpClass ui;

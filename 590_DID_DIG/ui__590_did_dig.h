@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file '_590_did_dig.ui'
 **
-** Created: Tue Mar 5 14:05:07 2019
+** Created: Thu Oct 10 11:59:50 2019
 **      by: Qt User Interface Compiler version 4.6.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -25,6 +25,7 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QRadioButton>
 #include <QtGui/QStatusBar>
+#include <QtGui/QToolBar>
 #include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -62,7 +63,6 @@ public:
     QPushButton *v1_pushButton;
     QPushButton *v3_pushButton;
     QRadioButton *R2;
-    QLabel *label_8;
     QRadioButton *R3;
     QRadioButton *R4;
     QLabel *detConfDialogLabel_2;
@@ -85,15 +85,25 @@ public:
     QLabel *polarize_volts_label;
     QPushButton *detDIDZeroButton;
     QPushButton *detDIDOffSetBLCurrentButton;
-    QPushButton *detSigReadButton;
     QPushButton *detDIDHvButton;
     QPushButton *detDIDImAButton;
     QPushButton *detDIDPOLButton;
     QPushButton *detDIDSIGButton;
     QPushButton *colTempPopUp;
     QPushButton *detTempPopUp;
+    QLabel *collumn_temp_set_label;
+    QLabel *detector_temp_set_label;
+    QLineEdit *collumnTempLine;
+    QLineEdit *detectorTempLine;
+    QLineEdit *gainAdjustLine;
+    QCheckBox *externalCheckbox;
+    QPushButton *externalButton;
+    QLabel *polarize_volts_label_3;
     QMenuBar *menubar;
     QStatusBar *statusbar;
+    QToolBar *toolBar;
+    QToolBar *toolBar_2;
+    QToolBar *toolBar_3;
 
     void setupUi(QMainWindow *_590_DID_DIGClass)
     {
@@ -119,12 +129,12 @@ public:
         thStatusLineEdit->setFrame(false);
         detTcdISigLabel_2 = new QLabel(centralwidget);
         detTcdISigLabel_2->setObjectName(QString::fromUtf8("detTcdISigLabel_2"));
-        detTcdISigLabel_2->setGeometry(QRect(210, 80, 81, 20));
+        detTcdISigLabel_2->setGeometry(QRect(260, 90, 81, 20));
         detTcdISigLabel_2->setCursor(QCursor(Qt::BlankCursor));
         detTcdISigLabel_2->setLayoutDirection(Qt::LeftToRight);
         detDidHvLCD = new QLCDNumber(centralwidget);
         detDidHvLCD->setObjectName(QString::fromUtf8("detDidHvLCD"));
-        detDidHvLCD->setGeometry(QRect(30, 100, 81, 41));
+        detDidHvLCD->setGeometry(QRect(40, 110, 81, 41));
         detDidHvLCD->setFont(font);
         detDidHvLCD->setCursor(QCursor(Qt::BlankCursor));
         detDidHvLCD->setNumDigits(4);
@@ -330,24 +340,24 @@ public:
         calButton->setFocusPolicy(Qt::NoFocus);
         detTcdISigLabel = new QLabel(centralwidget);
         detTcdISigLabel->setObjectName(QString::fromUtf8("detTcdISigLabel"));
-        detTcdISigLabel->setGeometry(QRect(300, 80, 71, 20));
+        detTcdISigLabel->setGeometry(QRect(350, 90, 71, 20));
         detTcdISigLabel->setCursor(QCursor(Qt::BlankCursor));
         detTcdISigLabel->setLayoutDirection(Qt::LeftToRight);
         detDidPolVLCD = new QLCDNumber(centralwidget);
         detDidPolVLCD->setObjectName(QString::fromUtf8("detDidPolVLCD"));
-        detDidPolVLCD->setGeometry(QRect(210, 100, 81, 41));
+        detDidPolVLCD->setGeometry(QRect(260, 110, 81, 41));
         detDidPolVLCD->setFont(font);
         detDidPolVLCD->setCursor(QCursor(Qt::BlankCursor));
         detDidPolVLCD->setNumDigits(4);
         detDidPolVLCD->setSegmentStyle(QLCDNumber::Flat);
         detTcdISigLabel_4 = new QLabel(centralwidget);
         detTcdISigLabel_4->setObjectName(QString::fromUtf8("detTcdISigLabel_4"));
-        detTcdISigLabel_4->setGeometry(QRect(120, 80, 71, 20));
+        detTcdISigLabel_4->setGeometry(QRect(130, 90, 71, 20));
         detTcdISigLabel_4->setCursor(QCursor(Qt::BlankCursor));
         detTcdISigLabel_4->setLayoutDirection(Qt::LeftToRight);
         offButton = new QPushButton(centralwidget);
         offButton->setObjectName(QString::fromUtf8("offButton"));
-        offButton->setGeometry(QRect(340, 700, 91, 41));
+        offButton->setGeometry(QRect(340, 670, 91, 41));
         offButton->setMinimumSize(QSize(55, 22));
         offButton->setMaximumSize(QSize(450, 242));
         QPalette palette5;
@@ -415,12 +425,12 @@ public:
         label_4->setFont(font2);
         detTcdISigLabel_3 = new QLabel(centralwidget);
         detTcdISigLabel_3->setObjectName(QString::fromUtf8("detTcdISigLabel_3"));
-        detTcdISigLabel_3->setGeometry(QRect(30, 80, 71, 20));
+        detTcdISigLabel_3->setGeometry(QRect(40, 90, 71, 20));
         detTcdISigLabel_3->setCursor(QCursor(Qt::BlankCursor));
         detTcdISigLabel_3->setLayoutDirection(Qt::LeftToRight);
         detDid1LCD = new QLCDNumber(centralwidget);
         detDid1LCD->setObjectName(QString::fromUtf8("detDid1LCD"));
-        detDid1LCD->setGeometry(QRect(120, 100, 81, 41));
+        detDid1LCD->setGeometry(QRect(130, 110, 81, 41));
         detDid1LCD->setFont(font);
         detDid1LCD->setCursor(QCursor(Qt::BlankCursor));
         detDid1LCD->setNumDigits(4);
@@ -485,7 +495,7 @@ public:
         thMeasureLineEdit->setFrame(false);
         detDidISigLCD = new QLCDNumber(centralwidget);
         detDidISigLCD->setObjectName(QString::fromUtf8("detDidISigLCD"));
-        detDidISigLCD->setGeometry(QRect(300, 100, 81, 41));
+        detDidISigLCD->setGeometry(QRect(350, 110, 81, 41));
         detDidISigLCD->setFont(font);
         detDidISigLCD->setCursor(QCursor(Qt::BlankCursor));
         detDidISigLCD->setSegmentStyle(QLCDNumber::Flat);
@@ -667,13 +677,13 @@ public:
         dataButton->setFocusPolicy(Qt::NoFocus);
         detConfDialogLabel_3 = new QLabel(centralwidget);
         detConfDialogLabel_3->setObjectName(QString::fromUtf8("detConfDialogLabel_3"));
-        detConfDialogLabel_3->setGeometry(QRect(160, 210, 121, 20));
+        detConfDialogLabel_3->setGeometry(QRect(170, 200, 121, 20));
         QFont font3;
         font3.setPointSize(8);
         detConfDialogLabel_3->setFont(font3);
         v2_pushButton = new QPushButton(centralwidget);
         v2_pushButton->setObjectName(QString::fromUtf8("v2_pushButton"));
-        v2_pushButton->setGeometry(QRect(130, 240, 81, 41));
+        v2_pushButton->setGeometry(QRect(200, 230, 81, 41));
         v2_pushButton->setMinimumSize(QSize(55, 22));
         v2_pushButton->setMaximumSize(QSize(450, 242));
         QPalette palette10;
@@ -728,7 +738,7 @@ public:
         v2_pushButton->setAutoFillBackground(false);
         v4_pushButton = new QPushButton(centralwidget);
         v4_pushButton->setObjectName(QString::fromUtf8("v4_pushButton"));
-        v4_pushButton->setGeometry(QRect(330, 240, 81, 41));
+        v4_pushButton->setGeometry(QRect(540, 240, 81, 41));
         v4_pushButton->setMinimumSize(QSize(55, 22));
         v4_pushButton->setMaximumSize(QSize(450, 242));
         QPalette palette11;
@@ -783,7 +793,7 @@ public:
         v4_pushButton->setAutoFillBackground(false);
         v1_pushButton = new QPushButton(centralwidget);
         v1_pushButton->setObjectName(QString::fromUtf8("v1_pushButton"));
-        v1_pushButton->setGeometry(QRect(30, 240, 81, 41));
+        v1_pushButton->setGeometry(QRect(80, 230, 81, 41));
         v1_pushButton->setMinimumSize(QSize(55, 22));
         v1_pushButton->setMaximumSize(QSize(450, 242));
         QPalette palette12;
@@ -838,7 +848,7 @@ public:
         v1_pushButton->setAutoFillBackground(false);
         v3_pushButton = new QPushButton(centralwidget);
         v3_pushButton->setObjectName(QString::fromUtf8("v3_pushButton"));
-        v3_pushButton->setGeometry(QRect(230, 240, 81, 41));
+        v3_pushButton->setGeometry(QRect(320, 230, 81, 41));
         v3_pushButton->setMinimumSize(QSize(55, 22));
         v3_pushButton->setMaximumSize(QSize(450, 242));
         QPalette palette13;
@@ -893,42 +903,49 @@ public:
         v3_pushButton->setAutoFillBackground(false);
         R2 = new QRadioButton(centralwidget);
         R2->setObjectName(QString::fromUtf8("R2"));
-        R2->setGeometry(QRect(390, 400, 51, 22));
+        R2->setGeometry(QRect(370, 420, 91, 41));
+        QFont font4;
+        font4.setPointSize(18);
+        R2->setFont(font4);
         R2->setCursor(QCursor(Qt::BlankCursor));
         R2->setFocusPolicy(Qt::NoFocus);
-        label_8 = new QLabel(centralwidget);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
-        label_8->setGeometry(QRect(370, 390, 21, 21));
-        label_8->setFont(font2);
         R3 = new QRadioButton(centralwidget);
         R3->setObjectName(QString::fromUtf8("R3"));
-        R3->setGeometry(QRect(390, 430, 51, 22));
+        R3->setGeometry(QRect(370, 470, 91, 51));
+        R3->setFont(font4);
         R3->setCursor(QCursor(Qt::BlankCursor));
         R3->setFocusPolicy(Qt::NoFocus);
         R4 = new QRadioButton(centralwidget);
         R4->setObjectName(QString::fromUtf8("R4"));
-        R4->setGeometry(QRect(390, 460, 51, 22));
+        R4->setGeometry(QRect(370, 530, 91, 51));
+        R4->setFont(font4);
         R4->setCursor(QCursor(Qt::BlankCursor));
         R4->setFocusPolicy(Qt::NoFocus);
         detConfDialogLabel_2 = new QLabel(centralwidget);
         detConfDialogLabel_2->setObjectName(QString::fromUtf8("detConfDialogLabel_2"));
-        detConfDialogLabel_2->setGeometry(QRect(380, 341, 61, 20));
+        detConfDialogLabel_2->setGeometry(QRect(370, 330, 61, 20));
         detConfDialogLabel_2->setFont(font3);
         R1 = new QRadioButton(centralwidget);
         R1->setObjectName(QString::fromUtf8("R1"));
-        R1->setGeometry(QRect(390, 370, 51, 22));
+        R1->setGeometry(QRect(370, 360, 84, 57));
+        R1->setMinimumSize(QSize(84, 57));
+        R1->setMaximumSize(QSize(84, 16777215));
+        R1->setSizeIncrement(QSize(4, 4));
+        R1->setBaseSize(QSize(5, 5));
+        R1->setFont(font4);
         R1->setCursor(QCursor(Qt::BlankCursor));
         R1->setFocusPolicy(Qt::NoFocus);
+        R1->setIconSize(QSize(18, 18));
         busyLineEdit = new QLineEdit(centralwidget);
         busyLineEdit->setObjectName(QString::fromUtf8("busyLineEdit"));
-        busyLineEdit->setGeometry(QRect(400, 60, 71, 21));
+        busyLineEdit->setGeometry(QRect(610, 60, 71, 21));
         busyLineEdit->setFont(font);
         detGainSpinBox_2 = new QDoubleSpinBox(centralwidget);
         detGainSpinBox_2->setObjectName(QString::fromUtf8("detGainSpinBox_2"));
-        detGainSpinBox_2->setGeometry(QRect(360, 610, 41, 41));
-        QFont font4;
-        font4.setPointSize(24);
-        detGainSpinBox_2->setFont(font4);
+        detGainSpinBox_2->setGeometry(QRect(540, 570, 41, 41));
+        QFont font5;
+        font5.setPointSize(24);
+        detGainSpinBox_2->setFont(font5);
         detGainSpinBox_2->setFocusPolicy(Qt::NoFocus);
         detGainSpinBox_2->setFrame(false);
         detGainSpinBox_2->setButtonSymbols(QAbstractSpinBox::NoButtons);
@@ -938,7 +955,7 @@ public:
         detGainSpinBox_2->setMaximum(4);
         detDIDWriteGainButton = new QPushButton(centralwidget);
         detDIDWriteGainButton->setObjectName(QString::fromUtf8("detDIDWriteGainButton"));
-        detDIDWriteGainButton->setGeometry(QRect(280, 610, 81, 41));
+        detDIDWriteGainButton->setGeometry(QRect(200, 560, 81, 41));
         detDIDWriteGainButton->setMinimumSize(QSize(1, 1));
         QPalette palette14;
         palette14.setBrush(QPalette::Active, QPalette::WindowText, brush2);
@@ -1008,7 +1025,7 @@ public:
         detDidGainLCD->setProperty("value", QVariant(-1));
         dcIgniteCtrlButton = new QPushButton(centralwidget);
         dcIgniteCtrlButton->setObjectName(QString::fromUtf8("dcIgniteCtrlButton"));
-        dcIgniteCtrlButton->setGeometry(QRect(120, 610, 91, 41));
+        dcIgniteCtrlButton->setGeometry(QRect(50, 560, 91, 41));
         dcIgniteCtrlButton->setMinimumSize(QSize(1, 1));
         QPalette palette15;
         palette15.setBrush(QPalette::Active, QPalette::WindowText, brush2);
@@ -1061,15 +1078,15 @@ public:
         dcIgniteCtrlButton->setFocusPolicy(Qt::NoFocus);
         didIgniteEnableCheckBox = new QCheckBox(centralwidget);
         didIgniteEnableCheckBox->setObjectName(QString::fromUtf8("didIgniteEnableCheckBox"));
-        didIgniteEnableCheckBox->setGeometry(QRect(210, 620, 21, 21));
+        didIgniteEnableCheckBox->setGeometry(QRect(140, 570, 21, 21));
         didIgniteEnableCheckBox->setCursor(QCursor(Qt::BlankCursor));
         didIgniteEnableCheckBox->setFocusPolicy(Qt::NoFocus);
         detVdcCtlSpinBox = new QDoubleSpinBox(centralwidget);
         detVdcCtlSpinBox->setObjectName(QString::fromUtf8("detVdcCtlSpinBox"));
         detVdcCtlSpinBox->setGeometry(QRect(600, 310, 111, 51));
-        QFont font5;
-        font5.setPointSize(36);
-        detVdcCtlSpinBox->setFont(font5);
+        QFont font6;
+        font6.setPointSize(36);
+        detVdcCtlSpinBox->setFont(font6);
         detVdcCtlSpinBox->setFocusPolicy(Qt::NoFocus);
         detVdcCtlSpinBox->setDecimals(0);
         detVdcCtlSpinBox->setMinimum(1);
@@ -1079,7 +1096,7 @@ public:
         didPolVCtlSpinBox = new QDoubleSpinBox(centralwidget);
         didPolVCtlSpinBox->setObjectName(QString::fromUtf8("didPolVCtlSpinBox"));
         didPolVCtlSpinBox->setGeometry(QRect(600, 580, 111, 51));
-        didPolVCtlSpinBox->setFont(font5);
+        didPolVCtlSpinBox->setFont(font6);
         didPolVCtlSpinBox->setFocusPolicy(Qt::NoFocus);
         didPolVCtlSpinBox->setDecimals(0);
         didPolVCtlSpinBox->setMinimum(1);
@@ -1094,10 +1111,10 @@ public:
         detDIDOffSetBLSpinBox = new QDoubleSpinBox(centralwidget);
         detDIDOffSetBLSpinBox->setObjectName(QString::fromUtf8("detDIDOffSetBLSpinBox"));
         detDIDOffSetBLSpinBox->setGeometry(QRect(530, 580, 111, 51));
-        QFont font6;
-        font6.setPointSize(26);
-        font6.setItalic(false);
-        detDIDOffSetBLSpinBox->setFont(font6);
+        QFont font7;
+        font7.setPointSize(26);
+        font7.setItalic(false);
+        detDIDOffSetBLSpinBox->setFont(font7);
         detDIDOffSetBLSpinBox->setCursor(QCursor(Qt::IBeamCursor));
         detDIDOffSetBLSpinBox->setFocusPolicy(Qt::TabFocus);
         detDIDOffSetBLSpinBox->setAccelerated(false);
@@ -1174,14 +1191,14 @@ public:
         detPolarityButton->setFocusPolicy(Qt::NoFocus);
         detector_temp_box = new QLCDNumber(centralwidget);
         detector_temp_box->setObjectName(QString::fromUtf8("detector_temp_box"));
-        detector_temp_box->setGeometry(QRect(190, 411, 101, 31));
+        detector_temp_box->setGeometry(QRect(200, 350, 101, 31));
         detector_temp_box->setFont(font);
         detector_temp_box->setCursor(QCursor(Qt::BlankCursor));
         detector_temp_box->setNumDigits(4);
         detector_temp_box->setSegmentStyle(QLCDNumber::Flat);
         column_temp_box = new QLCDNumber(centralwidget);
         column_temp_box->setObjectName(QString::fromUtf8("column_temp_box"));
-        column_temp_box->setGeometry(QRect(50, 411, 101, 31));
+        column_temp_box->setGeometry(QRect(50, 350, 101, 31));
         column_temp_box->setFont(font);
         column_temp_box->setCursor(QCursor(Qt::BlankCursor));
         column_temp_box->setNumDigits(4);
@@ -1189,17 +1206,17 @@ public:
         column_temp_box->setProperty("value", QVariant(0));
         polarize_volts_label_2 = new QLabel(centralwidget);
         polarize_volts_label_2->setObjectName(QString::fromUtf8("polarize_volts_label_2"));
-        polarize_volts_label_2->setGeometry(QRect(180, 380, 141, 31));
+        polarize_volts_label_2->setGeometry(QRect(180, 320, 141, 31));
         polarize_volts_label_2->setCursor(QCursor(Qt::BlankCursor));
         polarize_volts_label_2->setLayoutDirection(Qt::LeftToRight);
         polarize_volts_label = new QLabel(centralwidget);
         polarize_volts_label->setObjectName(QString::fromUtf8("polarize_volts_label"));
-        polarize_volts_label->setGeometry(QRect(40, 380, 121, 31));
+        polarize_volts_label->setGeometry(QRect(40, 320, 121, 31));
         polarize_volts_label->setCursor(QCursor(Qt::BlankCursor));
         polarize_volts_label->setLayoutDirection(Qt::LeftToRight);
         detDIDZeroButton = new QPushButton(centralwidget);
         detDIDZeroButton->setObjectName(QString::fromUtf8("detDIDZeroButton"));
-        detDIDZeroButton->setGeometry(QRect(90, 530, 111, 41));
+        detDIDZeroButton->setGeometry(QRect(50, 470, 111, 41));
         detDIDZeroButton->setMinimumSize(QSize(1, 1));
         QPalette palette17;
         palette17.setBrush(QPalette::Active, QPalette::WindowText, brush2);
@@ -1252,7 +1269,7 @@ public:
         detDIDZeroButton->setFocusPolicy(Qt::NoFocus);
         detDIDOffSetBLCurrentButton = new QPushButton(centralwidget);
         detDIDOffSetBLCurrentButton->setObjectName(QString::fromUtf8("detDIDOffSetBLCurrentButton"));
-        detDIDOffSetBLCurrentButton->setGeometry(QRect(310, 530, 111, 41));
+        detDIDOffSetBLCurrentButton->setGeometry(QRect(200, 470, 111, 41));
         detDIDOffSetBLCurrentButton->setMinimumSize(QSize(1, 1));
         QPalette palette18;
         palette18.setBrush(QPalette::Active, QPalette::WindowText, brush2);
@@ -1303,75 +1320,78 @@ public:
         detDIDOffSetBLCurrentButton->setPalette(palette18);
         detDIDOffSetBLCurrentButton->setCursor(QCursor(Qt::BlankCursor));
         detDIDOffSetBLCurrentButton->setFocusPolicy(Qt::NoFocus);
-        detSigReadButton = new QPushButton(centralwidget);
-        detSigReadButton->setObjectName(QString::fromUtf8("detSigReadButton"));
-        detSigReadButton->setGeometry(QRect(200, 530, 111, 41));
-        detSigReadButton->setMinimumSize(QSize(1, 1));
+        detDIDHvButton = new QPushButton(centralwidget);
+        detDIDHvButton->setObjectName(QString::fromUtf8("detDIDHvButton"));
+        detDIDHvButton->setGeometry(QRect(40, 110, 81, 41));
+        detDIDHvButton->setMinimumSize(QSize(1, 1));
         QPalette palette19;
         palette19.setBrush(QPalette::Active, QPalette::WindowText, brush2);
-        palette19.setBrush(QPalette::Active, QPalette::Button, brush17);
-        palette19.setBrush(QPalette::Active, QPalette::Light, brush18);
-        palette19.setBrush(QPalette::Active, QPalette::Midlight, brush19);
-        palette19.setBrush(QPalette::Active, QPalette::Dark, brush20);
-        palette19.setBrush(QPalette::Active, QPalette::Mid, brush21);
+        QBrush brush27(QColor(255, 255, 255, 0));
+        brush27.setStyle(Qt::SolidPattern);
+        palette19.setBrush(QPalette::Active, QPalette::Button, brush27);
+        palette19.setBrush(QPalette::Active, QPalette::Light, brush27);
+        palette19.setBrush(QPalette::Active, QPalette::Midlight, brush27);
+        QBrush brush28(QColor(127, 127, 127, 0));
+        brush28.setStyle(Qt::SolidPattern);
+        palette19.setBrush(QPalette::Active, QPalette::Dark, brush28);
+        QBrush brush29(QColor(170, 170, 170, 0));
+        brush29.setStyle(Qt::SolidPattern);
+        palette19.setBrush(QPalette::Active, QPalette::Mid, brush29);
         palette19.setBrush(QPalette::Active, QPalette::Text, brush2);
         palette19.setBrush(QPalette::Active, QPalette::BrightText, brush3);
         palette19.setBrush(QPalette::Active, QPalette::ButtonText, brush2);
         palette19.setBrush(QPalette::Active, QPalette::Base, brush3);
-        palette19.setBrush(QPalette::Active, QPalette::Window, brush17);
+        palette19.setBrush(QPalette::Active, QPalette::Window, brush27);
         palette19.setBrush(QPalette::Active, QPalette::Shadow, brush2);
-        palette19.setBrush(QPalette::Active, QPalette::AlternateBase, brush18);
+        QBrush brush30(QColor(255, 255, 255, 127));
+        brush30.setStyle(Qt::SolidPattern);
+        palette19.setBrush(QPalette::Active, QPalette::AlternateBase, brush30);
         palette19.setBrush(QPalette::Active, QPalette::ToolTipBase, brush7);
         palette19.setBrush(QPalette::Active, QPalette::ToolTipText, brush2);
         palette19.setBrush(QPalette::Inactive, QPalette::WindowText, brush2);
-        palette19.setBrush(QPalette::Inactive, QPalette::Button, brush17);
-        palette19.setBrush(QPalette::Inactive, QPalette::Light, brush18);
-        palette19.setBrush(QPalette::Inactive, QPalette::Midlight, brush19);
-        palette19.setBrush(QPalette::Inactive, QPalette::Dark, brush20);
-        palette19.setBrush(QPalette::Inactive, QPalette::Mid, brush21);
+        palette19.setBrush(QPalette::Inactive, QPalette::Button, brush27);
+        palette19.setBrush(QPalette::Inactive, QPalette::Light, brush27);
+        palette19.setBrush(QPalette::Inactive, QPalette::Midlight, brush27);
+        palette19.setBrush(QPalette::Inactive, QPalette::Dark, brush28);
+        palette19.setBrush(QPalette::Inactive, QPalette::Mid, brush29);
         palette19.setBrush(QPalette::Inactive, QPalette::Text, brush2);
         palette19.setBrush(QPalette::Inactive, QPalette::BrightText, brush3);
         palette19.setBrush(QPalette::Inactive, QPalette::ButtonText, brush2);
         palette19.setBrush(QPalette::Inactive, QPalette::Base, brush3);
-        palette19.setBrush(QPalette::Inactive, QPalette::Window, brush17);
+        palette19.setBrush(QPalette::Inactive, QPalette::Window, brush27);
         palette19.setBrush(QPalette::Inactive, QPalette::Shadow, brush2);
-        palette19.setBrush(QPalette::Inactive, QPalette::AlternateBase, brush18);
+        palette19.setBrush(QPalette::Inactive, QPalette::AlternateBase, brush30);
         palette19.setBrush(QPalette::Inactive, QPalette::ToolTipBase, brush7);
         palette19.setBrush(QPalette::Inactive, QPalette::ToolTipText, brush2);
-        palette19.setBrush(QPalette::Disabled, QPalette::WindowText, brush20);
-        palette19.setBrush(QPalette::Disabled, QPalette::Button, brush17);
-        palette19.setBrush(QPalette::Disabled, QPalette::Light, brush18);
-        palette19.setBrush(QPalette::Disabled, QPalette::Midlight, brush19);
-        palette19.setBrush(QPalette::Disabled, QPalette::Dark, brush20);
-        palette19.setBrush(QPalette::Disabled, QPalette::Mid, brush21);
-        palette19.setBrush(QPalette::Disabled, QPalette::Text, brush20);
+        palette19.setBrush(QPalette::Disabled, QPalette::WindowText, brush28);
+        palette19.setBrush(QPalette::Disabled, QPalette::Button, brush27);
+        palette19.setBrush(QPalette::Disabled, QPalette::Light, brush27);
+        palette19.setBrush(QPalette::Disabled, QPalette::Midlight, brush27);
+        palette19.setBrush(QPalette::Disabled, QPalette::Dark, brush28);
+        palette19.setBrush(QPalette::Disabled, QPalette::Mid, brush29);
+        palette19.setBrush(QPalette::Disabled, QPalette::Text, brush28);
         palette19.setBrush(QPalette::Disabled, QPalette::BrightText, brush3);
-        palette19.setBrush(QPalette::Disabled, QPalette::ButtonText, brush20);
-        palette19.setBrush(QPalette::Disabled, QPalette::Base, brush17);
-        palette19.setBrush(QPalette::Disabled, QPalette::Window, brush17);
+        palette19.setBrush(QPalette::Disabled, QPalette::ButtonText, brush28);
+        palette19.setBrush(QPalette::Disabled, QPalette::Base, brush27);
+        palette19.setBrush(QPalette::Disabled, QPalette::Window, brush27);
         palette19.setBrush(QPalette::Disabled, QPalette::Shadow, brush2);
-        palette19.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush17);
+        palette19.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush27);
         palette19.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush7);
         palette19.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush2);
-        detSigReadButton->setPalette(palette19);
-        detSigReadButton->setCursor(QCursor(Qt::BlankCursor));
-        detSigReadButton->setFocusPolicy(Qt::NoFocus);
-        detDIDHvButton = new QPushButton(centralwidget);
-        detDIDHvButton->setObjectName(QString::fromUtf8("detDIDHvButton"));
-        detDIDHvButton->setGeometry(QRect(30, 100, 81, 41));
-        detDIDHvButton->setMinimumSize(QSize(1, 1));
+        detDIDHvButton->setPalette(palette19);
+        detDIDHvButton->setCursor(QCursor(Qt::BlankCursor));
+        detDIDHvButton->setFocusPolicy(Qt::NoFocus);
+        detDIDHvButton->setFlat(true);
+        detDIDImAButton = new QPushButton(centralwidget);
+        detDIDImAButton->setObjectName(QString::fromUtf8("detDIDImAButton"));
+        detDIDImAButton->setGeometry(QRect(130, 110, 81, 41));
+        detDIDImAButton->setMinimumSize(QSize(1, 1));
         QPalette palette20;
         palette20.setBrush(QPalette::Active, QPalette::WindowText, brush2);
-        QBrush brush27(QColor(255, 255, 255, 0));
-        brush27.setStyle(Qt::SolidPattern);
         palette20.setBrush(QPalette::Active, QPalette::Button, brush27);
         palette20.setBrush(QPalette::Active, QPalette::Light, brush27);
         palette20.setBrush(QPalette::Active, QPalette::Midlight, brush27);
-        QBrush brush28(QColor(127, 127, 127, 0));
-        brush28.setStyle(Qt::SolidPattern);
         palette20.setBrush(QPalette::Active, QPalette::Dark, brush28);
-        QBrush brush29(QColor(170, 170, 170, 0));
-        brush29.setStyle(Qt::SolidPattern);
         palette20.setBrush(QPalette::Active, QPalette::Mid, brush29);
         palette20.setBrush(QPalette::Active, QPalette::Text, brush2);
         palette20.setBrush(QPalette::Active, QPalette::BrightText, brush3);
@@ -1379,8 +1399,6 @@ public:
         palette20.setBrush(QPalette::Active, QPalette::Base, brush3);
         palette20.setBrush(QPalette::Active, QPalette::Window, brush27);
         palette20.setBrush(QPalette::Active, QPalette::Shadow, brush2);
-        QBrush brush30(QColor(255, 255, 255, 127));
-        brush30.setStyle(Qt::SolidPattern);
         palette20.setBrush(QPalette::Active, QPalette::AlternateBase, brush30);
         palette20.setBrush(QPalette::Active, QPalette::ToolTipBase, brush7);
         palette20.setBrush(QPalette::Active, QPalette::ToolTipText, brush2);
@@ -1414,14 +1432,14 @@ public:
         palette20.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush27);
         palette20.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush7);
         palette20.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush2);
-        detDIDHvButton->setPalette(palette20);
-        detDIDHvButton->setCursor(QCursor(Qt::BlankCursor));
-        detDIDHvButton->setFocusPolicy(Qt::NoFocus);
-        detDIDHvButton->setFlat(true);
-        detDIDImAButton = new QPushButton(centralwidget);
-        detDIDImAButton->setObjectName(QString::fromUtf8("detDIDImAButton"));
-        detDIDImAButton->setGeometry(QRect(120, 100, 81, 41));
-        detDIDImAButton->setMinimumSize(QSize(1, 1));
+        detDIDImAButton->setPalette(palette20);
+        detDIDImAButton->setCursor(QCursor(Qt::BlankCursor));
+        detDIDImAButton->setFocusPolicy(Qt::NoFocus);
+        detDIDImAButton->setFlat(true);
+        detDIDPOLButton = new QPushButton(centralwidget);
+        detDIDPOLButton->setObjectName(QString::fromUtf8("detDIDPOLButton"));
+        detDIDPOLButton->setGeometry(QRect(260, 110, 81, 41));
+        detDIDPOLButton->setMinimumSize(QSize(1, 1));
         QPalette palette21;
         palette21.setBrush(QPalette::Active, QPalette::WindowText, brush2);
         palette21.setBrush(QPalette::Active, QPalette::Button, brush27);
@@ -1468,14 +1486,14 @@ public:
         palette21.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush27);
         palette21.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush7);
         palette21.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush2);
-        detDIDImAButton->setPalette(palette21);
-        detDIDImAButton->setCursor(QCursor(Qt::BlankCursor));
-        detDIDImAButton->setFocusPolicy(Qt::NoFocus);
-        detDIDImAButton->setFlat(true);
-        detDIDPOLButton = new QPushButton(centralwidget);
-        detDIDPOLButton->setObjectName(QString::fromUtf8("detDIDPOLButton"));
-        detDIDPOLButton->setGeometry(QRect(210, 100, 81, 41));
-        detDIDPOLButton->setMinimumSize(QSize(1, 1));
+        detDIDPOLButton->setPalette(palette21);
+        detDIDPOLButton->setCursor(QCursor(Qt::BlankCursor));
+        detDIDPOLButton->setFocusPolicy(Qt::NoFocus);
+        detDIDPOLButton->setFlat(true);
+        detDIDSIGButton = new QPushButton(centralwidget);
+        detDIDSIGButton->setObjectName(QString::fromUtf8("detDIDSIGButton"));
+        detDIDSIGButton->setGeometry(QRect(350, 110, 81, 41));
+        detDIDSIGButton->setMinimumSize(QSize(1, 1));
         QPalette palette22;
         palette22.setBrush(QPalette::Active, QPalette::WindowText, brush2);
         palette22.setBrush(QPalette::Active, QPalette::Button, brush27);
@@ -1522,14 +1540,14 @@ public:
         palette22.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush27);
         palette22.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush7);
         palette22.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush2);
-        detDIDPOLButton->setPalette(palette22);
-        detDIDPOLButton->setCursor(QCursor(Qt::BlankCursor));
-        detDIDPOLButton->setFocusPolicy(Qt::NoFocus);
-        detDIDPOLButton->setFlat(true);
-        detDIDSIGButton = new QPushButton(centralwidget);
-        detDIDSIGButton->setObjectName(QString::fromUtf8("detDIDSIGButton"));
-        detDIDSIGButton->setGeometry(QRect(300, 100, 81, 41));
-        detDIDSIGButton->setMinimumSize(QSize(1, 1));
+        detDIDSIGButton->setPalette(palette22);
+        detDIDSIGButton->setCursor(QCursor(Qt::BlankCursor));
+        detDIDSIGButton->setFocusPolicy(Qt::NoFocus);
+        detDIDSIGButton->setFlat(true);
+        colTempPopUp = new QPushButton(centralwidget);
+        colTempPopUp->setObjectName(QString::fromUtf8("colTempPopUp"));
+        colTempPopUp->setGeometry(QRect(50, 350, 101, 31));
+        colTempPopUp->setMinimumSize(QSize(1, 1));
         QPalette palette23;
         palette23.setBrush(QPalette::Active, QPalette::WindowText, brush2);
         palette23.setBrush(QPalette::Active, QPalette::Button, brush27);
@@ -1576,14 +1594,14 @@ public:
         palette23.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush27);
         palette23.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush7);
         palette23.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush2);
-        detDIDSIGButton->setPalette(palette23);
-        detDIDSIGButton->setCursor(QCursor(Qt::BlankCursor));
-        detDIDSIGButton->setFocusPolicy(Qt::NoFocus);
-        detDIDSIGButton->setFlat(true);
-        colTempPopUp = new QPushButton(centralwidget);
-        colTempPopUp->setObjectName(QString::fromUtf8("colTempPopUp"));
-        colTempPopUp->setGeometry(QRect(50, 440, 101, 31));
-        colTempPopUp->setMinimumSize(QSize(1, 1));
+        colTempPopUp->setPalette(palette23);
+        colTempPopUp->setCursor(QCursor(Qt::BlankCursor));
+        colTempPopUp->setFocusPolicy(Qt::NoFocus);
+        colTempPopUp->setFlat(true);
+        detTempPopUp = new QPushButton(centralwidget);
+        detTempPopUp->setObjectName(QString::fromUtf8("detTempPopUp"));
+        detTempPopUp->setGeometry(QRect(200, 350, 101, 31));
+        detTempPopUp->setMinimumSize(QSize(1, 1));
         QPalette palette24;
         palette24.setBrush(QPalette::Active, QPalette::WindowText, brush2);
         palette24.setBrush(QPalette::Active, QPalette::Button, brush27);
@@ -1630,64 +1648,100 @@ public:
         palette24.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush27);
         palette24.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush7);
         palette24.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush2);
-        colTempPopUp->setPalette(palette24);
-        colTempPopUp->setCursor(QCursor(Qt::BlankCursor));
-        colTempPopUp->setFocusPolicy(Qt::NoFocus);
-        colTempPopUp->setFlat(true);
-        detTempPopUp = new QPushButton(centralwidget);
-        detTempPopUp->setObjectName(QString::fromUtf8("detTempPopUp"));
-        detTempPopUp->setGeometry(QRect(190, 410, 101, 31));
-        detTempPopUp->setMinimumSize(QSize(1, 1));
+        detTempPopUp->setPalette(palette24);
+        detTempPopUp->setCursor(QCursor(Qt::BlankCursor));
+        detTempPopUp->setFocusPolicy(Qt::NoFocus);
+        detTempPopUp->setFlat(true);
+        collumn_temp_set_label = new QLabel(centralwidget);
+        collumn_temp_set_label->setObjectName(QString::fromUtf8("collumn_temp_set_label"));
+        collumn_temp_set_label->setGeometry(QRect(50, 380, 101, 31));
+        collumn_temp_set_label->setCursor(QCursor(Qt::BlankCursor));
+        collumn_temp_set_label->setLayoutDirection(Qt::LeftToRight);
+        detector_temp_set_label = new QLabel(centralwidget);
+        detector_temp_set_label->setObjectName(QString::fromUtf8("detector_temp_set_label"));
+        detector_temp_set_label->setGeometry(QRect(200, 380, 101, 31));
+        detector_temp_set_label->setCursor(QCursor(Qt::BlankCursor));
+        detector_temp_set_label->setLayoutDirection(Qt::LeftToRight);
+        collumnTempLine = new QLineEdit(centralwidget);
+        collumnTempLine->setObjectName(QString::fromUtf8("collumnTempLine"));
+        collumnTempLine->setGeometry(QRect(70, 410, 71, 21));
+        collumnTempLine->setFont(font);
+        collumnTempLine->setCursor(QCursor(Qt::BlankCursor));
+        collumnTempLine->setAlignment(Qt::AlignCenter);
+        detectorTempLine = new QLineEdit(centralwidget);
+        detectorTempLine->setObjectName(QString::fromUtf8("detectorTempLine"));
+        detectorTempLine->setGeometry(QRect(220, 410, 71, 21));
+        detectorTempLine->setFont(font);
+        detectorTempLine->setCursor(QCursor(Qt::BlankCursor));
+        detectorTempLine->setAlignment(Qt::AlignCenter);
+        gainAdjustLine = new QLineEdit(centralwidget);
+        gainAdjustLine->setObjectName(QString::fromUtf8("gainAdjustLine"));
+        gainAdjustLine->setGeometry(QRect(210, 600, 71, 21));
+        gainAdjustLine->setFont(font);
+        gainAdjustLine->setCursor(QCursor(Qt::BlankCursor));
+        gainAdjustLine->setAlignment(Qt::AlignCenter);
+        externalCheckbox = new QCheckBox(centralwidget);
+        externalCheckbox->setObjectName(QString::fromUtf8("externalCheckbox"));
+        externalCheckbox->setGeometry(QRect(40, 680, 21, 21));
+        externalCheckbox->setFocusPolicy(Qt::TabFocus);
+        externalCheckbox->setChecked(true);
+        externalButton = new QPushButton(centralwidget);
+        externalButton->setObjectName(QString::fromUtf8("externalButton"));
+        externalButton->setGeometry(QRect(60, 680, 131, 30));
+        externalButton->setMinimumSize(QSize(81, 30));
         QPalette palette25;
         palette25.setBrush(QPalette::Active, QPalette::WindowText, brush2);
-        palette25.setBrush(QPalette::Active, QPalette::Button, brush27);
-        palette25.setBrush(QPalette::Active, QPalette::Light, brush27);
-        palette25.setBrush(QPalette::Active, QPalette::Midlight, brush27);
-        palette25.setBrush(QPalette::Active, QPalette::Dark, brush28);
-        palette25.setBrush(QPalette::Active, QPalette::Mid, brush29);
+        palette25.setBrush(QPalette::Active, QPalette::Button, brush22);
+        palette25.setBrush(QPalette::Active, QPalette::Light, brush23);
+        palette25.setBrush(QPalette::Active, QPalette::Midlight, brush24);
+        palette25.setBrush(QPalette::Active, QPalette::Dark, brush25);
+        palette25.setBrush(QPalette::Active, QPalette::Mid, brush26);
         palette25.setBrush(QPalette::Active, QPalette::Text, brush2);
         palette25.setBrush(QPalette::Active, QPalette::BrightText, brush3);
         palette25.setBrush(QPalette::Active, QPalette::ButtonText, brush2);
         palette25.setBrush(QPalette::Active, QPalette::Base, brush3);
-        palette25.setBrush(QPalette::Active, QPalette::Window, brush27);
+        palette25.setBrush(QPalette::Active, QPalette::Window, brush22);
         palette25.setBrush(QPalette::Active, QPalette::Shadow, brush2);
-        palette25.setBrush(QPalette::Active, QPalette::AlternateBase, brush30);
+        palette25.setBrush(QPalette::Active, QPalette::AlternateBase, brush23);
         palette25.setBrush(QPalette::Active, QPalette::ToolTipBase, brush7);
         palette25.setBrush(QPalette::Active, QPalette::ToolTipText, brush2);
         palette25.setBrush(QPalette::Inactive, QPalette::WindowText, brush2);
-        palette25.setBrush(QPalette::Inactive, QPalette::Button, brush27);
-        palette25.setBrush(QPalette::Inactive, QPalette::Light, brush27);
-        palette25.setBrush(QPalette::Inactive, QPalette::Midlight, brush27);
-        palette25.setBrush(QPalette::Inactive, QPalette::Dark, brush28);
-        palette25.setBrush(QPalette::Inactive, QPalette::Mid, brush29);
+        palette25.setBrush(QPalette::Inactive, QPalette::Button, brush22);
+        palette25.setBrush(QPalette::Inactive, QPalette::Light, brush23);
+        palette25.setBrush(QPalette::Inactive, QPalette::Midlight, brush24);
+        palette25.setBrush(QPalette::Inactive, QPalette::Dark, brush25);
+        palette25.setBrush(QPalette::Inactive, QPalette::Mid, brush26);
         palette25.setBrush(QPalette::Inactive, QPalette::Text, brush2);
         palette25.setBrush(QPalette::Inactive, QPalette::BrightText, brush3);
         palette25.setBrush(QPalette::Inactive, QPalette::ButtonText, brush2);
         palette25.setBrush(QPalette::Inactive, QPalette::Base, brush3);
-        palette25.setBrush(QPalette::Inactive, QPalette::Window, brush27);
+        palette25.setBrush(QPalette::Inactive, QPalette::Window, brush22);
         palette25.setBrush(QPalette::Inactive, QPalette::Shadow, brush2);
-        palette25.setBrush(QPalette::Inactive, QPalette::AlternateBase, brush30);
+        palette25.setBrush(QPalette::Inactive, QPalette::AlternateBase, brush23);
         palette25.setBrush(QPalette::Inactive, QPalette::ToolTipBase, brush7);
         palette25.setBrush(QPalette::Inactive, QPalette::ToolTipText, brush2);
-        palette25.setBrush(QPalette::Disabled, QPalette::WindowText, brush28);
-        palette25.setBrush(QPalette::Disabled, QPalette::Button, brush27);
-        palette25.setBrush(QPalette::Disabled, QPalette::Light, brush27);
-        palette25.setBrush(QPalette::Disabled, QPalette::Midlight, brush27);
-        palette25.setBrush(QPalette::Disabled, QPalette::Dark, brush28);
-        palette25.setBrush(QPalette::Disabled, QPalette::Mid, brush29);
-        palette25.setBrush(QPalette::Disabled, QPalette::Text, brush28);
+        palette25.setBrush(QPalette::Disabled, QPalette::WindowText, brush25);
+        palette25.setBrush(QPalette::Disabled, QPalette::Button, brush22);
+        palette25.setBrush(QPalette::Disabled, QPalette::Light, brush23);
+        palette25.setBrush(QPalette::Disabled, QPalette::Midlight, brush24);
+        palette25.setBrush(QPalette::Disabled, QPalette::Dark, brush25);
+        palette25.setBrush(QPalette::Disabled, QPalette::Mid, brush26);
+        palette25.setBrush(QPalette::Disabled, QPalette::Text, brush25);
         palette25.setBrush(QPalette::Disabled, QPalette::BrightText, brush3);
-        palette25.setBrush(QPalette::Disabled, QPalette::ButtonText, brush28);
-        palette25.setBrush(QPalette::Disabled, QPalette::Base, brush27);
-        palette25.setBrush(QPalette::Disabled, QPalette::Window, brush27);
+        palette25.setBrush(QPalette::Disabled, QPalette::ButtonText, brush25);
+        palette25.setBrush(QPalette::Disabled, QPalette::Base, brush22);
+        palette25.setBrush(QPalette::Disabled, QPalette::Window, brush22);
         palette25.setBrush(QPalette::Disabled, QPalette::Shadow, brush2);
-        palette25.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush27);
+        palette25.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush22);
         palette25.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush7);
         palette25.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush2);
-        detTempPopUp->setPalette(palette25);
-        detTempPopUp->setCursor(QCursor(Qt::BlankCursor));
-        detTempPopUp->setFocusPolicy(Qt::NoFocus);
-        detTempPopUp->setFlat(true);
+        externalButton->setPalette(palette25);
+        externalButton->setFocusPolicy(Qt::NoFocus);
+        polarize_volts_label_3 = new QLabel(centralwidget);
+        polarize_volts_label_3->setObjectName(QString::fromUtf8("polarize_volts_label_3"));
+        polarize_volts_label_3->setGeometry(QRect(60, 650, 121, 31));
+        polarize_volts_label_3->setCursor(QCursor(Qt::BlankCursor));
+        polarize_volts_label_3->setLayoutDirection(Qt::LeftToRight);
         _590_DID_DIGClass->setCentralWidget(centralwidget);
         menubar = new QMenuBar(_590_DID_DIGClass);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -1696,10 +1750,18 @@ public:
         statusbar = new QStatusBar(_590_DID_DIGClass);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         _590_DID_DIGClass->setStatusBar(statusbar);
+        toolBar = new QToolBar(_590_DID_DIGClass);
+        toolBar->setObjectName(QString::fromUtf8("toolBar"));
+        _590_DID_DIGClass->addToolBar(Qt::TopToolBarArea, toolBar);
+        toolBar_2 = new QToolBar(_590_DID_DIGClass);
+        toolBar_2->setObjectName(QString::fromUtf8("toolBar_2"));
+        _590_DID_DIGClass->addToolBar(Qt::TopToolBarArea, toolBar_2);
+        toolBar_3 = new QToolBar(_590_DID_DIGClass);
+        toolBar_3->setObjectName(QString::fromUtf8("toolBar_3"));
+        _590_DID_DIGClass->addToolBar(Qt::TopToolBarArea, toolBar_3);
 
         retranslateUi(_590_DID_DIGClass);
         QObject::connect(offButton, SIGNAL(released()), _590_DID_DIGClass, SLOT(shutdownNow()));
-        QObject::connect(dcIgniteCtrlButton, SIGNAL(released()), _590_DID_DIGClass, SLOT(detIgn()));
         QObject::connect(R1, SIGNAL(clicked()), _590_DID_DIGClass, SLOT(detRange()));
         QObject::connect(R2, SIGNAL(clicked()), _590_DID_DIGClass, SLOT(detRange()));
         QObject::connect(R3, SIGNAL(clicked()), _590_DID_DIGClass, SLOT(detRange()));
@@ -1708,13 +1770,15 @@ public:
         QObject::connect(v2_pushButton, SIGNAL(pressed()), _590_DID_DIGClass, SLOT(activateValve2()));
         QObject::connect(v3_pushButton, SIGNAL(pressed()), _590_DID_DIGClass, SLOT(activateValve3()));
         QObject::connect(v4_pushButton, SIGNAL(pressed()), _590_DID_DIGClass, SLOT(activateValve4()));
-        QObject::connect(detDIDWriteGainButton, SIGNAL(pressed()), _590_DID_DIGClass, SLOT(detDIDSig()));
-        QObject::connect(detDIDHvButton, SIGNAL(pressed()), _590_DID_DIGClass, SLOT(numInPopUp()));
-        QObject::connect(detDIDImAButton, SIGNAL(pressed()), _590_DID_DIGClass, SLOT(numInPopUp()));
-        QObject::connect(detDIDPOLButton, SIGNAL(pressed()), _590_DID_DIGClass, SLOT(numInPopUp()));
-        QObject::connect(detDIDSIGButton, SIGNAL(pressed()), _590_DID_DIGClass, SLOT(numInPopUp()));
+        QObject::connect(detDIDHvButton, SIGNAL(pressed()), _590_DID_DIGClass, SLOT(numInVoltagePopUp()));
         QObject::connect(detTempPopUp, SIGNAL(pressed()), _590_DID_DIGClass, SLOT(numInPopUp()));
         QObject::connect(colTempPopUp, SIGNAL(pressed()), _590_DID_DIGClass, SLOT(numInTempPopUp()));
+        QObject::connect(detDIDOffSetBLCurrentButton, SIGNAL(pressed()), _590_DID_DIGClass, SLOT(numIn()));
+        QObject::connect(detDIDWriteGainButton, SIGNAL(pressed()), _590_DID_DIGClass, SLOT(numInGainPopUp()));
+        QObject::connect(detDIDPOLButton, SIGNAL(pressed()), _590_DID_DIGClass, SLOT(numInPolarizationPopUp()));
+        QObject::connect(dcIgniteCtrlButton, SIGNAL(clicked()), _590_DID_DIGClass, SLOT(detDIDIgnite()));
+        QObject::connect(detDIDZeroButton, SIGNAL(pressed()), _590_DID_DIGClass, SLOT(detDIDZeroCtl()));
+        QObject::connect(externalButton, SIGNAL(clicked()), _590_DID_DIGClass, SLOT(externalValves()));
 
         QMetaObject::connectSlotsByName(_590_DID_DIGClass);
     } // setupUi
@@ -1788,14 +1852,6 @@ public:
         v1_pushButton->setText(QApplication::translate("_590_DID_DIGClass", "Valve 1", 0, QApplication::UnicodeUTF8));
         v3_pushButton->setText(QApplication::translate("_590_DID_DIGClass", "Valve 3", 0, QApplication::UnicodeUTF8));
         R2->setText(QApplication::translate("_590_DID_DIGClass", "R2", 0, QApplication::UnicodeUTF8));
-        label_8->setText(QApplication::translate("_590_DID_DIGClass", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;\">\n"
-"<tr>\n"
-"<td style=\"border: none;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt; font-weight:600;\">V</span></p></td></tr></table></body></html>", 0, QApplication::UnicodeUTF8));
         R3->setText(QApplication::translate("_590_DID_DIGClass", "R3", 0, QApplication::UnicodeUTF8));
         R4->setText(QApplication::translate("_590_DID_DIGClass", "R4", 0, QApplication::UnicodeUTF8));
         detConfDialogLabel_2->setText(QApplication::translate("_590_DID_DIGClass", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
@@ -1832,13 +1888,41 @@ public:
         detDIDZeroButton->setText(QApplication::translate("_590_DID_DIGClass", "DID ZERO", 0, QApplication::UnicodeUTF8));
         detDIDOffSetBLCurrentButton->setText(QApplication::translate("_590_DID_DIGClass", "Offset\n"
 "Baseline", 0, QApplication::UnicodeUTF8));
-        detSigReadButton->setText(QApplication::translate("_590_DID_DIGClass", "sig read", 0, QApplication::UnicodeUTF8));
         detDIDHvButton->setText(QString());
         detDIDImAButton->setText(QString());
         detDIDPOLButton->setText(QString());
         detDIDSIGButton->setText(QString());
         colTempPopUp->setText(QString());
         detTempPopUp->setText(QString());
+        collumn_temp_set_label->setText(QApplication::translate("_590_DID_DIGClass", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+"<tr>\n"
+"<td style=\"border: none;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2'; font-size:12pt;\">Set Value</span></p></td></tr></table></body></html>", 0, QApplication::UnicodeUTF8));
+        detector_temp_set_label->setText(QApplication::translate("_590_DID_DIGClass", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+"<tr>\n"
+"<td style=\"border: none;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2'; font-size:12pt;\">Set Value</span></p></td></tr></table></body></html>", 0, QApplication::UnicodeUTF8));
+        externalCheckbox->setText(QString());
+        externalButton->setText(QApplication::translate("_590_DID_DIGClass", "On / Off", 0, QApplication::UnicodeUTF8));
+        polarize_volts_label_3->setText(QApplication::translate("_590_DID_DIGClass", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+"<tr>\n"
+"<td style=\"border: none;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2'; font-size:12pt; text-decoration: underline;\">External Valve</span></p></td></tr></table></body></html>", 0, QApplication::UnicodeUTF8));
+        toolBar->setWindowTitle(QApplication::translate("_590_DID_DIGClass", "toolBar", 0, QApplication::UnicodeUTF8));
+        toolBar_2->setWindowTitle(QApplication::translate("_590_DID_DIGClass", "toolBar_2", 0, QApplication::UnicodeUTF8));
+        toolBar_3->setWindowTitle(QApplication::translate("_590_DID_DIGClass", "toolBar_3", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

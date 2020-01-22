@@ -59,6 +59,8 @@ HEADERS   += _590_did_dig.h \
     numericinput.h \
     poweroffmessage.h \
     numpopup.h \
+    polarizepopup.h \
+    voltageNumPopUp.h \
     polpopup.h \
     temppopup.h \
     gainpopup.h
@@ -122,6 +124,8 @@ SOURCES   += main.cpp \
     numericinput.cpp \
     poweroffmessage.cpp \
     numpopup.cpp \
+    polarizepopup.cpp \
+    voltageNumPopUp.cpp \
     polpopup.cpp \
     temppopup.cpp \
     gainpopup.cpp
@@ -177,7 +181,9 @@ FORMS     += _590_did_dig.ui \
     numericinput.ui \
     poweroffmessage.ui \
     numpopup.ui \
+    voltageNumPopUp.ui \
     polpopup.ui \
+    polarizepopup.ui \
     temppopup.ui \
     gainpopup.ui        
 RESOURCES +=

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'temppopup.ui'
 **
-** Created: Tue Mar 5 14:48:27 2019
+** Created: Mon Aug 19 13:25:32 2019
 **      by: Qt User Interface Compiler version 4.6.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -45,14 +45,14 @@ public:
     {
         if (tempPopUpClass->objectName().isEmpty())
             tempPopUpClass->setObjectName(QString::fromUtf8("tempPopUpClass"));
-        tempPopUpClass->resize(327, 181);
+        tempPopUpClass->resize(361, 215);
         pushButton_10 = new QPushButton(tempPopUpClass);
         pushButton_10->setObjectName(QString::fromUtf8("pushButton_10"));
-        pushButton_10->setGeometry(QRect(10, 130, 40, 40));
+        pushButton_10->setGeometry(QRect(10, 160, 40, 40));
         pushButton_10->setCursor(QCursor(Qt::BlankCursor));
         pushButton_Clear = new QPushButton(tempPopUpClass);
         pushButton_Clear->setObjectName(QString::fromUtf8("pushButton_Clear"));
-        pushButton_Clear->setGeometry(QRect(190, 70, 98, 40));
+        pushButton_Clear->setGeometry(QRect(200, 70, 98, 40));
         pushButton_Clear->setCursor(QCursor(Qt::BlankCursor));
         pushButton_1 = new QPushButton(tempPopUpClass);
         pushButton_1->setObjectName(QString::fromUtf8("pushButton_1"));
@@ -60,58 +60,58 @@ public:
         pushButton_1->setCursor(QCursor(Qt::BlankCursor));
         enterButton = new QPushButton(tempPopUpClass);
         enterButton->setObjectName(QString::fromUtf8("enterButton"));
-        enterButton->setGeometry(QRect(190, 130, 51, 41));
+        enterButton->setGeometry(QRect(200, 130, 51, 41));
         enterButton->setMinimumSize(QSize(1, 1));
         enterButton->setCursor(QCursor(Qt::BlankCursor));
         enterButton->setFocusPolicy(Qt::NoFocus);
         pushButton_11 = new QPushButton(tempPopUpClass);
         pushButton_11->setObjectName(QString::fromUtf8("pushButton_11"));
-        pushButton_11->setGeometry(QRect(60, 130, 40, 40));
+        pushButton_11->setGeometry(QRect(70, 160, 40, 40));
         pushButton_11->setCursor(QCursor(Qt::BlankCursor));
         pushButton_7 = new QPushButton(tempPopUpClass);
         pushButton_7->setObjectName(QString::fromUtf8("pushButton_7"));
-        pushButton_7->setGeometry(QRect(10, 90, 40, 40));
+        pushButton_7->setGeometry(QRect(10, 110, 40, 40));
         pushButton_7->setCursor(QCursor(Qt::BlankCursor));
         lineEdit = new QLineEdit(tempPopUpClass);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setGeometry(QRect(170, 10, 151, 40));
+        lineEdit->setGeometry(QRect(180, 10, 151, 40));
         pushButton_9 = new QPushButton(tempPopUpClass);
         pushButton_9->setObjectName(QString::fromUtf8("pushButton_9"));
-        pushButton_9->setGeometry(QRect(110, 90, 40, 40));
+        pushButton_9->setGeometry(QRect(130, 110, 40, 40));
         pushButton_9->setCursor(QCursor(Qt::BlankCursor));
         pushButton_12 = new QPushButton(tempPopUpClass);
         pushButton_12->setObjectName(QString::fromUtf8("pushButton_12"));
-        pushButton_12->setGeometry(QRect(110, 130, 40, 40));
+        pushButton_12->setGeometry(QRect(130, 160, 40, 40));
         pushButton_12->setCursor(QCursor(Qt::BlankCursor));
         pushButton_6 = new QPushButton(tempPopUpClass);
         pushButton_6->setObjectName(QString::fromUtf8("pushButton_6"));
-        pushButton_6->setGeometry(QRect(110, 50, 40, 40));
+        pushButton_6->setGeometry(QRect(130, 60, 40, 40));
         pushButton_6->setCursor(QCursor(Qt::BlankCursor));
         pushButton_5 = new QPushButton(tempPopUpClass);
         pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
-        pushButton_5->setGeometry(QRect(60, 50, 40, 40));
+        pushButton_5->setGeometry(QRect(70, 60, 40, 40));
         pushButton_5->setCursor(QCursor(Qt::BlankCursor));
         detOkButton = new QPushButton(tempPopUpClass);
         detOkButton->setObjectName(QString::fromUtf8("detOkButton"));
-        detOkButton->setGeometry(QRect(270, 130, 51, 41));
+        detOkButton->setGeometry(QRect(280, 130, 51, 41));
         detOkButton->setMinimumSize(QSize(1, 1));
         detOkButton->setCursor(QCursor(Qt::BlankCursor));
         detOkButton->setFocusPolicy(Qt::NoFocus);
         pushButton_3 = new QPushButton(tempPopUpClass);
         pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
-        pushButton_3->setGeometry(QRect(110, 10, 40, 40));
+        pushButton_3->setGeometry(QRect(130, 10, 40, 40));
         pushButton_3->setCursor(QCursor(Qt::BlankCursor));
         pushButton_8 = new QPushButton(tempPopUpClass);
         pushButton_8->setObjectName(QString::fromUtf8("pushButton_8"));
-        pushButton_8->setGeometry(QRect(60, 90, 40, 40));
+        pushButton_8->setGeometry(QRect(70, 110, 40, 40));
         pushButton_8->setCursor(QCursor(Qt::BlankCursor));
         pushButton_2 = new QPushButton(tempPopUpClass);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-        pushButton_2->setGeometry(QRect(60, 10, 40, 40));
+        pushButton_2->setGeometry(QRect(70, 10, 40, 40));
         pushButton_2->setCursor(QCursor(Qt::BlankCursor));
         pushButton_4 = new QPushButton(tempPopUpClass);
         pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
-        pushButton_4->setGeometry(QRect(10, 50, 40, 40));
+        pushButton_4->setGeometry(QRect(10, 60, 40, 40));
         pushButton_4->setCursor(QCursor(Qt::BlankCursor));
 
         retranslateUi(tempPopUpClass);

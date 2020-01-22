@@ -1,5 +1,6 @@
 #include "numpopup.h"
 #include <QString>
+#include "_590_did_dig.h"
 
 numPopUp::numPopUp(QWidget *parent)
     : QDialog(parent)
@@ -73,7 +74,7 @@ void numPopUp::num_period(void){
 	vall1 = '.';
 	ui.lineEdit->insert(vall1);
 }
-void numPopUp::num_Clear(void){
+void numPopUp::num_clear(void){
 //	QString vall1;
 //	vall1 = '\b';
 	ui.lineEdit->clear();//->insert(vall1);
@@ -82,8 +83,20 @@ void numPopUp::processNumIn(void){
 	QString val1;
 	QString txt;
 
-	txt = ui.lineEdit->text();
-	transfer.deleteNumPop(txt);//
+	qDebug("Processing Polarization Voltage");
+	if(ui.lineEdit->text() == NULL){
+			qDebug("No Value Entered for Detector Temperature.");
+		}
+		else{
+			txt = ui.lineEdit->text();
+			ui.lineEdit->clear();
+			((_590_DID_DIG*)(parent()))->ui.detectorTempLine->setText(txt);
+
+
+			xferToMain.setDetectorTemp(txt);
+			qDebug("Setting Detector Temperature.");
+		}
+
 }
 QString numPopUp::popupNumInReturn(void){
 	QString txt;

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'polpopup.h'
 **
-** Created: Tue Mar 5 14:49:58 2019
+** Created: Thu Aug 22 14:28:14 2019
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
 **
 ** WARNING! All changes made in this file will be lost!
