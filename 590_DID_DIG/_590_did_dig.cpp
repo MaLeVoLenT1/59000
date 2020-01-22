@@ -11,6 +11,23 @@
 
 #include <QFile>// added 6-17-2016
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <linux/spi/spidev.h>
+
+////////////////////////////////////
+#include <stdint.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <math.h>
+#include <sys/ioctl.h>
+#include <linux/types.h>
+#include "ad7176-spi.h"
+#include "iio-utils.h"
+#include "constants.h"
+
+/////////////////////////////////////////////
+
 extern double updateRate;
 bool thStopMe;
 bool CALINDICATOR;
@@ -63,22 +80,17 @@ extern int YEAR;
 extern bool DLOGCHECK;
 extern void main_datalog(void);
 
-//QString alarm1Display;
-//QString alarm2Display;
-//QString busyState;
-//QString notBusyState;
-
 extern unsigned int DIDhexHoldGlobal;
 extern unsigned int DIDhexHoldGlobal2;
 
 bool dcGain1, dcGain2, dcGain1_1, dcGain2_1, dcOF, dcOF2, dcpol1, dcpol2;// for storing the set gain while on. off will default to 1
 extern unsigned int detNumberDirector;// used to select detector for processing - Temporary find another way
 
-//Variables Added by Dione.
 extern bool IGNITE_DID1;
 double DVC1D; // TCD1 Voltage
 double PolVolt;
-char AR[15] = "/dev/spi0cs3";// ar[] changed from cs3 because of problem with emac 4"
+
+char AR[15] = "/dev/spidev1.3"; // for the new screen
 char BR[5] = "44";//br[]
 bool DID_ONOFFCTRL2;
 extern unsigned int hexHoldGlobal;
@@ -86,6 +98,18 @@ bool Valve1toggle;
 bool Valve2toggle;
 bool Valve3toggle;
 bool Valve4toggle;
+
+//#define EPRINT(args...) fprintf(stderr, ##args)
+
+//#define MAX_LENGTH 64
+
+//static uint8_t bits = 8;
+//static uint32_t speed = 500000;
+
+//#define FOREVER()  for(;;)
+
+//#define SPI_DEVICE      "/dev/spidev1.3"
+//#define SPI_DEVICE_1      "/dev/spidev1.2"
 
 
 _590_DID_DIG::_590_DID_DIG(QWidget *parent)
@@ -107,8 +131,185 @@ _590_DID_DIG::~_590_DID_DIG()
 {
 
 }
+
+/*int _590_DID_DIG::transfer(uint8_t *tx, uint8_t *rx, int size)
+{
+	int ret;
+    int fd;
+
+    struct spi_ioc_transfer tr = {
+        tr.tx_buf = (unsigned long)tx,
+        tr.rx_buf = (unsigned long)rx,
+        tr.len = size,
+        tr.delay_usecs = 0,
+        tr.speed_hz = speed,
+        tr.bits_per_word = bits,
+    };
+
+    fd = open(SPI_DEVICE, O_RDWR);
+    ret = ioctl(fd, SPI_IOC_MESSAGE(1), &tr);
+    close(fd);
+    printf("Transfer end\n");
+
+    return ret;
+}*/
+
+/*char _590_DID_DIG::spi_init_5900(void)//bool
+{
+        int ret = 0;
+        int fd;
+
+    uint8_t statMsg[] = {0x02, 0x00, 0x40};
+    uint8_t rx[3] = {0,};
+    uint8_t mode = 0;
+
+    fd = open(SPI_DEVICE, O_RDWR);
+
+        if (fd < 0)
+        return FALSE;
+
+     // spi mode /
+    ret = ioctl(fd, SPI_IOC_WR_MODE, &mode);
+        if (ret == -1)
+        return FALSE;
+
+    ret = ioctl(fd, SPI_IOC_RD_MODE, &mode);
+        if (ret == -1)
+        return FALSE;
+
+     // bits per word /
+        ret = ioctl(fd, SPI_IOC_WR_BITS_PER_WORD, &bits);
+        if (ret == -1)
+        return FALSE;
+
+        ret = ioctl(fd, SPI_IOC_RD_BITS_PER_WORD, &bits);
+        if (ret == -1)
+        return FALSE;
+
+     // max speed hz /
+        ret = ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed);
+        if (ret == -1)
+        return FALSE;
+
+        ret = ioctl(fd, SPI_IOC_RD_MAX_SPEED_HZ, &speed);
+        if (ret == -1)
+        return FALSE;
+    close(fd);
+
+    // Enable appending of status to data read /
+    ret = transfer(statMsg,rx,3);
+
+    if (ret < 1)
+        return FALSE;
+
+    printf("init end ok\n");
+    return TRUE;
+}*/
+
+/*char _590_DID_DIG::checkADCID(void)
+{
+    int ret;
+    uint8_t idMsg[] = {0x47, 0x00, 0x00};
+    uint8_t rx[3] = {0,};
+    ret = transfer(idMsg,rx,3);
+
+    if (ret < 1)
+        return FALSE;
+
+//    // ID is 0x0C 0x94 /
+    if ( rx[1] == 12 && rx[2] == 148 )
+        return TRUE;
+
+    return FALSE;
+}*/
+
+/*int _590_DID_DIG::setChannel(int channel, char swap)// bool swap
+{
+    int ret;
+    uint8_t rx[6] = {0,};
+
+    // Format [ch addr] [enable] [order] /
+   uint8_t chanMsg[] = {0x10, 0x00, 0x01, 0x11, 0x00, 0x43};
+
+    if (channel == 0)
+    {
+        chanMsg[1] = 0x80;
+        chanMsg[4] = 0x00;
+    }
+    else if (channel == 1)
+    {
+        chanMsg[1] = 0x00;
+        chanMsg[4] = 0x80;
+    }
+
+    if (swap)
+    {
+        chanMsg[2] = 0x20;
+        chanMsg[5] = 0x62;
+    }
+
+    ret = transfer(chanMsg,rx,6);
+    return ret;
+}*/
+
+/*int _590_DID_DIG::read7176ADC(void)
+{
+    int ret;
+    int value;
+    int sum = 0;
+    uint8_t rx[5] = {0,};
+    uint8_t readMsg[] = {0x44, 0x00, 0x00, 0x00, 0x00};
+    // sleep for 50ms /
+    usleep(50000);
+
+    int i=0;
+    for (i=0; i<10; i++)
+    {
+        ret = transfer(readMsg,rx,5);
+        if (ret < 5)
+            return 0;
+
+        value = (rx[1] << 16) + (rx[2] << 8) + rx[3];
+        sum += value;
+    }
+    value = sum/10;
+
+    printf("value = %x\n",value);
+    return value;
+}*/
+
+/*int _590_DID_DIG::zeroADC(void)
+{
+//    char* dev_dir_name;
+    int countAdj = 0;
+//    int curCounts = 0;
+    int reading = read7176ADC();
+    int tries = 0;
+    double voltage = (reading * (2.5/8388607)) - 2.5;
+//    asprintf(&dev_dir_name, "%siio:device%d", IIO_DIR, POL_AMP_DAC_DEV);
+
+    while ((fabs(voltage) > .005) && tries < 100)
+    {
+        countAdj = fabs(voltage * (65535/5) * .4);
+//        curCounts = read_sysfs_posint(FRONT_ZERO,dev_dir_name) + countAdj;
+//        write_sysfs_int(FRONT_ZERO,dev_dir_name, curCounts);
+        reading = read7176ADC();
+        voltage = reading * (2.5/8388607) -2.5;
+        tries++;
+
+       // qDebug() << "adjust" << countAdj;
+      //  qDebug() << "cur counts" << curCounts;
+      //  qDebug() << "read" << reading;
+       // qDebug() << "volt" << voltage;
+    }
+
+    if (tries == 100)
+        return 1;
+
+    return 0;
+}*/
 void _590_DID_DIG::externalValves(void){
-	qDebug("External Valve Start");
+	qDebug("External Valve Function Start");
 	if(ui.externalCheckbox->isChecked()){
 		QString program = "killall eventwatch";
 		qDebug("Killing Eventwatch");
@@ -116,17 +317,32 @@ void _590_DID_DIG::externalValves(void){
 		arguments << "";
 		QProcess *myProcess1 = new QProcess();
 		myProcess1->start(program);//, arguments);
-		ui.externalCheckbox->setChecked(1);
+		//ui.externalCheckbox->setChecked(1);
 		ui.externalCheckbox->setChecked(0);
-	}else{
-		QString program = "/opt/Gow-Mac/bin/8100gc/ ./eventwatch";
+	}
+	else{
+		QString program = "/opt/Gow-Mac/bin/8100gc/./eventwatch";
 		qDebug("starting Eventwatch");
 		QStringList arguments;
 		arguments << "";
-		QProcess *myProcess = new QProcess();
+		QProcess *myProcess = new QProcess(this);
 		myProcess->start(program);
-		ui.externalCheckbox->setChecked(0);
 		ui.externalCheckbox->setChecked(1);
+		// Check if Process Failed.
+		if(myProcess->error()  == QProcess::FailedToStart){
+					qDebug("Process Has FAILED to START");
+		}
+
+
+		if(myProcess->state()  == QProcess::Running){
+			qDebug("Eventwatch Successfully Started");
+		}
+		if (myProcess->state()  == QProcess::Starting){
+			qDebug("Eventwatch is Starting but hasn't fully started yet.");
+		}
+
+		//ui.externalCheckbox->setChecked(0);
+
 	}
 
 
@@ -170,31 +386,34 @@ void _590_DID_DIG::setTempLabel(QString txt, int ovenType){
 void _590_DID_DIG::callViewSigs(void){
 
 	th_i2c.delay(200);
-	ui.detDid1LCD->display(dc.detDID_I_read());
+//	ui.detDid1LCD->display(dc.detDID_I_read());
 	th_i2c.delay(200);
 
-	ui.detDidHvLCD->display(dc.detHvSig());
-	qDebug("(detConfigure) detHvSig() firing.");
+//	ui.detDidHvLCD->display(dc.detHvSig());
+	//qDebug("(detConfigure) detHvSig() firing.");
 
 	th_i2c.delay(200);
-	ui.detDidPolVLCD->display(dc.detPolSig());
+//	ui.detDidPolVLCD->display(dc.detPolSig());
 
 	th_i2c.delay(500);
 
-	ui.column_temp_box->display(th_i2c.readTrueValue(1));
-	qDebug("readTrueValue(1) finished.");
+	//ui.column_temp_box->display(th_i2c.readTrueValue(1));
+	//qDebug("readTrueValue(1) finished.");
 
 	th_i2c.delay(500);
-	ui.detector_temp_box->display(th_i2c.readTrueValue(2));
-	qDebug("readTrueValue(2) finished.");
+	//ui.detector_temp_box->display(th_i2c.readTrueValue(2));
+	//qDebug("readTrueValue(2) finished.");
 
+	//dc.detDIDSig();
+
+	/*
 	if ((dc.detDIDSig() * -2.0 * 1.25)>=5.0){
 		ui.detDidISigLCD->display(12.5 - (dc.detDIDSig() * -2.0 * 1.25));
 	}else{
 		ui.detDidISigLCD->display(dc.detDIDSig() * -2.0 * 1.25);
-	}
+	}*/
 
-	qDebug("(detConfigure) callViewSigs ending.");
+	//qDebug("(detConfigure) callViewSigs ending.");
 }
 
 void _590_DID_DIG::calibrat(void)
@@ -944,10 +1163,11 @@ double _590_DID_DIG::detDIDZeroCtl(void){// OK
     __u8 hi_byte, lo_byte, buff[3];;
 //    int i;
     int fd;
-    double result, sig;
+    double result, sig, ADC_OFFSET;
     unsigned int hexHold;// i2c_result;
-    char ar[] = "/dev/spi0cs3";//////////// Changed from a spi0cs3 because of problem with 4" EMAC
-    char br[] = "44";
+    //char ar[] = "/dev/spi0cs3";//////////// Changed from a spi0cs3 because of problem with 4" EMAC
+    //char ar[] = "/dev/spidev1.3"; // for the new screen
+    //char br[] = "44";
     // Bottom two Variables Not being used Commented Out by Dione.
     //char cr[] = "/dev/spi0cs3";
     //char dr[] = "44";
@@ -972,36 +1192,45 @@ double _590_DID_DIG::detDIDZeroCtl(void){// OK
 	   */
 
 
-	fd = dci2c.init_i2c();
+	//fd = dci2c.init_i2c();
 	dci2c.delay(333);// added after speeding up mainwindow 7-23-2015
 
-	dci2c.test_set_slave(fd, 0x10);
+	//dci2c.test_set_slave(fd, 0x10);
 
 	//* write register /
 	buff[0] = 0x18;// channel
 	buff[1] = hi_byte;//(__u8)(cmd >> 8);
 	buff[2] = lo_byte;//(__u8)(cmd);
 
-	if (write(fd, buff, 3) != 3) {
+	/*if (write(fd, buff, 3) != 3) {
 		fprintf(stderr, "i2c_write_cmd: error on write: %s\n", strerror(errno));
 		//    		return -1;
-	}
+	}*/
 	dci2c.delay(333);// added after speeding up mainwindow 7-23-2015
-	dci2c.close_device(fd);//close(fd);// Close I2C fd
+	//dci2c.close_device(fd);//close(fd);// Close I2C fd
 			    	//////////////////////////////////// I2C End
 
 			    	// read offset
 
 			    	dci2c.delay(333);// added after speeding up mainwindow 7-23-2015
-				if(dci2c.setup_spi(ar) == -1){qDebug() << "Second step SPI - Zero Failure";}// exit(EXIT_FAILURE);
+				//if(dci2c.setup_spi(ar) == -1){qDebug() << "Second step SPI - Zero Failure";}// exit(EXIT_FAILURE);
 			//	qDebug() << "First step SPI";
 				dci2c.delay(333);// added after speeding up mainwindow 7-23-2015
 
-				result = dci2c.getSig_spi(4,br);
+//				spi_init_5900();//spi_init();
+//				setChannel(0,TRUE);
+//				read7176ADC();
+				usleep(48000);// 20 Hz approximate
+//				ADC_OFFSET = read7176ADC() * (2.5/8388607) -2.5;
+				printf("AT A/D = %f\n",ADC_OFFSET);
+				printf("AT POST = %f\n",(ADC_OFFSET/0.4));
+				result = ADC_OFFSET;
+				//result = dci2c.getSig_spi(4,br);
+
 			//	qDebug() << "Second step SPI";
 				dci2c.delay(333);// added after speeding up mainwindow 7-23-2015
 
-				dci2c.close_spi();
+				//dci2c.close_spi();
 
 				   if (result > 2.5){
 					   result = result - 2.5;
@@ -1464,6 +1693,7 @@ double _590_DID_DIG::detDIDSig(void){//ok - used for DID / FID- OK
     double result, resultDsply = false;
     double didResult[10];
     unsigned int i, t, avgTop;
+    double ADC_OFFSET;
 
 	busyState = "BUSY...";// 9-5-2014
 	notBusyState = "DONE...";
@@ -1474,31 +1704,31 @@ double _590_DID_DIG::detDIDSig(void){//ok - used for DID / FID- OK
 
 	//detNumberDirector = 1; // forcing  - test statement
 
-	char AR[] = "/dev/spidev1.3";
-	char BR[] = "44";
+	/*char AR[] = "/dev/spidev1.3";
+	char BR[] = "44";*/
 	avgTop = 10.0;
 
 	//ui.detSigReadButton->clearFocus();
 
-	i = 0;
+	/*i = 0;
 	for (i = 0; i < avgTop; ++i){
 		if(dci2c.setup_spi(AR) == -1){};// exit(EXIT_FAILURE);
 
 		didResult[i] = dci2c.getSig_spi(4,BR);
 
 		dci2c.close_spi();
-	}
+	}*/
 
-	t = 0;
+	/*t = 0;
 	result = 0.0;
 	for (t = 0; t < avgTop; t++){
 		result = result + didResult[t];
 	}
-	result = result / avgTop;
+	result = result / avgTop;*/
 
 		//qDebug("DID Read Signal Result = %f", result);
 
-	if (result >= 2.5){
+	/*if (result >= 2.5){
 		resultDsply = result - 2.5;
 		//qDebug("(>= 2.5) DID ResultDsply - 2.5 = %f", resultDsply);
 	}
@@ -1508,13 +1738,22 @@ double _590_DID_DIG::detDIDSig(void){//ok - used for DID / FID- OK
 	}else if (result < 0.0){
 		resultDsply = (result + 2.5) * (-1);
 		//qDebug("(< 0) DID ResultDsply + 2.5 = %f", resultDsply);
-	}
+	}*/
+//	spi_init_5900();//spi_init();
+//	setChannel(0,TRUE);
+//	read7176ADC();
+//	usleep(48000);// 20 Hz approximate
+//	ADC_OFFSET = read7176ADC() * (2.5/8388607) -2.5;
+	printf("AT A/D = %f\n",ADC_OFFSET);
+	printf("AT POST = %f\n",(ADC_OFFSET/0.4));
+	result = ADC_OFFSET;
 
-	ui.detDidISigLCD->display(resultDsply * -2.0 * 1.25);
+	ui.detDidISigLCD->display(result);//(resultDsply * -2.0 * 1.25);
 
 	ui.busyLineEdit->setText(notBusyState);
 
-	return result - 2.5;
+	return result;// - 2.5;
+	qDebug("DID Result ************************ = %f", result);
 }
 
 double _590_DID_DIG::detTCD_I_Sig(void){// Ok // good USED FOR 2300 reads any det sig from A/D "Voltage"

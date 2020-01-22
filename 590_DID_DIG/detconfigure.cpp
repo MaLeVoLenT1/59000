@@ -4,9 +4,11 @@
 #include "numpopup.h"
 #include "gainpopup.h"
 #include "polpopup.h"
+#include <stdlib.h>
 #include <QApplication>
 #include <QKeyEvent>
 #include <QString>
+#include <stdio.h>
 
 #include "i2c--dev.h"
 #include "pleasewait.h"
@@ -20,6 +22,24 @@
 #include <QtGui>
 #include <QtCore>//
 
+#include <stdint.h>
+#include <unistd.h>
+//#include <fcntl.h>
+#include <math.h>
+#include <sys/ioctl.h>
+#include <linux/types.h>
+#include "ad7176-spi.h"
+#include "iio-utils.h"
+#include "constants.h"
+/*//////////////////////////////////////////////////////////////////////////fcccccc
+#include <errno.h>
+#include <QDebug>
+#include <QAction>
+#include <QProcess>
+#include <QFile>// added 6-17-2016
+
+#include <linux/spi/spidev.h>
+////////////////////////////////////////////////////////////////////*/
 
 extern unsigned int DIDhexHoldGlobal;
 extern unsigned int DIDhexHoldGlobal2;
@@ -36,7 +56,8 @@ int DID1rng, DID2rng;
 double dVC1d, dcId, offSet1d, dVC2d, dcI2d, offSet2d; // TCD1 Voltage
 extern bool stopViewS;;
 extern bool dcGain1, dcGain2, dcGain1_1, dcGain2_1, dcOF, dcOF2, dcpol1, dcpol2;
-char ar[15] = "/dev/spi0cs3";// ar[] changed from cs3 because of problem with emac 4"
+//char ar[15] = "/dev/spi0cs3";// ar[] changed from cs3 because of problem with emac 4"
+char ar[15] = "/dev/spidev1.3"; // for the new screen
 char br[5] = "44";//br[]
 double tcdResult[10];
 extern unsigned int hexHoldGlobal;
@@ -48,6 +69,17 @@ extern unsigned int i2c_slaveAddr;
 extern unsigned int detNumberDirector;// used to select detector for processing - Temporary find another way
 
 extern void deviceClose8100(int fd);
+//#define EPRINT(args...) fprintf(stderr, ##args)
+
+//#define MAX_LENGTH 64
+
+//static uint8_t bits = 8;
+//static uint32_t speed = 500000;
+
+//#define FOREVER()  for(;;)
+
+//#define SPI_DEVICE      "/dev/spidev1.3"
+//#define SPI_DEVICE_1      "/dev/spidev1.2"
 
 detConfigure::detConfigure(QWidget *parent)
     : QDialog(parent)
@@ -69,6 +101,184 @@ detConfigure::~detConfigure()
 {
 
 }
+
+/*int detConfigure::transfer(uint8_t *tx, uint8_t *rx, int size)
+{
+	int ret;
+    int fd;
+
+    struct spi_ioc_transfer tr = {
+        tr.tx_buf = (unsigned long)tx,
+        tr.rx_buf = (unsigned long)rx,
+        tr.len = size,
+        tr.delay_usecs = 0,
+        tr.speed_hz = speed,
+        tr.bits_per_word = bits,
+    };
+
+//    fd = open(SPI_DEVICE, O_RDWR);
+    ret = ioctl(fd, SPI_IOC_MESSAGE(1), &tr);
+    close(fd);
+    printf("Transfer end\n");
+
+    return ret;
+}*/
+
+/*char detConfigure::spi_init_5900(void)//bool
+{
+        int ret = 0;
+        int fd;
+
+    uint8_t statMsg[] = {0x02, 0x00, 0x40};
+    uint8_t rx[3] = {0,};
+    uint8_t mode = 0;
+
+//    fd = open(SPI_DEVICE, O_RDWR);
+
+        if (fd < 0)
+        return FALSE;
+
+     // spi mode /
+    ret = ioctl(fd, SPI_IOC_WR_MODE, &mode);
+        if (ret == -1)
+        return FALSE;
+
+    ret = ioctl(fd, SPI_IOC_RD_MODE, &mode);
+        if (ret == -1)
+        return FALSE;
+
+     // bits per word /
+        ret = ioctl(fd, SPI_IOC_WR_BITS_PER_WORD, &bits);
+        if (ret == -1)
+        return FALSE;
+
+        ret = ioctl(fd, SPI_IOC_RD_BITS_PER_WORD, &bits);
+        if (ret == -1)
+        return FALSE;
+
+     // max speed hz /
+        ret = ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed);
+        if (ret == -1)
+        return FALSE;
+
+        ret = ioctl(fd, SPI_IOC_RD_MAX_SPEED_HZ, &speed);
+        if (ret == -1)
+        return FALSE;
+    close(fd);
+
+    // Enable appending of status to data read /
+    ret = transfer(statMsg,rx,3);
+
+    if (ret < 1)
+        return FALSE;
+
+    printf("init end ok\n");
+    return TRUE;
+}*/
+
+/*char detConfigure::checkADCID(void)
+{
+    int ret;
+    uint8_t idMsg[] = {0x47, 0x00, 0x00};
+    uint8_t rx[3] = {0,};
+    ret = transfer(idMsg,rx,3);
+
+    if (ret < 1)
+        return FALSE;
+
+//    // ID is 0x0C 0x94 /
+    if ( rx[1] == 12 && rx[2] == 148 )
+        return TRUE;
+
+    return FALSE;
+}*/
+
+/*int detConfigure::setChannel(int channel, char swap)// bool swap
+{
+    int ret;
+    uint8_t rx[6] = {0,};
+
+    // Format [ch addr] [enable] [order] /
+   uint8_t chanMsg[] = {0x10, 0x00, 0x01, 0x11, 0x00, 0x43};
+
+    if (channel == 0)
+    {
+        chanMsg[1] = 0x80;
+        chanMsg[4] = 0x00;
+    }
+    else if (channel == 1)
+    {
+        chanMsg[1] = 0x00;
+        chanMsg[4] = 0x80;
+    }
+
+    if (swap)
+    {
+        chanMsg[2] = 0x20;
+        chanMsg[5] = 0x62;
+    }
+
+    ret = transfer(chanMsg,rx,6);
+    return ret;
+}*/
+
+/*int detConfigure::read7176ADC(void)
+{
+    int ret;
+    int value;
+    int sum = 0;
+    uint8_t rx[5] = {0,};
+    uint8_t readMsg[] = {0x44, 0x00, 0x00, 0x00, 0x00};
+    // sleep for 50ms /
+    usleep(50000);
+
+    int i=0;
+    for (i=0; i<10; i++)
+    {
+        ret = transfer(readMsg,rx,5);
+        if (ret < 5)
+            return 0;
+
+        value = (rx[1] << 16) + (rx[2] << 8) + rx[3];
+        sum += value;
+    }
+    value = sum/10;
+
+    printf("value = %x\n",value);
+    return value;
+}*/
+
+/*int detConfigure::zeroADC(void)
+{
+//    char* dev_dir_name;
+    int countAdj = 0;
+//    int curCounts = 0;
+    int reading = read7176ADC();
+    int tries = 0;
+    double voltage = (reading * (2.5/8388607)) - 2.5;
+//    asprintf(&dev_dir_name, "%siio:device%d", IIO_DIR, POL_AMP_DAC_DEV);
+
+    while ((fabs(voltage) > .005) && tries < 100)
+    {
+        countAdj = fabs(voltage * (65535/5) * .4);
+//        curCounts = read_sysfs_posint(FRONT_ZERO,dev_dir_name) + countAdj;
+//        write_sysfs_int(FRONT_ZERO,dev_dir_name, curCounts);
+        reading = read7176ADC();
+        voltage = reading * (2.5/8388607) -2.5;
+        tries++;
+
+       // qDebug() << "adjust" << countAdj;
+      //  qDebug() << "cur counts" << curCounts;
+      //  qDebug() << "read" << reading;
+       // qDebug() << "volt" << voltage;
+    }
+
+    if (tries == 100)
+        return 1;
+
+    return 0;
+}*/
+
 void detConfigure::setSettings2(void){
 	//qDebug("TIMER 2 .................................................START");
 	completeProcess = "COMPLETE...2";
@@ -2446,7 +2656,7 @@ double detConfigure::detHvSig(void){
 //}
 double detConfigure::detDIDSig(void){//ok - used for DID / FID- OK
 
-    double result;
+    double result, ADC_OFFSET;
     double resultDsply;
     double didResult[10];
     unsigned int i, t, avgTop;
@@ -2465,14 +2675,14 @@ double detConfigure::detDIDSig(void){//ok - used for DID / FID- OK
 	{
 		case 1:
 		{
-		    //char ar[] = "/dev/spidev1.3"; // This is for the new Panel
-			char ar[] = "/dev/spi0cs3";		// This is for the old Panel
-		    char br[] = "44";
+//		    char ar[] = "/dev/spidev1.3"; // This is for the new Panel
+			//char ar[] = "/dev/spi0cs3";		// This is for the old Panel
+//		    char br[] = "44";
 		    avgTop = 10.0;
 
 		    //ui.detSigReadButton->clearFocus();
 
-		    i = 0;
+/*		    i = 0;
 		    for (i = 0; i < avgTop; ++i){
 		    	if(dci2c.setup_spi(ar) == -1){};// exit(EXIT_FAILURE);
 
@@ -2485,7 +2695,18 @@ double detConfigure::detDIDSig(void){//ok - used for DID / FID- OK
 		    result = 0.0;
 		    for (t = 0; t < avgTop; t++){
 		    	result = result + didResult[t];
-		    }
+		    }*/
+
+		    ///////////////////////////////////////////////////////////////////////
+//		    spi_init_5900();//spi_init();
+//		    setChannel(0,TRUE);
+//		    read7176ADC();
+		    usleep(48000);// 20 Hz approximate
+//		    ADC_OFFSET = read7176ADC() * (2.5/8388607) -2.5;
+		    printf("AT A/D = %f\n",ADC_OFFSET);
+		    printf("AT POST = %f\n",(ADC_OFFSET/0.4));
+		    result = ADC_OFFSET;
+		    ///////////////////////////////////////////////////////////////////////
 		    result = result / avgTop;
 
 			//qDebug("DID Read Signal Result = %f", result);
@@ -3629,9 +3850,11 @@ double detConfigure::detDIDZeroCtl(void){// OK
     int fd;
     double result, sig;
     unsigned int hexHold;// i2c_result;
-    char ar[] = "/dev/spi0cs3";//////////// Changed from a spi0cs3 because of problem with 4" EMAC
+    //char ar[] = "/dev/spi0cs3";//////////// Changed from a spi0cs3 because of problem with 4" EMAC
+    char ar[] = "/dev/spidev1.3"; // for the new screen
     char br[] = "44";
-    char cr[] = "/dev/spi0cs3";
+    //char cr[] = "/dev/spi0cs3";
+    char cr[] = "/dev/spidev1.3";
     char dr[] = "44";
 
 	busyState = "BUSY...";// 9-5-2014

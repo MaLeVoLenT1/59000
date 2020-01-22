@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'polarizepopup.h'
 **
-** Created: Mon Aug 19 13:27:02 2019
+** Created: Tue Jan 7 13:03:38 2020
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
 **
 ** WARNING! All changes made in this file will be lost!

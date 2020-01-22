@@ -24,6 +24,13 @@
 #include "voltagenumpopup.h"
 #include "ovenwidget.h"
 
+#include "ad7176-spi.h"
+//#include "iio-utils.h"
+#include "constants.h"
+#define SPI_DEVICE      "/dev/spidev1.3"
+#define SPI_DEVICE_1      "/dev/spidev1.2"
+
+
 class _590_DID_DIG : public QMainWindow
 {
     Q_OBJECT
@@ -146,6 +153,12 @@ public slots:
 	void deletePolPop(QString txt);
 
 	double detDIDZeroCtl(void);
+//	char spi_init_5900(void);
+//	char checkADCID(void);
+//	int setChannel(int channel, char swap);
+//	int read7176ADC(void);
+//	int zeroADC(void);
+//	int transfer(uint8_t *tx, uint8_t *rx, int size);
 
 
 private:

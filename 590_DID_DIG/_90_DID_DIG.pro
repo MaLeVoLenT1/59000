@@ -63,7 +63,10 @@ HEADERS   += _590_did_dig.h \
     voltageNumPopUp.h \
     polpopup.h \
     temppopup.h \
-    gainpopup.h
+    gainpopup.h \
+    ad7176-spi.h \
+    iio-utils.h
+#    linux/spi/spidev.h
 #    ui_calibrate.h \
 #    ui_data.h \
 #    ui_output.h \
@@ -128,7 +131,9 @@ SOURCES   += main.cpp \
     voltageNumPopUp.cpp \
     polpopup.cpp \
     temppopup.cpp \
-    gainpopup.cpp
+    gainpopup.cpp \
+    ad7176-spi.cpp \
+    iio-utils.cpp
 INCLUDEPATH += 3rdparty/libmodbus 3rdparty/libmodbus/src 3rdparty/qextserialport
 
 	unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\

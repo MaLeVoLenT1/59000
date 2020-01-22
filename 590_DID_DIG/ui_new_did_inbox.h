@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'new_did_inbox.ui'
 **
-** Created: Thu Aug 3 10:54:50 2017
+** Created: Tue Dec 17 16:27:37 2019
 **      by: Qt User Interface Compiler version 4.6.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

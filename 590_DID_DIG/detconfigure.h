@@ -4,6 +4,7 @@
 #include <QtGui/QDialog>
 #include "ui_detconfigure.h"
 #include "mainwindow.h"
+//#include "_590_did_dig.h"
 
 
 class detConfigure : public QDialog
@@ -68,6 +69,13 @@ public slots:
 
 	void polarizationSET(double voltage);
 	void passPolarization(QString txt);
+
+//	char spi_init_5900(void);
+//	char checkADCID(void);
+//	int setChannel(int channel, char swap);
+//	int read7176ADC(void);
+//	int zeroADC(void);
+//	int transfer(uint8_t *tx, uint8_t *rx, int size);
 
 
 private:

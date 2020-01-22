@@ -27,6 +27,8 @@
 #include "stdio.h"
 #include "valves.h"
 
+#include "iio-utils.h"
+
 extern unsigned int i2c_slaveAddr;
 extern bool FLAMEON;
 
@@ -137,6 +139,9 @@ int main(int argc, char *argv[])
 	qDebug() << "Starting Test third";
 	oprc.outputRange4();
 	detConfig.powerOnInitSettings();// Get Last Used Settings from disk
+
+//	w.spi_init_5900();//spi_init();
+//	w.setChannel(0,TRUE);
 
 	qDebug() << "End of main";
 	w.displayStatusDone();

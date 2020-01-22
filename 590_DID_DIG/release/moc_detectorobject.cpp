@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'detectorobject.h'
 **
-** Created: Fri Aug 23 12:47:48 2019
+** Created: Thu Jan 16 07:30:13 2020
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
 **
 ** WARNING! All changes made in this file will be lost!

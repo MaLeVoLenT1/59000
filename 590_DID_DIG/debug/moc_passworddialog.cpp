@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'passworddialog.h'
 **
-** Created: Mon Aug 19 13:26:37 2019
+** Created: Tue Jan 7 13:01:43 2020
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
 **
 ** WARNING! All changes made in this file will be lost!

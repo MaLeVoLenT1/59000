@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file '_590_did_dig.ui'
 **
-** Created: Thu Oct 10 11:59:50 2019
+** Created: Tue Jan 7 12:49:33 2020
 **      by: Qt User Interface Compiler version 4.6.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

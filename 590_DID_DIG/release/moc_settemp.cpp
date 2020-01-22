@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'settemp.h'
 **
-** Created: Fri Aug 23 12:48:05 2019
+** Created: Thu Jan 16 07:31:08 2020
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
 **
 ** WARNING! All changes made in this file will be lost!
