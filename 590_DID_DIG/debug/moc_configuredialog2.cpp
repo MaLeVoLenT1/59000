@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'configuredialog2.h'
 **
-** Created: Wed Jan 15 09:52:34 2020
+** Created: Wed Jan 8 09:18:59 2020
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
 **
 ** WARNING! All changes made in this file will be lost!

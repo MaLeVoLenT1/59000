@@ -128,15 +128,16 @@ int main(int argc, char *argv[])
 	lcdMultiplyer = 1.0;
 	ConcMultiplyer = 1.0;
 
-	stup.setPolVolt();// set pol volt to 160 removed wtr
+	//stup.setPolVolt();// set pol volt to 160 removed wtr
 
+	// Stuff disabled for testing.
 	qDebug() << "Starting Test";
-	detConfig.detDID_I_OnOffCtl();
+	//detConfig.detDID_I_OnOffCtl();
 	qDebug() << "Starting Test second";
-	detConfig.detDID_I_Ctl();// Turn DID current control for the HV Voltage setting Full on
+	//detConfig.detDID_I_Ctl();// Turn DID current control for the HV Voltage setting Full on
 	qDebug() << "Starting Test third";
 	oprc.outputRange4();
-	detConfig.powerOnInitSettings();// Get Last Used Settings from disk
+	//detConfig.powerOnInitSettings();// Get Last Used Settings from disk
 
 	qDebug() << "End of main";
 	w.displayStatusDone();

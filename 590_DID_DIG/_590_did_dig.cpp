@@ -78,8 +78,7 @@ extern unsigned int detNumberDirector;// used to select detector for processing 
 extern bool IGNITE_DID1;
 double DVC1D; // TCD1 Voltage
 double PolVolt;
-//char AR[15] = "/dev/spi0cs3";// ar[] changed from cs3 because of problem with emac 4"
-char AR[15] = "/dev/spidev1.3"; // for the new screen
+char AR[15] = "/dev/spidev1.3";// ar[] changed from cs3 because of problem with emac 4"
 char BR[5] = "44";//br[]
 bool DID_ONOFFCTRL2;
 extern unsigned int hexHoldGlobal;
@@ -109,7 +108,7 @@ _590_DID_DIG::~_590_DID_DIG()
 
 }
 void _590_DID_DIG::externalValves(void){
-	qDebug("External Valve Function Start");
+	qDebug("External Valve Start");
 	if(ui.externalCheckbox->isChecked()){
 		QString program = "killall eventwatch";
 		qDebug("Killing Eventwatch");
@@ -117,32 +116,17 @@ void _590_DID_DIG::externalValves(void){
 		arguments << "";
 		QProcess *myProcess1 = new QProcess();
 		myProcess1->start(program);//, arguments);
-		//ui.externalCheckbox->setChecked(1);
+		ui.externalCheckbox->setChecked(1);
 		ui.externalCheckbox->setChecked(0);
-	}
-	else{
-		QString program = "/opt/Gow-Mac/bin/8100gc/./eventwatch";
+	}else{
+		QString program = "/opt/Gow-Mac/bin/8100gc/ ./eventwatch";
 		qDebug("starting Eventwatch");
 		QStringList arguments;
 		arguments << "";
-		QProcess *myProcess = new QProcess(this);
+		QProcess *myProcess = new QProcess();
 		myProcess->start(program);
+		ui.externalCheckbox->setChecked(0);
 		ui.externalCheckbox->setChecked(1);
-		// Check if Process Failed.
-		if(myProcess->error()  == QProcess::FailedToStart){
-					qDebug("Process Has FAILED to START");
-		}
-
-
-		if(myProcess->state()  == QProcess::Running){
-			qDebug("Eventwatch Successfully Started");
-		}
-		if (myProcess->state()  == QProcess::Starting){
-			qDebug("Eventwatch is Starting but hasn't fully started yet.");
-		}
-
-		//ui.externalCheckbox->setChecked(0);
-
 	}
 
 
@@ -186,32 +170,31 @@ void _590_DID_DIG::setTempLabel(QString txt, int ovenType){
 void _590_DID_DIG::callViewSigs(void){
 
 	th_i2c.delay(200);
-	ui.detDid1LCD->display(dc.detDID_I_read());
+	//ui.detDid1LCD->display(dc.detDID_I_read());
 	th_i2c.delay(200);
 
-	ui.detDidHvLCD->display(dc.detHvSig());
-	//qDebug("(detConfigure) detHvSig() firing.");
+	//ui.detDidHvLCD->display(dc.detHvSig());
+	qDebug("(detConfigure) detHvSig() firing.");
 
 	th_i2c.delay(200);
-	ui.detDidPolVLCD->display(dc.detPolSig());
+	//ui.detDidPolVLCD->display(dc.detPolSig());
 
 	th_i2c.delay(500);
 
 	ui.column_temp_box->display(th_i2c.readTrueValue(1));
-	//qDebug("readTrueValue(1) finished.");
+	qDebug("readTrueValue(1) finished.");
 
 	th_i2c.delay(500);
 	ui.detector_temp_box->display(th_i2c.readTrueValue(2));
-	//qDebug("readTrueValue(2) finished.");
+	qDebug("readTrueValue(2) finished.");
 
-	/*
-	if ((dc.detDIDSig() * -2.0 * 1.25)>=5.0){
-		ui.detDidISigLCD->display(12.5 - (dc.detDIDSig() * -2.0 * 1.25));
-	}else{
-		ui.detDidISigLCD->display(dc.detDIDSig() * -2.0 * 1.25);
-	}*/
+//	if ((dc.detDIDSig() * -2.0 * 1.25)>=5.0){
+//		ui.detDidISigLCD->display(12.5 - (dc.detDIDSig() * -2.0 * 1.25));
+//	}else{
+//		ui.detDidISigLCD->display(dc.detDIDSig() * -2.0 * 1.25);
+//	}
 
-	//qDebug("(detConfigure) callViewSigs ending.");
+	qDebug("(detConfigure) callViewSigs ending.");
 }
 
 void _590_DID_DIG::calibrat(void)
@@ -963,8 +946,7 @@ double _590_DID_DIG::detDIDZeroCtl(void){// OK
     int fd;
     double result, sig;
     unsigned int hexHold;// i2c_result;
-    //char ar[] = "/dev/spi0cs3";//////////// Changed from a spi0cs3 because of problem with 4" EMAC
-    char ar[] = "/dev/spidev1.3"; // for the new screen
+    char ar[] = "/dev/spi0cs3";//////////// Changed from a spi0cs3 because of problem with 4" EMAC
     char br[] = "44";
     // Bottom two Variables Not being used Commented Out by Dione.
     //char cr[] = "/dev/spi0cs3";
