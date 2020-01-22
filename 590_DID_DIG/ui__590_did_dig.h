@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file '_590_did_dig.ui'
 **
-** Created: Thu Oct 10 11:59:50 2019
+** Created: Wed Jan 15 09:50:58 2020
 **      by: Qt User Interface Compiler version 4.6.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -109,7 +109,7 @@ public:
     {
         if (_590_DID_DIGClass->objectName().isEmpty())
             _590_DID_DIGClass->setObjectName(QString::fromUtf8("_590_DID_DIGClass"));
-        _590_DID_DIGClass->resize(526, 800);
+        _590_DID_DIGClass->resize(513, 800);
         centralwidget = new QWidget(_590_DID_DIGClass);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         thStatusLineEdit = new QLineEdit(centralwidget);
@@ -683,7 +683,7 @@ public:
         detConfDialogLabel_3->setFont(font3);
         v2_pushButton = new QPushButton(centralwidget);
         v2_pushButton->setObjectName(QString::fromUtf8("v2_pushButton"));
-        v2_pushButton->setGeometry(QRect(200, 230, 81, 41));
+        v2_pushButton->setGeometry(QRect(140, 230, 81, 41));
         v2_pushButton->setMinimumSize(QSize(55, 22));
         v2_pushButton->setMaximumSize(QSize(450, 242));
         QPalette palette10;
@@ -738,7 +738,7 @@ public:
         v2_pushButton->setAutoFillBackground(false);
         v4_pushButton = new QPushButton(centralwidget);
         v4_pushButton->setObjectName(QString::fromUtf8("v4_pushButton"));
-        v4_pushButton->setGeometry(QRect(540, 240, 81, 41));
+        v4_pushButton->setGeometry(QRect(360, 230, 81, 41));
         v4_pushButton->setMinimumSize(QSize(55, 22));
         v4_pushButton->setMaximumSize(QSize(450, 242));
         QPalette palette11;
@@ -793,7 +793,7 @@ public:
         v4_pushButton->setAutoFillBackground(false);
         v1_pushButton = new QPushButton(centralwidget);
         v1_pushButton->setObjectName(QString::fromUtf8("v1_pushButton"));
-        v1_pushButton->setGeometry(QRect(80, 230, 81, 41));
+        v1_pushButton->setGeometry(QRect(20, 230, 81, 41));
         v1_pushButton->setMinimumSize(QSize(55, 22));
         v1_pushButton->setMaximumSize(QSize(450, 242));
         QPalette palette12;
@@ -848,7 +848,7 @@ public:
         v1_pushButton->setAutoFillBackground(false);
         v3_pushButton = new QPushButton(centralwidget);
         v3_pushButton->setObjectName(QString::fromUtf8("v3_pushButton"));
-        v3_pushButton->setGeometry(QRect(320, 230, 81, 41));
+        v3_pushButton->setGeometry(QRect(260, 230, 81, 41));
         v3_pushButton->setMinimumSize(QSize(55, 22));
         v3_pushButton->setMaximumSize(QSize(450, 242));
         QPalette palette13;
@@ -1745,7 +1745,7 @@ public:
         _590_DID_DIGClass->setCentralWidget(centralwidget);
         menubar = new QMenuBar(_590_DID_DIGClass);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 526, 25));
+        menubar->setGeometry(QRect(0, 0, 513, 25));
         _590_DID_DIGClass->setMenuBar(menubar);
         statusbar = new QStatusBar(_590_DID_DIGClass);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));

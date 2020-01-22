@@ -37,6 +37,7 @@ double dVC1d, dcId, offSet1d, dVC2d, dcI2d, offSet2d; // TCD1 Voltage
 extern bool stopViewS;;
 extern bool dcGain1, dcGain2, dcGain1_1, dcGain2_1, dcOF, dcOF2, dcpol1, dcpol2;
 char ar[15] = "/dev/spi0cs3";// ar[] changed from cs3 because of problem with emac 4"
+//char ar[15] = "/dev/spidev1.3"; // for the new screen
 char br[5] = "44";//br[]
 double tcdResult[10];
 extern unsigned int hexHoldGlobal;
@@ -3630,8 +3631,10 @@ double detConfigure::detDIDZeroCtl(void){// OK
     double result, sig;
     unsigned int hexHold;// i2c_result;
     char ar[] = "/dev/spi0cs3";//////////// Changed from a spi0cs3 because of problem with 4" EMAC
+    //char ar[] = "/dev/spidev1.3"; // for the new screen
     char br[] = "44";
     char cr[] = "/dev/spi0cs3";
+    //char cr[] = "/dev/spidev1.3";
     char dr[] = "44";
 
 	busyState = "BUSY...";// 9-5-2014

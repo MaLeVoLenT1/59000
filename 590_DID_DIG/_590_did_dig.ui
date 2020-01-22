@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>526</width>
+    <width>513</width>
     <height>800</height>
    </rect>
   </property>
@@ -4020,7 +4020,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="v2_pushButton">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>140</x>
       <y>230</y>
       <width>81</width>
       <height>41</height>
@@ -4469,8 +4469,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="v4_pushButton">
     <property name="geometry">
      <rect>
-      <x>540</x>
-      <y>240</y>
+      <x>360</x>
+      <y>230</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -4918,7 +4918,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="v1_pushButton">
     <property name="geometry">
      <rect>
-      <x>80</x>
+      <x>20</x>
       <y>230</y>
       <width>81</width>
       <height>41</height>
@@ -5367,7 +5367,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="v3_pushButton">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>260</x>
       <y>230</y>
       <width>81</width>
       <height>41</height>
@@ -11769,7 +11769,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>526</width>
+     <width>513</width>
      <height>25</height>
     </rect>
    </property>

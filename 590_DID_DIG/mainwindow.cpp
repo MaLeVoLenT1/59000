@@ -310,7 +310,7 @@ void MainWindow::changeSerialPort( int temp)
 	int portIndex = 0;
     int i = 0;
     int test;
-    int portNum = 2;
+    int portNum = 1;
 
     test = temp;
 

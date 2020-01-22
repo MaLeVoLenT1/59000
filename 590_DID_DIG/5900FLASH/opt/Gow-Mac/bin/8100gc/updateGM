@@ -1,0 +1,25 @@
+#!/bin/bash
+prog_path=/opt/Gow-Mac/bin/8100gc
+if [ -f /media/sda1/updateGM.in ]
+	then
+mount -o remount,rw / &
+wait
+bkstamp=$(date +%Y%m%d.%H%M%S)
+tar -zcf /media/sda1/backupGM-$bkstamp.sav $prog_path &
+wait
+tar -xzf /media/sda1/updateGM.in -C / &
+wait
+rm  /media/sda1/updateGM.in & 
+wait
+COUNTER=0
+while [ $COUNTER -lt 2 ]; do
+echo 1 > /sys/class/backlight/backlight/bl_power
+sleep 1
+echo 0 > /sys/class/backlight/backlight/bl_power
+sleep 1
+let COUNTER=COUNTER+1
+done
+wait
+fi
+exit
+
