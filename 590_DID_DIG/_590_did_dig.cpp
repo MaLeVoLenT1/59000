@@ -1,5 +1,4 @@
-#include "_590_did_dig.h"
-
+#include"_590_did_dig.h
 //#include "detconfigure.h"
 #include <errno.h>
 #include <QDebug>
