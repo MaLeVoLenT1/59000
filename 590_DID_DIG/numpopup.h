@@ -4,6 +4,7 @@
 #include <QtGui/QDialog>
 #include "ui_numpopup.h"
 #include "detconfigure.h"
+//#include "_590_did_dig.h"
 
 class numPopUp : public QDialog
 {
@@ -13,6 +14,8 @@ public:
     numPopUp(QWidget *parent = 0);
     ~numPopUp();
     detConfigure transfer;
+    MainWindow xferToMain;
+    //_590_DID_DIG to5900;
 public slots:
     void processNumIn(void);
     QString popupNumInReturn(void);
@@ -28,7 +31,7 @@ public slots:
     void num_0(void);
     void num_minus(void);
     void num_period(void);
-    void num_Clear(void);
+    void num_clear(void);
 
 private:
     Ui::numPopUpClass ui;

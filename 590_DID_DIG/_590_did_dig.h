@@ -20,6 +20,8 @@
 #include "polpopup.h"
 #include "pleasewait.h"
 #include "numpopup.h"
+#include "polarizepopup.h"
+#include "voltagenumpopup.h"
 #include "ovenwidget.h"
 
 class _590_DID_DIG : public QMainWindow
@@ -51,6 +53,9 @@ public:
         MainWindow vc_i2c;
         QString completeProcess;
 
+    // Moved UI from Private to Public by Dione.
+        Ui::_590_DID_DIGClass ui;
+
 public slots:
 
 	void calibrat(void);
@@ -60,12 +65,12 @@ public slots:
 	void oGainCtrl(void);
 //	void keyReleaseEvent(QKeyEvent *e);
 //	void alarmOutput(double Sample);
-	void measure(void);
+	//void measure(void);
 	void displayStatusBusy(void);
 	void displayStatusDone(void);
 	void killSampFuelMethFlow(void);
 	void callMain_datalog(void);
-	void sendSerial_3(void);
+	//void sendSerial_3(void);
 	void callViewSigs(void);
 	void initSettings(void);
 	void shutdownNow(void);
@@ -77,18 +82,18 @@ public slots:
 	void detDIDIgnite(void);
 		double detDID_I_read(void);
 		double detHvSig(void);
-	void detIgn(void);
+	//void detIgn(void);
 	void detPolSet(void);
 		double detPolSig(void);
 	double detDIDSig(void);
 	double detTCD_I_Sig(void);
 	void detDID_I_Ctl(void);
 	void detDID_I_OnOffCtl(void);
-	void detDID_V_Ctl(void);
+	//void detDID_V_Ctl(void);
 	void configIO(unsigned int num);
 	void detRead(void);
 	void pleaseWaitForIt(void);
-	void detMoveBaseline(void);
+	//void detMoveBaseline(void);
 	void detTCDPolarityfCtl(void);
 	double FlowH2read(void);
 	double FlowAirread(void);
@@ -96,20 +101,26 @@ public slots:
 	double FlowMethread(void);
 	QString numIn(void);
 	QString numInPopUp(void);
+	void setTempLabel(QString txt, int OvenType);
+	QString numInPolarizationPopUp(void);
+	QString numInVoltagePopUp(void);
 	QString numInTempPopUp(void);
-	QString numInPolPopUp(unsigned int target);
+	//QString numInPolPopUp(unsigned int target);
 	void tempSetPoint(int _t1, int _t2);
 	QString numInGainPopUp(void);
-	void deleteNumIn(QString);
+	//void deleteNumIn(QString);
 	void deleteNumPop(QString txt);
 	void deleteGainPop(QString txt);
-	void powerOnInitSettings(void);
+	void externalValves(void);
+	//void powerOnInitSettings(void);
 	void setSettings(void);
 	void saveDetSettings(void);
-	void processDid_line(QByteArray line, unsigned int nex);
+	//void processDid_line(QByteArray line, unsigned int nex);
+	void processDid_line(unsigned int nex);
 	void getDidSettings(void);
 	void setSettings2(void);
-	void polVoltMenu(void);
+	int getRange(void);
+	//void calltempUpdates(void);
 
 	// Valve One
 	void IO20b(void);
@@ -134,8 +145,11 @@ public slots:
 	// POL Volt delete.
 	void deletePolPop(QString txt);
 
+	double detDIDZeroCtl(void);
+
+
 private:
-    Ui::_590_DID_DIGClass ui;
+
 };
 
 #endif // _590_DID_DIG_H

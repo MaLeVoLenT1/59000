@@ -78,8 +78,8 @@ extern unsigned int detNumberDirector;// used to select detector for processing 
 extern bool IGNITE_DID1;
 double DVC1D; // TCD1 Voltage
 double PolVolt;
-char AR[15] = "/dev/spi0cs3";// ar[] changed from cs3 because of problem with emac 4"
-char BR[5] = "44";//br[]
+//char AR[15] = "/dev/spi0cs3";// ar[] changed from cs3 because of problem with emac 4"
+//char BR[5] = "44";//br[]
 bool DID_ONOFFCTRL2;
 extern unsigned int hexHoldGlobal;
 bool Valve1toggle;
@@ -94,39 +94,43 @@ _590_DID_DIG::_590_DID_DIG(QWidget *parent)
 	ui.setupUi(this);
 
     QTimer *timer = new QTimer(this);
-//    connect(timer, SIGNAL(timeout()), this, SLOT(callViewSigs()));//callMain_datalog()
 
 	displayStatusBusy();
 
 	timer->start(updateRate);
 
 	connect(timer, SIGNAL(timeout()), this, SLOT(callViewSigs()));//callMain_datalog()
+
 }
 
 _590_DID_DIG::~_590_DID_DIG()
 {
 
 }
-//NEW_DID_INBOX::NEW_DID_INBOX(QWidget *parent)
-//    : QMainWindow(parent)
-//{
-//	ui.setupUi(this);
-//
-//    QTimer *timer = new QTimer(this);
-////    connect(timer, SIGNAL(timeout()), this, SLOT(callViewSigs()));//callMain_datalog()
-//
-//	displayStatusBusy();
-//
-//	timer->start(updateRate);
-//
-//	connect(timer, SIGNAL(timeout()), this, SLOT(callViewSigs()));//callMain_datalog()
-//}
-//
-//NEW_DID_INBOX::~NEW_DID_INBOX()
-//{
-//
-//}
-// slots begin
+void _590_DID_DIG::externalValves(void){
+	qDebug("External Valve Start");
+	if(ui.externalCheckbox->isChecked()){
+		QString program = "killall eventwatch";
+		qDebug("Killing Eventwatch");
+		QStringList arguments;
+		arguments << "";
+		QProcess *myProcess1 = new QProcess();
+		myProcess1->start(program);//, arguments);
+		ui.externalCheckbox->setChecked(1);
+		ui.externalCheckbox->setChecked(0);
+	}else{
+		QString program = "/opt/Gow-Mac/bin/8100gc/ ./eventwatch";
+		qDebug("starting Eventwatch");
+		QStringList arguments;
+		arguments << "";
+		QProcess *myProcess = new QProcess();
+		myProcess->start(program);
+		ui.externalCheckbox->setChecked(0);
+		ui.externalCheckbox->setChecked(1);
+	}
+
+
+}
 
 void _590_DID_DIG::shutdownNow(void){
 
@@ -148,22 +152,51 @@ void _590_DID_DIG::callMain_datalog(void){
 		main_datalog();
 	}
 }
+
+void _590_DID_DIG::setTempLabel(QString txt, int ovenType){
+	qDebug("Set Temp Label is Firing.");
+	switch(ovenType){
+		// Collum Oven
+		case 1: ui.collumnTempLine->setText(txt); break;
+
+		// Oven Detector
+		case 2:
+			qDebug("Set Temp Label DETECTOR CODE FIRING!!!");
+			ui.detectorTempLine->setText(txt);
+			break;
+
+	}
+}
 void _590_DID_DIG::callViewSigs(void){
-	// This is a Test.
+
 	th_i2c.delay(200);
 	ui.detDid1LCD->display(dc.detDID_I_read());
 	th_i2c.delay(200);
+
 	ui.detDidHvLCD->display(dc.detHvSig());
+	qDebug("(detConfigure) detHvSig() firing.");
+
 	th_i2c.delay(200);
 	ui.detDidPolVLCD->display(dc.detPolSig());
+
+	th_i2c.delay(500);
+
+	//ui.column_temp_box->display(th_i2c.readTrueValue(1));
+	//qDebug("readTrueValue(1) finished.");
+
+	//th_i2c.delay(500);
+	//ui.detector_temp_box->display(th_i2c.readTrueValue(2));
+	//qDebug("readTrueValue(2) finished.");
 
 	if ((dc.detDIDSig() * -2.0 * 1.25)>=5.0){
 		ui.detDidISigLCD->display(12.5 - (dc.detDIDSig() * -2.0 * 1.25));
 	}else{
 		ui.detDidISigLCD->display(dc.detDIDSig() * -2.0 * 1.25);
 	}
-//	ui.detDidISigLCD->display(dc.detDIDSig() * -2.0 * 1.25));
+
+	qDebug("(detConfigure) callViewSigs ending.");
 }
+
 void _590_DID_DIG::calibrat(void)
 {
 	calibrate cal1(this);// Create a dialog
@@ -182,18 +215,6 @@ void _590_DID_DIG::data(void)
 	if (data1.exec()) {
 	}
 }
-
-// This Opens detctg Menu that's to be added to the main.ui file.
-// Therefore this is not needed by the 5900: Dione Robertson 2/21/2019
-/*
-void _590_DID_DIG::detcfg(void)
-{
-	detConfigure didcfg1(this);// Create a dialog
-	if (didcfg1.exec()) {
-		dc.setSettings();// if dialog is opened get last settings- did notwork
-	}
-}
-*/
 
 void _590_DID_DIG::oGainCtrl(void)
 {
@@ -218,17 +239,14 @@ void _590_DID_DIG::displayStatusDone(void){
 
 	updateRate = 1000;
 	notBusyState = "DONE...";
-
-//	ui.mainStatusLineEdit->setText(notBusyState);
+	ui.mainStatusLineEdit->setText(notBusyState);
+	th_i2c.delay(1000);
+	notBusyState = "";
+    ui.mainStatusLineEdit->setText(notBusyState);
 }
 void _590_DID_DIG::initSettings(void){
 	dc.setSettings();
 }
-// Commented out so it doesn't run.
-//void NEW_DID_INBOX::alarmOutput(double Sample){}
-void _590_DID_DIG::measure(void){}
-void _590_DID_DIG::sendSerial_3(void){}
-
 // +++++++++++++++++++++++++++ Added by Dione. Moved from Detconfigure.h +++++++++++++++++++++++++++++++
 
 
@@ -653,6 +671,8 @@ void _590_DID_DIG::detGain(void){//(double valu){// good USED FOR 2300
 
 	detNumberDirector = 1; // added for 2300
 
+	qDebug("590_did detGain firing");
+
 //	qDebug("Before case DET GAIN detNumberDirector = %x", detNumberDirector);//
 	//			ntxt = numIn();
 	//			readValu = ntxt.toDouble();
@@ -918,16 +938,139 @@ void _590_DID_DIG::detGain(void){//(double valu){// good USED FOR 2300
 	dci2c.delay(2000);
 	ui.busyLineEdit->clear();
 }
+double _590_DID_DIG::detDIDZeroCtl(void){// OK
 
+//	MainWindow dcZero;
+    __u8 hi_byte, lo_byte, buff[3];;
+//    int i;
+    int fd;
+    double result, sig;
+    unsigned int hexHold;// i2c_result;
+    //char ar[] = "/dev/spi0cs3";//////////// Changed from a spi0cs3 because of problem with 4" EMAC
+    //char br[] = "44";
+    // Bottom two Variables Not being used Commented Out by Dione.
+    //char cr[] = "/dev/spi0cs3";
+    //char dr[] = "44";
+
+	busyState = "BUSY...";// 9-5-2014
+	notBusyState = "DONE...";
+
+	ui.busyLineEdit->setText(busyState);
+
+    //ui.detTCDZeroButton->clearFocus();
+	//qDebug("DET detDIDZeroCtl .........................");// test
+
+	//remove any offset by writing a 0 value - i2cset 0 0x10 0x18 0x7f 0xff
+	///////////////////////////////////// Send I2C to frontend
+
+	hi_byte = 0x7f; // with 5 volt ref so it will be set to 2.5
+	lo_byte = 0xff;
+
+	/*
+	 * printf("hi_byte = %x\n", hi_byte);
+	   printf("lo_byte = %x\n", lo_byte);
+	   */
+
+
+	//fd = dci2c.init_i2c();
+	dci2c.delay(333);// added after speeding up mainwindow 7-23-2015
+
+	//dci2c.test_set_slave(fd, 0x10);
+
+	//* write register /
+	buff[0] = 0x18;// channel
+	buff[1] = hi_byte;//(__u8)(cmd >> 8);
+	buff[2] = lo_byte;//(__u8)(cmd);
+
+	/*if (write(fd, buff, 3) != 3) {
+		fprintf(stderr, "i2c_write_cmd: error on write: %s\n", strerror(errno));
+		//    		return -1;
+	}*/
+	dci2c.delay(333);// added after speeding up mainwindow 7-23-2015
+	dci2c.close_device(fd);//close(fd);// Close I2C fd
+			    	//////////////////////////////////// I2C End
+
+			    	// read offset
+
+			    	dci2c.delay(333);// added after speeding up mainwindow 7-23-2015
+				//if(dci2c.setup_spi(ar) == -1){qDebug() << "Second step SPI - Zero Failure";}// exit(EXIT_FAILURE);
+			//	qDebug() << "First step SPI";
+				dci2c.delay(333);// added after speeding up mainwindow 7-23-2015
+
+				//result = dci2c.getSig_spi(4,br);
+			//	qDebug() << "Second step SPI";
+				dci2c.delay(333);// added after speeding up mainwindow 7-23-2015
+
+				//dci2c.close_spi();
+
+				   if (result > 2.5){
+					   result = result - 2.5;
+					   //qDebug("Result - 2.5 = %f", result);
+				   }
+				   else{
+					   result = (result + 2.5) * (-1);
+					   //qDebug("Result + 2.5 = %f", result);
+				   }
+
+				hexHold = 32767 + ((result) / 5.0) * 32767;//
+
+				hexHoldGlobal = hexHold; // used for baseline shift
+
+				//qDebug("Used to zero - hexHold Result = %x", hexHold);
+
+				// write value to bring to 0 (2.5) i2cset 0 0x10 0x18 byte1 byte2 /u8
+
+			    hi_byte = (hexHold & 0xff00) >> 8;
+			    lo_byte = hexHold & 0x00ff;
+
+	/*		    printf("hi_byte = %x\n", hi_byte);
+			    printf("lo_byte = %x\n", lo_byte);*/
+
+
+			    fd = dci2c.init_i2c();
+			    dci2c.delay(333);// added after speeding up mainwindow 7-23-2015
+
+			    dci2c.test_set_slave(fd, 0x10);
+			    dci2c.delay(333);// added after speeding up mainwindow 7-23-2015
+
+			 	//* write register /
+			 	buff[0] = 0x18;// channel
+			 	buff[1] = hi_byte;//(__u8)(cmd >> 8);
+			 	buff[2] = lo_byte;//(__u8)(cmd);
+
+			 	if (write(fd, buff, 3) != 3) {
+			 		fprintf(stderr, "i2c_write_cmd: error on write: %s\n", strerror(errno));
+			// 		return -1;
+			 	}
+			 	dci2c.delay(333);// added after speeding up mainwindow 7-23-2015
+
+			 	dci2c.close_device(fd);//close(fd);// Close I2C fd
+			 	dci2c.delay(333);// added after speeding up mainwindow 7-23-2015
+			 	//////////////////////////////////// I2C End
+	//		 	sig = detTCD_I_Sig();
+	//		 	sig = detDIDSig();
+			 	ui.detDIDOffSetBLSpinBox->setValue(0.0);//clear();
+			 	sig = detDIDSig();
+			 	//qDebug("DID SIgnal Returned = %f", sig);
+
+//	QCursor crr;
+//	crr.setPos(2, 2);
+	ui.busyLineEdit->setText(notBusyState);
+	dci2c.delay(2000);
+	ui.busyLineEdit->clear();
+	return sig;
+}
 void _590_DID_DIG::detDIDIgnite(void){// OK USED for DID Only
 	MainWindow i2c;
 //	QCursor crr;
 //	crr.setPos(1,1);
 	__u8 buff[3];//__16
-	unsigned int temp_16;
-	double iBIT, readValue;
+	//unsigned int temp_16;  Commented out by DIone. Unused.
+	//double iBIT; Commented Out by Dione. Unused.
+	double readValue;
 	int fd;
 	__u8 device_addr;
+	qDebug() << "Detector Igniting!";
 
 	busyState = "BUSY...";// 9-5-2014
 	notBusyState = "DONE...";
@@ -936,7 +1079,7 @@ void _590_DID_DIG::detDIDIgnite(void){// OK USED for DID Only
 
 	if(IGNITE_DID1 == 0){//ui.didIgniteEnableCheckBox->isChecked()
 		// IGNITE
-//		ui.didIgniteEnableCheckBox->click();
+		ui.didIgniteEnableCheckBox->click();
 		device_addr = 0x10;
 
 		buff[0] = 0x1a;//
@@ -966,7 +1109,7 @@ void _590_DID_DIG::detDIDIgnite(void){// OK USED for DID Only
 		// Operate
 
 		if(IGNITE_DID1 == 1){//ui.didIgniteEnableCheckBox->isChecked()){
-//			ui.didIgniteEnableCheckBox->click();
+			ui.didIgniteEnableCheckBox->click();
 			qDebug("DET DID Operate v-ctrl detNumberDirector = %x", detNumberDirector);// test
 
 			readValue =  ui.detVdcCtlSpinBox->value();
@@ -1041,15 +1184,15 @@ double _590_DID_DIG::detDID_I_read(void){// ok USED FOR DID ONLY
 			dci2c.test_set_slave(fd, i2c_slaveAddr);
 			buff[0] = port_addr;// command for P4-7
 			if (write(fd, buff, 1) != 1) {
-					fprintf(stderr, "i2c_write_command: 0x09 0x0a Error on write: %s\n",
-					strerror(errno));
+					fprintf(stderr, "ERROR: on detDID_I_read()");
+					//strerror(errno));
 			}
 
 			for(i=0;i<2;++i){
 				buff[0] = port_addr;// command for P4-7
 				if (read(fd, buff, 2) != 2) {
-						fprintf(stderr, "i2c_write_command: 0x09 0x0a Error on write: %s\n",
-								strerror(errno));
+						fprintf(stderr, "ERROR: on detDID_I_read() secondary");
+								//strerror(errno));
 					}
 			}
 
@@ -1075,8 +1218,8 @@ double _590_DID_DIG::detDID_I_read(void){// ok USED FOR DID ONLY
 
 			valu1 = ((t_16 / 4096) * 5.0);    // % voltage of max voltage;
 			qDebug("VALU1 = %f", valu1);
-			valu = valu1 * 10.0;// Multiply to make read 6.45mA instead of 0.645//((valu1 - 0.5) / 0.1 )  * 5.0;
-
+			//valu = valu1 * 10.0;// Multiply to make read 6.45mA instead of 0.645//((valu1 - 0.5) / 0.1 )  * 5.0;
+			valu = valu1 / 150.0;
 			qDebug("DISCHARGE CURRENT = %f", valu);
 //			i2c.delay(500);
 
@@ -1088,59 +1231,7 @@ double _590_DID_DIG::detDID_I_read(void){// ok USED FOR DID ONLY
 			break;
 		}
 		case 2://DID 2
-		{/*
-			port_addr = 0x65;// address for flow DID CURRENT For Detector 1
-
-			tempSid = i2c_slaveAddr;// store current I2C Slave Id
-			i2c_slaveAddr = 0x35;// Change to needed Id for Flow reading
-
-			fd = i2c.init_i2c();// open device
-			i2c.test_set_slave(fd, i2c_slaveAddr);
-			buff[0] = port_addr;// command for P4-7
-			if (write(fd, buff, 1) != 1) {
-					fprintf(stderr, "i2c_write_command: 0x09 0x0a Error on write: %s\n",
-					strerror(errno));
-			}
-
-			for(i=0;i<2;++i){
-				buff[0] = port_addr;// command for P4-7
-				if (read(fd, buff, 2) != 2) {
-						fprintf(stderr, "i2c_write_command: 0x09 0x0a Error on write: %s\n",
-								strerror(errno));
-					}
-			}
-
-
-			buft[1] = buff[0]>>8;
-			buft[0] = buff[0] & 0x00ff;
-
-			qDebug("buff[0] = %x", buff[0]);
-
-			qDebug("hi Byte buft[0] = %x", buft[0]);
-			qDebug("lo Byte buft[1] = %x", buft[1]);
-
-			temp_16 = (buft[0] & 0x0F);
-			qDebug("mask hi Byte = %x", temp_16);
-
-			temp_16 = temp_16<<8;
-			qDebug("shift hi Byte = %x", temp_16);
-
-			temp_16 = temp_16 + buft[1];
-			qDebug("Add hi & Lo Byte = %x", temp_16);
-
-			t_16 = temp_16;// move to double
-
-			valu1 = ((t_16 / 4096) * 5.0);    // % voltage of max voltage;
-			qDebug("VALU1 = %f", valu1);
-			valu = valu1 * 10.0;//((valu1 - 0.5) / 0.1 )  * 5.0;
-
-			qDebug("DISCHARGE CURRENT = %f", valu);
-//			i2c.delay(500);
-
-			i2c.close_device(fd);
-			i2c_slaveAddr = tempSid;
-
-//			ui.detDid1LCD->display(valu);*/
+		{
 			break;
 		}
 		default:
@@ -1184,43 +1275,43 @@ double _590_DID_DIG::detHvSig(void){
 			dci2c.test_set_slave(fd, i2c_slaveAddr);
 			buff[0] = port_addr;// command for P4-7
 			if (write(fd, buff, 1) != 1) {
-					fprintf(stderr, "i2c_write_command: 0x09 0x0a Error on write: %s\n",
-					strerror(errno));
+					fprintf(stderr, "ERROR: on detHvSig()");
+					//strerror(errno));
 			}
 
 			for(i=0;i<2;++i){
 				buff[0] = port_addr;// command for P4-7
 				if (read(fd, buff, 2) != 2) {
-						fprintf(stderr, "i2c_write_command: 0x09 0x0a Error on write: %s\n",
-								strerror(errno));
+						fprintf(stderr, "ERROR: on detHvSig()");
+								//strerror(errno));
 					}
 			}
 
 
-			buft[1] = buff[0]>>8;
-			buft[0] = buff[0] & 0x00ff;
+			buft[1] = buff[0]>>8;// lower byte
+			buft[0] = buff[0] & 0x00ff;//upper byte
 
-//			qDebug("buff[0] = %x", buff[0]);
+			qDebug("buff[0] = %x", buff[0]);
 
-//			qDebug("hi Byte buft[0] = %x", buft[0]);
-//			qDebug("lo Byte buft[1] = %x", buft[1]);
+			qDebug("hi Byte buft[0] = %x", buft[0]);
+			qDebug("lo Byte buft[1] = %x", buft[1]);
 
-			temp_16 = (buft[0] & 0x0F);
-//			qDebug("mask hi Byte = %x", temp_16);
+			temp_16 = (buft[0] & 0x0F);// only use 4 bits for upper of 12 bit word
+			qDebug("mask hi Byte = %x", temp_16);
 
 			temp_16 = temp_16<<8;
-//			qDebug("shift hi Byte = %x", temp_16);
+			qDebug("shift hi Byte = %x", temp_16);
 
 			temp_16 = temp_16 + buft[1];
-//			qDebug("Add hi & Lo Byte = %x", temp_16);
+			qDebug("Add hi & Lo Byte = %x", temp_16);
 
 			t_16 = temp_16;// move to double
 
-			valu1 = ((t_16 / 4096) * 5.0);    // % voltage of max voltage;
-//			qDebug("VALU1 = %f", valu1);
-			valu = valu1 * 200.0;//((valu1 - 0.5) / 0.1 )  * 5.0;
+			valu1 = ((t_16 / 4095) * 1000.0);//5.0);    // % voltage of max voltage;
+			qDebug("VALU1 = %f", valu1);
+			valu = valu1;// * 200.0;//((valu1 - 0.5) / 0.1 )  * 5.0;
 
-//			qDebug("READ DISCHARGE Voltage = %f", valu);
+			qDebug("READ DISCHARGE Voltage = %f", valu);
 
 			dci2c.close_device(fd);
 			i2c_slaveAddr = tempSid;
@@ -1229,59 +1320,7 @@ double _590_DID_DIG::detHvSig(void){
 			break;
 		}
 		case 2://DID 2
-		{/*
-			port_addr = 0x63;// address for DID HV For Detector 1
-
-			tempSid = i2c_slaveAddr;// store current I2C Slave Id
-			i2c_slaveAddr = 0x35;// Change to needed Id for Flow reading
-
-			fd = i2c.init_i2c();// open device
-			i2c.test_set_slave(fd, i2c_slaveAddr);
-			buff[0] = port_addr;// command for P4-7
-			if (write(fd, buff, 1) != 1) {
-					fprintf(stderr, "i2c_write_command: 0x09 0x0a Error on write: %s\n",
-					strerror(errno));
-			}
-
-			for(i=0;i<2;++i){
-				buff[0] = port_addr;// command for P4-7
-				if (read(fd, buff, 2) != 2) {
-						fprintf(stderr, "i2c_write_command: 0x09 0x0a Error on write: %s\n",
-								strerror(errno));
-					}
-			}
-
-
-			buft[1] = buff[0]>>8;
-			buft[0] = buff[0] & 0x00ff;
-
-			qDebug("buff[0] = %x", buff[0]);,
-
-			qDebug("hi Byte buft[0] = %x", buft[0]);
-			qDebug("lo Byte buft[1] = %x", buft[1]);
-
-			temp_16 = (buft[0] & 0x0F);
-			qDebug("mask hi Byte = %x", temp_16);
-
-			temp_16 = temp_16<<8;
-			qDebug("shift hi Byte = %x", temp_16);
-
-			temp_16 = temp_16 + buft[1];
-			qDebug("Add hi & Lo Byte = %x", temp_16);
-
-			t_16 = temp_16;// move to double
-
-			valu1 = ((t_16 / 4096) * 5.0);    // % voltage of max voltage;
-			qDebug("VALU1 = %f", valu1);
-			valu = valu1 * 200.0;//((valu1 - 0.5) / 0.1 )  * 5.0;
-
-			qDebug("DISCHARGE CURRENT = %f", valu);
-//			i2c.delay(500);
-
-			i2c.close_device(fd);
-			i2c_slaveAddr = tempSid;
-
-//			->display(valu);*/
+		{
 			break;
 		}
 		default:
@@ -1292,167 +1331,8 @@ double _590_DID_DIG::detHvSig(void){
 //	ui.busyLineEdit->clear();
 
 	return valu;
-//	MainWindow i2c;
-//
-//	__u16 buff[3], temp_16;//__16
-//	__u8 buft[3];
-//	int fd;
-//	__u8 port_addr;
-//	double valu;
-//
-//	switch (detNumberDirector)
-//	{
-//		case 1:
-//		{
-//			port_addr = 0x0A;// address for flow read ??
-//			fd = i2c.init_i2c();
-//			if (i2c.i2c_read_reg2(fd, buff, port_addr)< 0){
-//				fprintf(stderr, "i2c_read_reg2: Error on read: %s\n",
-//				strerror(errno));
-//			}
-//			i2c.close_device(fd);
-//			buft[0] = buff[0]<<8;
-//			buft[1] = buff[1]<<8;
-//			buft[2] = buff[2]<<8;
-//			buft[3] = buff[3]<<8;
-//
-//			temp_16 = buft[1] + (buft[0] & 0x0F)<<4;
-//			valu = temp_16 * 0.0006;
-//
-//			ui.detHvLCD->display(valu);
-//			break;
-//		}
-//		case 2:
-//		{//calvc.fidH2BypassRdInput()
-//			port_addr = 0x0A;// address for flow read ??
-//			fd = i2c.init_i2c();
-//			if (i2c.i2c_read_reg2(fd, buff, port_addr)< 0){
-//				fprintf(stderr, "i2c_read_reg2: Error on read: %s\n",
-//				strerror(errno));
-//			}    char ar[15] = "/dev/spi0cs3";// ar[] changed from cs3 because of problem with emac 4"
-//    char br[5] = "44";//br[]
-//			i2c.close_device(fd);
-//			buft[0] = buff[0]<<8;
-//			buft[1] = buff[1]<<8;
-//			buft[2] = buff[2]<<8;
-//			buft[3] = buff[3]<<8;
-//
-//			temp_16 = buft[1] + (buft[0] & 0x0F)<<4;
-//			valu = temp_16 * 0.0006;
-//
-//			ui.detHvLCD->display(valu);
-//			break;
-//		}
-//		default:
-//			break;
-//	}
-////	ui.readFlowLCD->display(valu);
 }
 
-void _590_DID_DIG::detIgn(void){
-//	MainWindow i2c;
-//	QCursor crr;
-//	crr.setPos(1,1);
-	__u16 buff[3], temp_16;//__16
-	__u8 buft[3];
-	int fd;
-	__u8 port_addr;
-	double valu;
-
-	detNumberDirector = 1; // forcing  - test statement
-
-	switch (detNumberDirector)
-	{
-		case 1://FID need feedback to test for ignition -  need to time out as well
-		{
-			port_addr = 0x041;// 7300 on detector 1 board
-			// port 29 // range 1
-			buff[0] = 0x36;// command
-			buff[1] = 0x00;// Data to switch
-			fd = dci2c.init_i2c();
-			dci2c.test_set_slave(fd, port_addr);//i2c_slaveAddr);//addr = 0x45;
-			if (write(fd, buff, 2) != 2) {
-					fprintf(stderr, "i2c_write_command: R1-1 Error on write: %s\n",
-					strerror(errno));
-				}
-			dci2c.close_device(fd);
-			break;
-		}
-		case 2:
-		{
-//			port_addr = 0x0A;// address for flow read ??
-//			fd = i2c.init_i2c();
-//			if (i2c.i2c_read_reg2(fd, buff, port_addr)< 0){
-//				fprintf(stderr, "i2c_read_reg2: Error on read: %s\n",
-//				strerror(errno));
-//			}
-//			i2c.close_device(fd);
-//			buft[0] = buff[0]<<8;
-//			buft[1] = buff[1]<<8;
-//			buft[2] = buff[2]<<8;
-//			buft[3] = buff[3]<<8;
-//
-//			temp_16 = buft[1] + (buft[0] & 0x0F)<<4;
-//			valu = temp_16 * 0.0006;
-			break;
-		}
-		default:
-			break;
-	}
-//	ui.readFlowLCD->display(valu);
-
-//	MainWindow i2c;
-//
-//	__u16 buff[3], temp_16;//__16
-//	__u8 buft[3];
-//	int fd;
-//	__u8 port_addr;
-//	double valu;
-//
-//	switch (detNumberDirector)
-//	{
-//		case 1:
-//		{
-//			port_addr = 0x0A;// address for flow read ??
-//			fd = i2c.init_i2c();
-//			if (i2c.i2c_read_reg2(fd, buff, port_addr)< 0){
-//				fprintf(stderr, "i2c_read_reg2: Error on read: %s\n",
-//				strerror(errno));
-//			}
-//			i2c.close_device(fd);
-//			buft[0] = buff[0]<<8;
-//			buft[1] = buff[1]<<8;
-//			buft[2] = buff[2]<<8;
-//			buft[3] = buff
-//			[3]<<8;
-//
-//			temp_16 = buft[1] + (buft[0] & 0x0F)<<4;
-//			valu = temp_16 * 0.0006;
-//			break;
-//		}
-//		case 2:
-//		{
-//			port_addr = 0x0A;// address for flow read ??
-//			fd = i2c.init_i2c();
-//			if (i2c.i2c_read_reg2(fd, buff, port_addr)< 0){
-//				fprintf(stderr, "i2c_read_reg2: Error on read: %s\n",
-//				strerror(errno));
-//			}
-//			i2c.close_device(fd);
-//			buft[0] = buff[0]<<8;
-//			buft[1] = buff[1]<<8;
-//			buft[2] = buff[2]<<8;
-//			buft[3] = buff[3]<<8;
-//
-//			temp_16 = buft[1] + (buft[0] & 0x0F)<<4;
-//			valu = temp_16 * 0.0006;
-//			break;
-//		}
-//		default:
-//			break;
-//	}
-////	ui.readFlowLCD->display(valu);
-}
 
 void _590_DID_DIG::detPolSet(void){// Used for DID and FID
 //	MainWindow i2c;
@@ -1460,80 +1340,40 @@ void _590_DID_DIG::detPolSet(void){// Used for DID and FID
 //	crr.setPos(1,1);
 	__u8 buff[3];//__16
 	unsigned int temp_16;
-	double iBIT, readValue;
+	//double iBIT, readValue; Commented Out by Dione. Unused.
 	int fd;
 	__u8 device_addr;
 
 	busyState = "BUSY...";// 9-5-2014
 	notBusyState = "DONE...";
 
-	detNumberDirector = 1; // forcing  - test statement
+	//detNumberDirector = 1; // forcing  - test statement
+	ui.busyLineEdit->setText(busyState);
 
-	switch (detNumberDirector)
-	{
-		case 1:
-		{
-				ui.busyLineEdit->setText(busyState);
+	qDebug("(_590)Polarization Voltage set....................");
 
-				qDebug("Polarization Voltage set....................");
+	PolVolt = ui.didPolVCtlSpinBox->value() - 20.0;
 
-				PolVolt = ui.didPolVCtlSpinBox->value() - 20.0;
+	device_addr = 0x10;
 
-				device_addr = 0x10;
+	temp_16 = (PolVolt / 500) * 0xffff;
 
-				temp_16 = (PolVolt / 500) * 0xffff;
+	buff[0] = 0x19;//
+	buff[1] = temp_16>>8;// upper bits
+	buff[2] = temp_16 & 0x00ff;// lower 8 bits
 
-				buff[0] = 0x19;//
-				buff[1] = temp_16>>8;// upper bits
-				buff[2] = temp_16 & 0x00ff;// lower 8 bits
+	qDebug("DID POL Volt buff{0} %x", buff[0]);
+	qDebug("DID POL Volt buff{1} %x", buff[1]);
+	qDebug("DID POL Volt buff{2} %x", buff[2]);
 
-				qDebug("DID POL Volt buff{0} %x", buff[0]);
-				qDebug("DID POL Volt buff{1} %x", buff[1]);
-				qDebug("DID POL Volt buff{2} %x", buff[2]);
-
-				fd = dci2c.init_i2c();
-				dci2c.test_set_slave(fd, device_addr);//i2c_slaveAddr);
-				if (write(fd, buff, 3) != 3) {
-				fprintf(stderr, "i2c_write_command: I ctrl Error on write: %s\n",
-				strerror(errno));
-				}
-				dci2c.close_device(fd);
-				detPolSig();
-				qDebug() << "DID SET POL VOLT";
-				break;
-		}
-		case 2:// CHANGE TO FIT SECOND IONIZATION DETECTOR
-		{
-			/*ui.busyLineEdit->setText(busyState);
-
-			PolVolt = ui.didPolVCtlSpinBox->value();
-
-			device_addr = 0x1c;
-
-			temp_16 = (PolVolt / 500.0) * 0xffff;
-
-			buff[0] = 0x19;//
-			buff[1] = temp_16>>8;// upper bits
-			buff[2] = temp_16 & 0x00ff;// lower 8 bits
-
-			qDebug("POL Volt buff{0} %x", buff[0]);
-			qDebug("POL Volt buff{1} %x", buff[1]);
-			qDebug("POL Volt buff{2} %x", buff[2]);
-
-			fd = i2c.init_i2c();
-			i2c.test_set_slave(fd, device_addr);//i2c_slaveAddr);
-			if (write(fd, buff, 3) != 3) {
-			fprintf(stderr, "i2c_write_command: I ctrl Error on write: %s\n",
-			strerror(errno));
-			}
-			i2c.close_device(fd);
-			detPolSig();
-			qDebug() << "SET POL VOLT";*/
-			break;
-		}
-		default:
-			break;
+	fd = dci2c.init_i2c();
+	dci2c.test_set_slave(fd, device_addr);//i2c_slaveAddr);
+	if (write(fd, buff, 3) != 3) {
+		fprintf(stderr, "i2c_write_command: I ctrl Error on write: %s\n",strerror(errno));
 	}
+	dci2c.close_device(fd);
+	detPolSig();
+	qDebug() << "DID SET POL VOLT";
 
 	ui.busyLineEdit->setText(notBusyState);
 	dci2c.delay(2000);
@@ -1541,16 +1381,12 @@ void _590_DID_DIG::detPolSet(void){// Used for DID and FID
 }
 
 double _590_DID_DIG::detPolSig(void){
-//	MainWindow i2c;
-//	QCursor crr;
-//	crr.setPos(1,1);
-
 	__u16 buff[3], temp_16;//__16
 	__u8 buft[3];
 	int fd;
 	__u8 port_addr;
 	unsigned int tempSid, i;
-	double valu, valu1, t_16, he_Valu;
+	double valu, valu1, t_16; // he_Valu; commented out by Dione. Unused.
 
 	temp_16 = 0x00;
 
@@ -1559,191 +1395,73 @@ double _590_DID_DIG::detPolSig(void){
 
 	ui.busyLineEdit->setText(busyState);
 
-	qDebug("det Pol Sig.............");
+	qDebug("Detecting Polarization.....");
 
 	detNumberDirector = 1; // forcing  - test statement
+	port_addr = 0x61;// address for flow DID PV
 
-	switch (detNumberDirector)
-	{
-		case 1://DID 1
-		{
-			port_addr = 0x61;// address for flow DID PV
+	tempSid = i2c_slaveAddr;// store current I2C Slave Id
+	i2c_slaveAddr = 0x35;// Change to needed Id for Flow reading
 
-			tempSid = i2c_slaveAddr;// store current I2C Slave Id
-			i2c_slaveAddr = 0x35;// Change to needed Id for Flow reading
-
-			fd = dci2c.init_i2c();// open device
-			dci2c.test_set_slave(fd, i2c_slaveAddr);
-			buff[0] = port_addr;// command for P4-7
-			if (write(fd, buff, 1) != 1) {
-					fprintf(stderr, "i2c_write_command: 0x09 0x0a Error on write: %s\n",
-					strerror(errno));
-			}
-
-			for(i=0;i<2;++i){
-				buff[0] = port_addr;// command for P4-7
-				if (read(fd, buff, 2) != 2) {
-						fprintf(stderr, "i2c_write_command: 0x09 0x0a Error on write: %s\n",
-								strerror(errno));
-					}
-			}
-
-
-			buft[1] = buff[0]>>8;
-			buft[0] = buff[0] & 0x00ff;
-
-//			qDebug("buff[0] = %x", buff[0]);
-
-//			qDebug("hi Byte buft[0] = %x", buft[0]);
-//			qDebug("lo Byte buft[1] = %x", buft[1]);
-
-			temp_16 = (buft[0] & 0x0F);
-//			qDebug("mask hi Byte = %x", temp_16);
-
-			temp_16 = temp_16<<8;
-//			qDebug("shift hi Byte = %x", temp_16);
-
-			temp_16 = temp_16 + buft[1];
-//			qDebug("Add hi & Lo Byte = %x", temp_16);
-
-			t_16 = temp_16;// move to double
-
-			valu1 = ((t_16 / 4096) * 5.0);    // % voltage of max voltage;
-//			qDebug("VALU1 = %f", valu1);
-			valu = valu1 * 100.0;//((valu1 - 0.5) / 0.1 )  * 5.0;
-
-			dci2c.close_device(fd);
-			i2c_slaveAddr = tempSid;
-
-			ui.detDidPolVLCD->display(valu);
-			break;
-		}
-		case 2://DID 2
-		{/*
-			port_addr = 0x61;// address for flow DID PV For Detector 1
-
-			tempSid = i2c_slaveAddr;// store current I2C Slave Id
-			i2c_slaveAddr = 0x35;// Change to needed Id for Flow reading
-
-			fd = i2c.init_i2c();// open device
-			i2c.test_set_slave(fd, i2c_slaveAddr);
-			buff[0] = port_addr;// command for P4-7
-			if (write(fd, buff, 1) != 1) {
-					fprintf(stderr, "i2c_write_command: 0x09 0x0a Error on write: %s\n",
-					strerror(errno));
-			}
-
-			for(i=0;i<2;++i){
-				buff[0] = port_addr;// command for P4-7
-				if (read(fd, buff, 2) != 2) {
-						fprintf(stderr, "i2c_write_command: 0x09 0x0a Error on write: %s\n",
-								strerror(errno));
-					}
-			}
-
-
-			buft[1] = buff[0]>>8;
-			buft[0] = buff[0] & 0x00ff;
-
-			qDebug("buff[0] = %x", buff[0]);
-
-			qDebug("hi Byte buft[0] = %x", buft[0]);
-			qDebug("lo Byte buft[1] = %x", buft[1]);
-
-			temp_16 = (buft[0] & 0x0F);
-			qDebug("mask hi Byte = %x", temp_16);
-
-			temp_16 = temp_16<<8;
-			qDebug("shift hi Byte = %x", temp_16);
-
-			temp_16 = temp_16 + buft[1];
-			qDebug("Add hi & Lo Byte = %x", temp_16);
-
-			t_16 = temp_16;// move to double
-
-			valu1 = ((t_16 / 4096) * 5.0);    // % voltage of max voltage;
-			qDebug("VALU1 = %f", valu1);
-			valu = valu1 * 100.0;//((valu1 - 0.5) / 0.1 )  * 5.0;
-
-			qDebug("DISCHARGE CURRENT = %f", valu);
-//			i2c.delay(500);
-
-			i2c.close_device(fd);
-			i2c_slaveAddr = tempSid;
-
-//			->display(valu);*/
-			break;
-		}
-		default:
-			break;
+	qDebug("Test 1.....");
+	fd = dci2c.init_i2c();// open device
+	dci2c.test_set_slave(fd, i2c_slaveAddr);
+	qDebug("Test 2.....");
+	buff[0] = port_addr;// command for P4-7
+	if (write(fd, buff, 1) != 1) {
+			fprintf(stderr, "Error: on detHvSig()");
 	}
-	ui.busyLineEdit->setText(notBusyState);
-//	dci2c.delay(2000);
-//	ui.busyLineEdit->clear();
+	qDebug("Test 3.....");
+	for(i=0;i<2;++i){
+		buff[0] = port_addr;// command for P4-7
+		if (read(fd, buff, 2) != 2) {
+			fprintf(stderr, "Error: on detHvSig() 2");
+		}
+	}
+	qDebug("Test 4.....");
 
+
+	buft[1] = buff[0]>>8;
+	buft[0] = buff[0] & 0x00ff;
+
+	//qDebug("buff[0] = %x", buff[0]);
+
+	//qDebug("hi Byte buft[0] = %x", buft[0]);
+	//qDebug("lo Byte buft[1] = %x", buft[1]);
+
+	temp_16 = (buft[0] & 0x0F);
+	//qDebug("mask hi Byte = %x", temp_16);
+
+	temp_16 = temp_16<<8;
+	//qDebug("shift hi Byte = %x", temp_16);
+
+	temp_16 = temp_16 + buft[1];
+	//qDebug("Add hi & Lo Byte = %x", temp_16);
+
+	t_16 = temp_16;// move to double
+
+	valu1 = ((t_16 / 4096) * 5.0);    // % voltage of max voltage;
+	//qDebug("VALU1 = %f", valu1);
+	valu = valu1 * 100.0;//((valu1 - 0.5) / 0.1 )  * 5.0;
+
+	dci2c.close_device(fd);
+	i2c_slaveAddr = tempSid;
+	qDebug("Test 5.....");
+
+	ui.detDidPolVLCD->display(valu);
+	ui.busyLineEdit->setText(notBusyState);
+	qDebug("Test 6.....");
 	return valu;
-//	MainWindow i2c;
-//
-//	__u16 buff[3], temp_16;//__16
-//	__u8 buft[3];
-//	int fd;
-//	__u8 port_addr;
-//	double valu;
-//
-//	switch (detNumberDirector)
-//	{
-//		case 1:
-//		{
-//			port_addr = 0x061;/
-//			fd = i2c.init_i2c();
-//			if (i2c.i2c_read_reg2(fd, buff, port_addr)< 0){
-//				fprintf(stderr, "i2c_read_reg2: Error on read: %s\n",
-//				strerror(errno));
-//			}
-//			i2c.close_device(fd);
-//			buft[0] = buff[0]<<8;
-//			buft[1] = buff[1]<<8;
-//			buft[2] = buff[2]<<8;
-//			buft[3] = buff[3]<<8;
-//
-//			temp_16 = buft[1] + (buft[0] & 0x0F)<<4;
-//			valu = temp_16 * 0.0006;
-//
-//			ui.detPvLCD->display(valu);
-//			break;
-//		}
-//		case 2:
-//		{
-//			port_addr = 0x0A;// address for flow read ??
-//			fd = i2c.init_i2c();
-//			if (i2c.i2c_read_reg2(fd, buff, port_addr)< 0){
-//				fprintf(stderr, "i2c_read_reg2: Error on read: %s\n",
-//				strerror(errno));
-//			}
-//			i2c.close_device(fd);
-//			buft[0] = buff[0]<<8;
-//			buft[1] = buff[1]<<8;
-//			buft[2] = buff[2]<<8;
-//			buft[3] = buff[3]<<8;
-//
-//			temp_16 = buft[1] + (buft[0] & 0x0F)<<4;
-//			valu = temp_16 * 0.0006;
-//
-//			ui.detPvLCD->display(valu);
-//			break;
-//		}
-//		default:
-//			break;
-//	}
-////	ui.readFlowLCD->display(valu);
+
 }
 double _590_DID_DIG::detDIDSig(void){//ok - used for DID / FID- OK
 
-    double result;
-    double resultDsply;
+	/*
+	 * I Believe this is the broken function - Dione 2/7/2020
+	 */
+    double result, resultDsply = false;
     double didResult[10];
     unsigned int i, t, avgTop;
-
 
 	busyState = "BUSY...";// 9-5-2014
 	notBusyState = "DONE...";
@@ -1752,159 +1470,49 @@ double _590_DID_DIG::detDIDSig(void){//ok - used for DID / FID- OK
 
 	qDebug("DID SIG  DISPLAY...........................");
 
-	detNumberDirector = 1; // forcing  - test statement
+	//detNumberDirector = 1; // forcing  - test statement
 
-	switch (detNumberDirector)
-	{
-		case 1:
-		{
-		    char AR[] = "/dev/spi0cs3";
-		    char BR[] = "44";
-		    avgTop = 10.0;
+	//char AR[] = "/dev/spidev1.3";
+	//char BR[] = "44";
+	avgTop = 10.0;
 
-		    //ui.detSigReadButton->clearFocus();
+	//ui.detSigReadButton->clearFocus();
+	/*
+	i = 0;
+	for (i = 0; i < avgTop; ++i){
+		if(dci2c.setup_spi(AR) == -1){};// exit(EXIT_FAILURE);
 
-		    i = 0;
-		    for (i = 0; i < avgTop; ++i){
-		    	if(dci2c.setup_spi(AR) == -1){};// exit(EXIT_FAILURE);
+		didResult[i] = dci2c.getSig_spi(4,BR);
 
-		    	didResult[i] = dci2c.getSig_spi(4,BR);
-
-		    	dci2c.close_spi();
-		    }
-
-		    t = 0;
-		    result = 0.0;
-		    for (t = 0; t < avgTop; t++){
-		    	result = result + didResult[t];
-		    }
-		    result = result / avgTop;
-
-//			qDebug("DID Read Signal Result = %f", result);
-
-			   if (result >= 2.5){
-				   resultDsply = result - 2.5;
-//				   qDebug("(>= 2.5) DID ResultDsply - 2.5 = %f", resultDsply);
-			   }
-			   else if(result < 2.5 && result > 0){
-				   resultDsply = (result - 2.5);
-//				   qDebug("(< 2.5) DID ResultDsply - 2.5 = %f", resultDsply);
-			   }else if (result < 0.0){
-				   resultDsply = (result + 2.5) * (-1);
-//				   qDebug("(< 0) DID ResultDsply + 2.5 = %f", resultDsply);
-			   }
-
-			ui.detDidISigLCD->display(resultDsply * -2.0 * 1.25);
-
-			break;
-		}
-		case 2:
-		{/*
-		    char ar[] = "/dev/spi0cs1";
-		    char br[] = "44";
-		    avgTop = 1;
-
-		    //ui.detSigReadButton->clearFocus();
-
-			qDebug("DET detTCD_I_Sig detNumberDirector = %x", detNumberDirector);// test
-
-		    i = 0;
-		    for (i = 0; i < avgTop; ++i){
-		    	if(dcZero.setup_spi(ar) == -1){};// exit(EXIT_FAILURE);
-
-		    	tcdResult[i] = dcZero.getSig_spi(4,br);
-
-		    	dcZero.close_spi();
-		    }
-
-		    t = 0;
-		    result = 0.0;
-		    for (t = 0; t < avgTop; t++){
-		    	result = result + tcdResult[t];
-		    }
-		    result = result / 1.0;//avgTop;
-
-			qDebug("Signal Result = %f", result);
-
-			   if (result >= 2.5){
-				   resultDsply = result - 2.5;
-				   qDebug("ResultDsply - 2.5 = %f", resultDsply);
-			   }
-			   else{
-				   resultDsply = (result + 2.5) * (-1);
-				   qDebug("ResultDsply + 2.5 = %f", resultDsply);
-			   }
-
-			   ui.detDidISigLCD->display(resultDsply) * 2.0;*/
-
-			break;
-		}
-		default:
-			result = 0.0;
-			break;
+		dci2c.close_spi();
+	}*/
+	/*
+	t = 0;
+	result = 0.0;
+	for (t = 0; t < avgTop; t++){
+		result = result + didResult[t];
 	}
+	result = result / avgTop;*/
+
+		//qDebug("DID Read Signal Result = %f", result);
+
+	/*if (result >= 2.5){
+		resultDsply = result - 2.5;
+		//qDebug("(>= 2.5) DID ResultDsply - 2.5 = %f", resultDsply);
+	}
+	else if(result < 2.5 && result > 0){
+		resultDsply = (result - 2.5);
+		//qDebug("(< 2.5) DID ResultDsply - 2.5 = %f", resultDsply);
+	}else if (result < 0.0){
+		resultDsply = (result + 2.5) * (-1);
+		//qDebug("(< 0) DID ResultDsply + 2.5 = %f", resultDsply);
+	}*/
+
+	//ui.detDidISigLCD->display(resultDsply * -2.0 * 1.25);
+
 	ui.busyLineEdit->setText(notBusyState);
+
 	return result - 2.5;
-
-//	if((result < 2.5 && result > 0) || (result >= 2.5)){
-//		resultDsply = (result - 2.5);
-//		return result - 2.5;
-//	}else if (result < 0.0){
-//		return (result + 2.5) * (-1);
-//	}
-/*	MainWindow i2c;
-
-	__u16 buff[3], temp_16, valu;//__16
-	__u8 buft[3];
-	int fd;
-	__u8 port_addr;
-
-	switch (detNumberDirector)
-	{
-		case 1:
-		{
-			port_addr = 0x0A;// address for flow read ??
-			fd = i2c.init_i2c();
-			if (i2c.i2c_read_reg2(fd, buff, port_addr)< 0){
-				fprintf(stderr, "i2c_read_reg2: Error on read: %s\n",
-				strerror(errno));
-			}
-			i2c.close_device(fd);
-			buft[0] = buff[0]<<8;
-			buft[1] = buff[1]<<8;
-			buft[2] = buff[2]<<8;
-			buft[3] = buff[3]<<8;
-
-			temp_16 = buft[1] + (buft[0] & 0x0F)<<4;
-			valu = temp_16 * 0.0006;
-
-			ui.detDidISigLCD->display(valu);
-			break;
-		}
-		case 2:
-		{
-			port_addr = 0x0A;// address for flow read ??
-			fd = i2c.init_i2c();
-			if (i2c.i2c_read_reg2(fd, buff, port_addr)< 0){
-				fprintf(stderr, "i2c_read_reg2: Error on read: %s\n",
-				strerror(errno));
-			}
-			i2c.close_device(fd);
-			buft[0] = buff[0]<<8;
-			buft[1] = buff[1]<<8;
-			buft[2] = buff[2]<<8;
-			buft[3] = buff[3]<<8;
-
-			temp_16 = buft[1] + (buft[0] & 0x0F)<<4;
-			valu = temp_16 * 0.0006;
-
-			ui.detDidISigLCD->display(valu);
-			break;
-		}
-		default:
-			break;
-	}
-//	ui.readFlowLCD->display(valu);*/
 }
 
 double _590_DID_DIG::detTCD_I_Sig(void){// Ok // good USED FOR 2300 reads any det sig from A/D "Voltage"
@@ -1936,7 +1544,7 @@ double _590_DID_DIG::detTCD_I_Sig(void){// Ok // good USED FOR 2300 reads any de
 		    avgTop = 10.0;
 
 //			qDebug("DET FID detTCD_I_Sig detNumberDirector = %x", detNumberDirector);// test
-		    g = dci2c.setup_spi(AR);
+		    //g = dci2c.setup_spi(AR);
 //g = 0;//remove
 		    i = 0;
 		    if(g == -1){
@@ -1944,9 +1552,9 @@ double _590_DID_DIG::detTCD_I_Sig(void){// Ok // good USED FOR 2300 reads any de
 		    }else{// exit(EXIT_FAILURE);
 //		    	qDebug("SETUP SPI Collecting = %d", g);
 			    for (i = 0; i < avgTop; ++i){
-			    	tcdResult[i] = dci2c.getSig_spi(4,BR);
+			    	//tcdResult[i] = dci2c.getSig_spi(4,BR);
 			    }
-			    dci2c.close_spi();// close when done
+			    //dci2c.close_spi();// close when done
 		    }
 
 
@@ -1975,43 +1583,6 @@ double _590_DID_DIG::detTCD_I_Sig(void){// Ok // good USED FOR 2300 reads any de
 		}
 		case 2:
 		{
-/*		    char ar[] = "/dev/spi0cs3";
-		    char br[] = "44";
-		    avgTop = 1;
-
-		    //ui.detSigReadButton->clearFocus();
-
-//			qDebug("DET detTCD_I_Sig detNumberDirector = %x", detNumberDirector);// test
-
-		    i = 0;
-		    for (i = 0; i < avgTop; ++i){
-		    	if(dcZero.setup_spi(ar) == -1){};// exit(EXIT_FAILURE);
-
-		    	tcdResult[i] = dcZero.getSig_spi(4,br);
-
-		    	dcZero.close_spi();
-		    }
-
-		    t = 0;
-		    result = 0.0;
-		    for (t = 0; t < avgTop; t++){
-		    	result = result + tcdResult[t];
-		    }
-		    result = result / (avgTop * 1.0);
-
-//			qDebug("Signal Result = %f", result);
-
-			   if (result >= 2.5){
-				   resultDsply = result - 2.5;
-//				   qDebug("ResultDsply - 2.5 = %f", resultDsply);
-			   }detconfigure.cpp:1348: error: ‘notBusyState’ was not declared in this scope
-
-			   else{
-				   resultDsply = (result + 2.5) * (-1);
-//				   qDebug("ResultDsply + 2.5 = %f", resultDsply);
-			   }
-
-			ui.detTcdISigLCD->display(resultDsply);*/
 
 			break;
 		}
@@ -2113,46 +1684,7 @@ void _590_DID_DIG::detDID_I_OnOffCtl(void){//(int valu){// turn on or off curren
 				break;
 		}
 		case 2://OK
-		{/*
-			//ui.detTCDOnOffButton->clearFocus();
-			qDebug("DET on/off detNumberDirector = %x", detNumberDirector);// test OK
-
-			device_addr = 0x44;
-
-			if (ui.detAmpEnableCheckBox->isChecked()){
-
-		//		ui.detAmpEnableCheckBox->click();
-
-					buff[0] = 0x2E;// command for P14
-					buff[1] = 0x01;// Data to switch
-					fd = i2c.init_i2c();
-				 	i2c.test_set_slave(fd, device_addr);//i2c_slaveAddr);
-				 	if (write(fd, buff, 2) != 2) {
-							fprintf(stderr, "i2c_write_command: On Off I Error on write: %s\n",
-							strerror(errno));
-						}
-				 	dcOF2d = 1;
-				 	qDebug() << "Current On ";
-			}
-		 	else{
-		// 			ui.detAmpEnableCheckBox->click();
-
-
-				buff[0] = 0x2E;// command for P14
-				buff[1] = 0x00;// Data to switch
-				fd = i2c.init_i2c();
-				i2c.test_set_slave(fd, device_addr);//i2c_slaveAddr);
-				if (write(fd, buff, 2) != 2) {
-					fprintf(stderr, "i2c_write_command: On Off I Error on write: %s\n",
-					strerror(errno));
-				}
-				qDebug() << "Current OFF ";
-				dcOF2d = 0;
-		 	}
-		// 			qDebug("ImA On / Off passed valu %d", valu);
-
-			i2c.close_device(fd);
-//			detTCD_I_read();*/
+		{
 			break;
 		}
 		default:
@@ -2463,8 +1995,8 @@ void _590_DID_DIG::detDID_I_Ctl(void){//(double valu){// ok
 //	QCursor crr;
 //	crr.setPos(1,1);
 	__u8 buff[3];//__16
-	unsigned int temp_16, temp;
-	double iBIT, readValu;
+	unsigned int temp; // temp_16, commented out by Dione.
+	// double iBIT, readValu; Commented out by Dione.
 	int fd;
 	__u8 device_addr;
 
@@ -2527,45 +2059,7 @@ void _590_DID_DIG::detDID_I_Ctl(void){//(double valu){// ok
 			break;
 		}
 		case 2://OK
-		{/*
-			qDebug("DET current ctrl detNumberDirector = %x", detNumberDirector);// test
-
-			readValu = 0;// ui.det_I_CtlSpinBox->value();
-			dcI2d = readValu;
-
-			qDebug("ImA Ctl passed value %f", readValu);//valu);
-
-			iBIT = 350.0 / 65535.0;// calculate current per bit for 16 bits of data What is max current
-			temp_16 = readValu / iBIT;// calculate num of bits
-			qDebug("ImA Ctl passed temp_16 bits before %x", temp_16);
-			temp = 0xffff - temp_16;
-			qDebug("ImA Ctl passed temp bits before %x", temp);
-
-			if (temp > 0xFC16){//64534 FC16
-				temp = 0xFC16;
-			}
-			if (temp < 0xDEA8){
-					temp = 0xDEA8;//57000
-				}
-			qDebug("ImA Ctl passed temp bits after %x", temp);
-			device_addr = 0x1c;
-
-			buff[0] = 0x1b;//
-			buff[1] = temp>>8;// upper bits
-			buff[2] = temp & 0x00ff;// lower 8 bits
-
-			qDebug("ImA buff{0} %x", buff[0]);
-			qDebug("ImA buff{1} %x", buff[1]);
-			qDebug("ImA buff{2} %x", buff[2]);
-
-			fd = i2c.init_i2c();
-			i2c.test_set_slave(fd, device_addr);//i2c_slaveAddr);
-			if (write(fd, buff, 3) != 3) {
-					fprintf(stderr, "i2c_write_command: I ctrl Error on write: %s\n",
-					strerror(errno));
-				}
-			i2c.close_device(fd);
-//			detTCD_I_read();*/
+		{
 			break;
 		}
 		default:
@@ -2586,113 +2080,9 @@ void _590_DID_DIG::setSettings2(void){
 	ui.busyLineEdit->setText(completeProcess);
 }
 
-void _590_DID_DIG::detDID_V_Ctl(void){//(double valu){// ok
-//	MainWindow i2c;
-//	QCursor crr;
-//	crr.setPos(1,1);
-	__u8 buff[3];//__16
-	unsigned int temp_16;
-	double iBIT, readValue;
-	int fd;
-	__u8 device_addr;
-
-	busyState = "BUSY...";// 9-5-2014
-	notBusyState = "DONE...";
-
-	ui.busyLineEdit->setText(busyState);
-
-	qDebug("DET High volt ctrl...............");
-
-	//ui.detTCDWriteVoltageButton->clearFocus();
-
-	detNumberDirector = 1; // forcing  - test statement
-
-	switch (detNumberDirector)
-	{
-		case 1:
-		{
-			qDebug("DET High volt ctrl detNumberDirector = %x", detNumberDirector);// test
-
-			readValue = ui.detVdcCtlSpinBox->value();
-			DVC1D = readValue;
-
-			qDebug("High Volt Ctl passed value %f", readValue);//valu);
-
-//			temp_16 = ((readValue / 1000.0)*0xffff)>>1;
-			iBIT = 1000.0 / 65535.0;
-			temp_16 = (((readValue - 25) / iBIT)/2)-0x19;// Divide by 2 and subtract 25 to make result accurate ??
-
-			qDebug("High Volt Ctl temp_16 bits %x", temp_16);
-
-			device_addr = 0x10;
-
-			buff[0] = 0x1a;//
-			buff[1] = temp_16>>8;//Hi Byte
-			buff[2] = temp_16 & 0x00ff;//LO Byte
-
-			qDebug("High Volt buff{0} %x", buff[0]);
-			qDebug("High Volt buff{1} %x", buff[1]);
-			qDebug("High Volt buff{2} %x", buff[2]);
-
-			fd = dci2c.init_i2c();
-			dci2c.test_set_slave(fd, device_addr);//i2c_slaveAddr);//addr = 0x45;
-			if (write(fd, buff, 3) != 3) {
-					fprintf(stderr, "i2c_write_command: DID HV Error on write: %s\n",
-					strerror(errno));
-				}
-			dci2c.close_device(fd);
-			detHvSig();// read and display HV
-
-//			i2c.delay(5000);
-
-			detDID_I_read();
-
-			break;
-		}
-		case 2://OK
-		{/*
-			qDebug("DET High volt ctrl detNumberDirector = %x", detNumberDirector);// test
-
-			readValue = ui.detVdcCtlSpinBox->value();
-			dVC2d = readValue;
-
-			qDebug("High Volt Ctl passed value %f", readValue);//valu);
-
-			iBIT = 24.0 / 65535.0;
-			temp_16 = readValue / iBIT;
-
-			qDebug("High Volt Ctl temp_16 bits %x", temp_16);
-
-			device_addr = 0x1c;
-
-			buff[0] = 0x1a;//
-			buff[1] = temp_16>>8;//Hi Byte
-			buff[2] = temp_16 & 0x00ff;//LO Byte
-
-			qDebug("High Volt buff{0} %x", buff[0]);
-			qDebug("High Volt buff{1} %x", buff[1]);
-			qDebug("High Volt buff{2} %x", buff[2]);
-
-			fd = i2c.init_i2c();
-			i2c.test_set_slave(fd, device_addr);//i2c_slaveAddr);//addr = 0x45;
-			if (write(fd, buff, 3) != 3) {
-					fprintf(stderr, "i2c_write_command: DID HV Error on write: %s\n",
-					strerror(errno));
-				}
-			i2c.close_device(fd);*/
-			break;
-		}
-		default:
-			break;
-	}
-	ui.busyLineEdit->setText(notBusyState);
-	dci2c.delay(2000);
-	ui.busyLineEdit->clear();
-}
-
 QString _590_DID_DIG::numIn(void)
 {
-	class numericInput Nin(this);// Crerate a dialog
+	class numericInput Nin(this);// Create a dialog
 	if (Nin.exec()) {
 	}
 	numericInput numkey;
@@ -2704,7 +2094,7 @@ QString _590_DID_DIG::numIn(void)
 }
 QString _590_DID_DIG::numInPopUp(void)
 {
-	class numPopUp Nin(this);// Crerate a dialog
+	class numPopUp Nin(this);// Create a dialog
 	if (Nin.exec()) {
 	}
 	numPopUp numkey;
@@ -2714,29 +2104,34 @@ QString _590_DID_DIG::numInPopUp(void)
 
 	return txt_dc;
 }
-QString _590_DID_DIG::numInPolPopUp(unsigned int target)
+
+QString _590_DID_DIG::numInPolarizationPopUp(void)
 {
-	class polPopUp Nin(this);// Crerate a dialog
+	class Polarizepopup Nin(this);// Create a dialog
 	if (Nin.exec()) {
 	}
-	qDebug("_590 Target %x", target);
-	polPopUp numkey;
+	Polarizepopup numkey;
 	QString txt_dc;
 
 	txt_dc = numkey.popupNumInReturn();
 
 	return txt_dc;
 }
+
+
+// Attempting to set high value
+QString _590_DID_DIG::numInVoltagePopUp(void)
+{
+	class voltageNumPopUp Nin(this);// Create a dialog
+		if (Nin.exec()) {
+		}
+		voltageNumPopUp numkey;
+		QString txt_dc;
+		return txt_dc;
+}
+
 QString _590_DID_DIG::numInTempPopUp(void)
 {
-	//class tempPopUp Nin(this);// Create a dialog
-//	if (Nin.exec()) {}
-//	tempPopUp numkey;
-
-//	QString txt_dc;
-
-//	txt_dc = numkey.popupNumInReturn();
-
 	class polPopUp Nin(this);
 		if (Nin.exec()) {
 		}
@@ -2750,6 +2145,7 @@ QString _590_DID_DIG::numInTempPopUp(void)
 	return txt_dc;
 }
 
+
 void _590_DID_DIG::tempSetPoint(int _t1, int _t2)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
@@ -2758,30 +2154,19 @@ void _590_DID_DIG::tempSetPoint(int _t1, int _t2)
 
 QString _590_DID_DIG::numInGainPopUp(void)
 {
-	class gainPopUp Nin(this);// Crerate a dialog
+	class gainPopUp Nin(this);// Create a dialog
 	if (Nin.exec()) {
 	}
 	gainPopUp numkey;
 	QString txt_dc;
-
+	numkey.detectRange(Range);
 	txt_dc = numkey.popupNumInReturn();
 
 	return txt_dc;
 }
-void _590_DID_DIG::deleteNumIn(QString txt){// for move baseline only
 
-	double val3;
-	bool okv[1];
-
-	val3 = txt.toDouble(okv);
-	qDebug("deleteNumIn Firing!");
-
-	qDebug("numIn val3  = %f", val3);
-
-	ui.detDIDOffSetBLSpinBox->setValue(val3);
-	detMoveBaseline();
-}
 void _590_DID_DIG::deleteNumPop(QString txt){// for Change HV only
+	//Dione Might have over written this with is own function.
 
 	double val3;
 	bool okv[1];
@@ -2791,7 +2176,7 @@ void _590_DID_DIG::deleteNumPop(QString txt){// for Change HV only
 	qDebug("NumPop val3  = %f", val3);
 
 	ui.detVdcCtlSpinBox->setValue(val3);
-	detDID_V_Ctl();
+	//detDID_V_Ctl();
 }
 void _590_DID_DIG::deletePolPop(QString txt){// for Change  polV only
 
@@ -2808,19 +2193,25 @@ void _590_DID_DIG::deletePolPop(QString txt){// for Change  polV only
 void _590_DID_DIG::deleteGainPop(QString txt){// for Change gain only
 
 	double val3;
+	int valInt;
 	bool okv[1];
 
 	val3 = txt.toDouble(okv);
+	valInt = txt.toInt();
 
-	qDebug("gain val3  = %f", val3);
 
-	ui.detGainSpinBox_2->setValue(val3);
+	qDebug("deleteGainPop from _590 is firing");
+	qDebug("gain val from _590  = %f", val3);
+	///
+	ui.detGainSpinBox_2->setValue(valInt);
 	ui.detDidGainLCD->display(val3);
 	detGain();
+
+
 }
 void _590_DID_DIG::pleaseWaitForIt(void)
 {
-	pleaseWait wait_dc(this);// Crerate a dialog
+	pleaseWait wait_dc(this);// Create a dialog
 			if (wait_dc.exec()) {
 				qDebug() << "IWait for Process to end)";
 
@@ -2859,8 +2250,8 @@ void _590_DID_DIG::configIO(unsigned int num)// OK
 				buff[0] = port_addr;// command for P4-7
 				buff[1] = 0x55;// Data to configure ports to output
 				if (write(fd, buff, 2) != 2) {
-						fprintf(stderr, "i2c_write_command: 0x09 0x0a Error on write: %s\n",
-						strerror(errno));
+						fprintf(stderr, "Error: on configIO()");
+						//strerror(errno));
 					}
 				++port_addr;
 			}
@@ -2870,8 +2261,8 @@ void _590_DID_DIG::configIO(unsigned int num)// OK
 				buff[0] = port_addr;// command for P4-7
 				buff[1] = 0x55;// Data to configure ports to output
 				if (write(fd, buff, 2) != 2) {
-						fprintf(stderr, "i2c_write_command: 0x0e 0x0f Error on write: %s\n",
-						strerror(errno));
+						fprintf(stderr, "Error: on configIO() 2");
+						//strerror(errno));
 					}
 				++port_addr;
 			}
@@ -2880,32 +2271,36 @@ void _590_DID_DIG::configIO(unsigned int num)// OK
 			buff[0] = port_addr;
 			buff[1] = 0x55;
 			if (write(fd, buff, 2) != 2) {
-				fprintf(stderr, "i2c_write_command: 0x0b Error on write: %s\n",
-				strerror(errno));
+				//fprintf(stderr, "i2c_write_command: 0x0b Error on write: %s\n");
+				qDebug("i2c_write_command: 0x0b Error on write: %s\n", strerror(errno));
+				//strerror(errno));
 			}
 
 			port_addr = 0x0C;
 			buff[0] = port_addr;
 			buff[1] = 0x55;
 			if (write(fd, buff, 2) != 2) {
-				fprintf(stderr, "i2c_write_command: 0x0c Error on write: %s\n",
-				strerror(errno));
+				//fprintf(stderr, "i2c_write_command: 0x0c Error on write: %s\n");
+				qDebug("i2c_write_command: 0x0c Error on write: %s\n", strerror(errno));
+				//strerror(errno));
 			}
 
 			port_addr = 0x0D;
 			buff[0] = port_addr;
 			buff[1] = 0x55;
 			if (write(fd, buff, 2) != 2) {
-				fprintf(stderr, "i2c_write_command: 0x0d Error on write: %s\n",
-				strerror(errno));
+				qDebug("i2c_write_command: 0x0d Error on write: %s\n", strerror(errno));
+				//fprintf(stderr, "i2c_write_command: 0x0d Error on write: %s\n");
+				//strerror(errno));
 			}
 
 			port_addr = 0x04;
 			buff[0] = port_addr;
 			buff[1] = 0x01;
 			if (write(fd, buff, 2) != 2) {
-				fprintf(stderr, "i2c_write_command: Start Error on write: %s\n",
-				strerror(errno));
+				qDebug("i2c_write_command: Start Error on write: %s\n", strerror(errno));
+				//fprintf(stderr, "i2c_write_command: Start Error on write: %s\n");
+				//strerror(errno));
 			}
 			qDebug() << "Detector 1 7300 configured";
 			i2c_slaveAddr = tempSid;
@@ -2929,8 +2324,8 @@ void _590_DID_DIG::configIO(unsigned int num)// OK
 				buff[0] = port_addr;// command for P4-7
 				buff[1] = 0x55;// Data to configure ports to output
 				if (write(fd, buff, 2) != 2) {
-						fprintf(stderr, "i2c_write_command: 0x09 0x0a Error on write: %s\n",
-						strerror(errno));
+						fprintf(stderr, "Error: on configIO() 3");
+						//strerror(errno));
 					}
 				++port_addr;
 			}
@@ -2940,8 +2335,9 @@ void _590_DID_DIG::configIO(unsigned int num)// OK
 				buff[0] = port_addr;// command for P4-7
 				buff[1] = 0x55;// Data to configure ports to output
 				if (write(fd, buff, 2) != 2) {
-						fprintf(stderr, "i2c_write_command: 0x0e 0x0f Error on write: %s\n",
-						strerror(errno));
+						qDebug("i2c_write_command: 0x0e 0x0f Error on write: %s\n", strerror(errno));
+						//fprintf(stderr, "i2c_write_command: 0x0e 0x0f Error on write: %s\n");
+						//strerror(errno));
 					}
 				++port_addr;
 			}
@@ -2950,32 +2346,36 @@ void _590_DID_DIG::configIO(unsigned int num)// OK
 			buff[0] = port_addr;
 			buff[1] = 0x55;
 			if (write(fd, buff, 2) != 2) {
-				fprintf(stderr, "i2c_write_command: 0x0b Error on write: %s\n",
-				strerror(errno));
+				qDebug("i2c_write_command: 0x0b Error on write: %s\n", strerror(errno));
+				//fprintf(stderr, "i2c_write_command: 0x0b Error on write: %s\n");
+				//strerror(errno));
 			}
 
 			port_addr = 0x0C;
 			buff[0] = port_addr;
 			buff[1] = 0x55;
 			if (write(fd, buff, 2) != 2) {
-				fprintf(stderr, "i2c_write_command: 0x0c Error on write: %s\n",
-				strerror(errno));
+				qDebug("i2c_write_command: 0x0c Error on write: %s\n", strerror(errno));
+				//fprintf(stderr, "i2c_write_command: 0x0c Error on write: %s\n");
+				//strerror(errno));
 			}
 
 			port_addr = 0x0D;
 			buff[0] = port_addr;
 			buff[1] = 0x55;
 			if (write(fd, buff, 2) != 2) {
-				fprintf(stderr, "i2c_write_command: 0x0d Error on write: %s\n",
-				strerror(errno));
+				qDebug("i2c_write_command: 0x0d Error on write: %s\n", strerror(errno));
+				//fprintf(stderr, "i2c_write_command: 0x0d Error on write: %s\n");
+				//strerror(errno));
 			}
 
 			port_addr = 0x04;
 			buff[0] = port_addr;
 			buff[1] = 0x01;
 			if (write(fd, buff, 2) != 2) {
-				fprintf(stderr, "i2c_write_command: Start Error on write: %s\n",
-				strerror(errno));
+				qDebug("i2c_write_command: Start Error on write: %s\n", strerror(errno));
+				//fprintf(stderr, "i2c_write_command: Start Error on write: %s\n");
+				//strerror(errno));
 			}
 			qDebug() << "Detector 2 7300 configured";
 			i2c_slaveAddr = tempSid;
@@ -2992,6 +2392,9 @@ void _590_DID_DIG::configIO(unsigned int num)// OK
 ///////////////////////////////////////////////////////////////////// DET 2
 
 
+}
+int _590_DID_DIG::getRange(void){
+	return Range;
 }
 double _590_DID_DIG::FlowMethread(void){// ok
 
@@ -3060,12 +2463,12 @@ void _590_DID_DIG::detTCDPolarityfCtl(void){ // testing // good USED FOR 2300
 //	QCursor crr;
 //	crr.setPos(2, 2);
 //	MainWindow detPol;dci2c
-    char ar[] = "/dev/spi0cs1"; // Det 1 // changed from cs3 because of problem with emac 4"
+    /*char ar[] = "/dev/spi0cs1"; // Det 1 // changed from cs3 because of problem with emac 4"
     char br[] = "/dev/spi0cs1"; // Det 2
     char cr[] = "108001"; // Det 1 - Channel '0' positive - ain0 positive ain1 negative
     char dr[] = "108020"; // Det 1 - Channel '0' Negative - ain0 negative ain1 positive
     char er[] = "108001"; // Det 2 - Channel '0' positive - ain0 positive ain1 negative
-    char fr[] = "108020"; // Det 2 - Channel '0' Negative - ain0 negative ain1 positive
+    char fr[] = "108020"; // Det 2 - Channel '0' Negative - ain0 negative ain1 positive*/
     int numofbytes;
 
 	busyState = "BUSY...";// 9-5-2014
@@ -3083,17 +2486,17 @@ void _590_DID_DIG::detTCDPolarityfCtl(void){ // testing // good USED FOR 2300
 		{
 
 			if (ui.detPolarityEnableCheckBox->isChecked()){
-		    	if(dci2c.setup_spi(ar) == -1){};// exit(EXIT_FAILURE);
+		    	//if(dci2c.setup_spi(ar) == -1){};// exit(EXIT_FAILURE);
 
-		    	dci2c.transmit_spi(numofbytes,dr);
+		    	//dci2c.transmit_spi(numofbytes,dr);
 
 				dcpol1 = 1;
 				qDebug() << "reversed ";
 			}
 		 	else{
-		    	if(dci2c.setup_spi(ar) == -1){};// exit(EXIT_FAILURE);
+		    	//if(dci2c.setup_spi(ar) == -1){};// exit(EXIT_FAILURE);
 
-		    	dci2c.transmit_spi(numofbytes,cr);
+		    	//dci2c.transmit_spi(numofbytes,cr);
 
 				qDebug() << "reversed ";
 				dcpol1 = 0;
@@ -3105,18 +2508,18 @@ void _590_DID_DIG::detTCDPolarityfCtl(void){ // testing // good USED FOR 2300
 		{
 
 			if (ui.detPolarityEnableCheckBox->isChecked()){
-		    	if(dci2c.setup_spi(br) == -1){};// exit(EXIT_FAILURE);
+		    	//if(dci2c.setup_spi(br) == -1){};// exit(EXIT_FAILURE);
 
-		    	dci2c.transmit_spi(numofbytes,fr);
+		    	//dci2c.transmit_spi(numofbytes,fr);
 
-		    	dci2c.close_spi();
+		    	//dci2c.close_spi();
 				dcpol2 = 1;
 				qDebug() << "Current On ";
 			}
 		 	else{
-		    	if(dci2c.setup_spi(br) == -1){};// exit(EXIT_FAILURE);
+		    	//if(dci2c.setup_spi(br) == -1){};// exit(EXIT_FAILURE);
 
-		    	dci2c.transmit_spi(numofbytes,er);
+		    	//dci2c.transmit_spi(numofbytes,er);
 
 		 		qDebug() << "reversed ";
 				dcpol2 = 0;
@@ -3134,123 +2537,7 @@ void _590_DID_DIG::detTCDPolarityfCtl(void){ // testing // good USED FOR 2300
 	dci2c.delay(2000);
 	ui.busyLineEdit->clear();
 }
-void _590_DID_DIG::detMoveBaseline(void){// Using this for 2300
 
-//	MainWindow dci2c;//dcBaseline;
-    __u8 hi_byte, lo_byte, buff[3];;
-    int fd;
-    double result;
-    unsigned int hexHold, hexHoldOffset;
-
-	busyState = "BUSY...";// 9-5-2014
-	notBusyState = "DONE...";
-
-	ui.busyLineEdit->setText(busyState);
-
-    hexHoldOffset = 0x00;
-    hexHold = 0x00;
-    //ui.detTCDOffSetBLCurrentButton->clearFocus();
-    detNumberDirector = 1;
-    switch (detNumberDirector)
-	{
-		case 1:
-		{
-			qDebug("MOVE BASELINE........................");
-			/////////////////////////////////////////////// get change and convert it
-			    //result = ui.detDIDOffSetBLSpinBox->value() *-0.4;
-			    dci2c.delay(500);
-			    offSet1 = result;
-
-			    if(result > 0){
-			       	hexHoldOffset = ((result) / 5) * 32767;//
-			       	hexHold = hexHoldGlobal - hexHoldOffset;
-			    }else if(result < 0){
-			       	hexHoldOffset = (-1) * ((result) / 5) * 32767;//
-			       	hexHold = hexHoldGlobal + hexHoldOffset;
-			    }
-
-			    qDebug("result = %f", result);// test
-			   	qDebug("result = %x", result);// test
-			   	qDebug("hexHoldOffset = %x", hexHoldOffset);// test
-			   	qDebug("hexHold = %x", hexHold);// test
-			/////////////////////////////////////////////// make change
-
-			    hi_byte = (hexHold & 0xff00) >> 8;
-			    lo_byte = hexHold & 0x00ff;
-
-			    printf("hi_byte = %x\n", hi_byte);
-			    printf("lo_byte = %x\n", lo_byte);
-
-			    fd = dci2c.init_i2c();
-			    dci2c.test_set_slave(fd, 0x10);
-
-			 	//* write register /
-			 	buff[0] = 0x18;// channel
-			 	buff[1] = hi_byte;//(__u8)(cmd >> 8);
-			 	buff[2] = lo_byte;//(__u8)(cmd);
-
-			 	if (write(fd, buff, 3) != 3) {
-			 		fprintf(stderr, "i2c_write_cmd: error on write: %s\n", strerror(errno));
-			// 		return -1;
-			 	}
-			 	dci2c.close_device(fd);//close(fd);// Close I2C fd
-			 	//////////////////////////////////// I2C End
-			 	dci2c.delay(500);
-			 	detDIDSig();
-			break;
-		}
-		case 2:
-		{
-//			/////////////////////////////////////////////// get change and convert it
-//			    result = ui.detDIDOffSetBLSpinBox->value();
-//			    offSet2 = result;
-//
-//			    if(result > 0){
-//			       	hexHoldOffset = ((result) / 5) * 32767;//
-//			       	hexHold = hexHoldGlobal - hexHoldOffset;
-//			    }else if(result < 0){
-//			       	hexHoldOffset = (-1) * ((result) / 5) * 32767;//
-//			       	hexHold = hexHoldGlobal + hexHoldOffset;
-//			    }
-//
-//
-///*			   	qDebug("result = %x", result);// test
-//			   	qDebug("hexHoldOffset = %x", hexHoldOffset);// test
-//			   	qDebug("hexHold = %x", hexHold);// test*/
-//			/////////////////////////////////////////////// make change
-//
-//			    hi_byte = (hexHold & 0xff00) >> 8;
-//			    lo_byte = hexHold & 0x00ff;
-//
-///*			    printf("hi_byte = %x\n", hi_byte);
-//			    printf("lo_byte = %x\n", lo_byte);*/
-//
-//			    fd = dci2c.init_i2c();
-//			    dci2c.test_set_slave(fd, 0x1c);
-//
-//			 	//* write register /
-//			 	buff[0] = 0x18;// channel
-//			 	buff[1] = hi_byte;//(__u8)(cmd >> 8);
-//			 	buff[2] = lo_byte;//(__u8)(cmd);
-//
-//			 	if (write(fd, buff, 3) != 3) {
-//			 		fprintf(stderr, "i2c_write_cmd: error on write: %s\n", strerror(errno));
-//			// 		return -1;
-//			 	}
-//			 	dci2c.close_device(fd);//close(fd);// Close I2C fd
-//			 	//////////////////////////////////// I2C End
-//			 	detTCD_I_Sig();
-			break;
-		}
-		default:
-			break;
-	}
-//	QCursor crr;
-//	crr.setPos(2, 2);
-	ui.busyLineEdit->setText(notBusyState);
-	dci2c.delay(2000);
-	ui.busyLineEdit->clear();
-}
 
 double _590_DID_DIG::FlowH2read(void){// ok
 
@@ -3317,34 +2604,34 @@ double _590_DID_DIG::FlowH2read(void){// ok
 }
 
 void _590_DID_DIG::setSettings(void){
-	qDebug("TIMER 1 .................................................START");
+	//qDebug("TIMER 1 .................................................START");
 	completeProcess = "COMPLETE....";
 
-	qDebug("SET SETTINGS..........................%d",Range);
+	//qDebug("SET SETTINGS..........................%d",Range);
 	if (Range == 1){
 		ui.R1->setChecked(1);
 		ui.R2->setChecked(0);
 		ui.R3->setChecked(0);
 		ui.R4->setChecked(0);
-		qDebug("SWITCH 1..........................%d",Range);
+		//qDebug("SWITCH 1..........................%d",Range);
 	}else if (Range == 2){
 		ui.R1->setChecked(0);
 		ui.R2->setChecked(1);
 		ui.R3->setChecked(0);
 		ui.R4->setChecked(0);
-		qDebug("SWITCH 2..........................%d",Range);
+		//qDebug("SWITCH 2..........................%d",Range);
 	}else if (Range == 3){
 		ui.R1->setChecked(0);
 		ui.R2->setChecked(0);
 		ui.R3->setChecked(1);
 		ui.R4->setChecked(0);
-		qDebug("SWITCH 3..........................%d",Range);
+		//qDebug("SWITCH 3..........................%d",Range);
 	}else if (Range == 4){
 		ui.R1->setChecked(0);
 		ui.R2->setChecked(0);
 		ui.R3->setChecked(0);
 		ui.R4->setChecked(1);
-		qDebug("SWITCH 4..........................%d",Range);
+		//qDebug("SWITCH 4..........................%d",Range);
 	}
 
 	if (dcGain1 == 0 && dcGain2 == 0){
@@ -3365,7 +2652,7 @@ void _590_DID_DIG::setSettings(void){
 
 	ui.detVdcCtlSpinBox->setValue(DVC1D);
 
-	detDIDSig();
+	//detDIDSig();
 
 	ui.busyLineEdit->setText(completeProcess);
 	qDebug("TIMER 1 .................................................COMPLETE");
@@ -3381,8 +2668,11 @@ void _590_DID_DIG::saveDetSettings(void){
 
     qDebug() << "ALARM SAVED";
 }
-void _590_DID_DIG::processDid_line(QByteArray line, unsigned int nex){
-	bool ok;
+
+void _590_DID_DIG::processDid_line(unsigned int nex){
+	// Commented out QByteArray line, because not in use. Dione.
+	//void _590_DID_DIG::processDid_line(QByteArray line, unsigned int nex){
+	//bool ok;
 	QString alData;//[line.size()];
 	unsigned int dataResultInt;
 	double dataResult;
@@ -3391,95 +2681,11 @@ void _590_DID_DIG::processDid_line(QByteArray line, unsigned int nex){
 	dataResult = 0.0;
 
 	qDebug("NEX  = %d", nex);
-/*	switch (nex){
-		case 0:{
-			 for (int i = 0; i < line.size(); ++i) {
-			     if (line.at(i) >= '0' && line.at(i) <= '9')
-			    	 alData[i] = line.at(i);
-			     	 qDebug("data  = %x", line.at(i));
-			 }
-			 dataResultInt = alData.toUInt(&ok);
-			 ALARM1ACTIVE = dataResultInt;
-			 qDebug("to ALARM1ACTIVE = %d", dataResultInt);
 
-			break;
-		}
-		case 1:{
-			 for (int i = 0; i < line.size(); ++i) {
-			     if (line.at(i) >= '0' && line.at(i) <= '9')
-			    	 alData[i] = line.at(i);
-			     	 qDebug("data  = %x", line.at(i));
-			 }
-			 dataResultInt = alData.toUInt(&ok);
-			 ALARM2ACTIVE = dataResultInt;
-			 qDebug("to ALARM2ACTIVE = %d", dataResultInt);
-			break;
-		}
-		case 2:{
-			 for (int i = 0; i < line.size(); ++i) {
-			     if (line.at(i) >= '0' && line.at(i) <= '9')
-			    	 alData[i] = line.at(i);
-			     	 qDebug("data  = %x", line.at(i));
-			 }
-			 dataResultInt = alData.toUInt(&ok);
-			 ALARMACTIVE = dataResultInt;
-			 qDebug("to ALARMACTIVE = %d", dataResultInt);
-			break;
-		}
-		case 3:{
-			 for (int i = 0; i < line.size(); ++i) {
-			     if (line.at(i) >= '0' && line.at(i) <= '9')
-			    	 alData[i] = line.at(i);
-			     	 qDebug("data  = %x", line.at(i));
-			 }
-			 dataResult = alData.toUInt(&ok);
-			 ALARMHI1 = dataResult;
-			 qDebug("to ALARMHI1 = %f", dataResult);
-			break;
-		}
-		case 4:{
-			 for (int i = 0; i < line.size(); ++i) {
-			     if (line.at(i) >= '0' && line.at(i) <= '9')
-			    	 alData[i] = line.at(i);
-			     	 qDebug("data  = %x", line.at(i));
-			 }
-			 dataResult = alData.toDouble(&ok);
-			 ALARMLO1 = dataResult;
-			 qDebug("to ALARMLO1 = %f", dataResult);
-			break;
-		}
-		case 5:{
-			 for (int i = 0; i < line.size(); ++i) {
-			     if (line.at(i) >= '0' && line.at(i) <= '9')
-			    	 alData[i] = line.at(i);
-			     	 qDebug("data  = %x", line.at(i));
-			 }#include "numpopup.h"
-			 dataResult = alData.toDouble(&ok);
-			 ALARMHI2 = dataResult;
-			 qDebug("to ALARMHI2 = %f", dataResult);
-			break;
-		}
-		case 6:{
-			ALARMLO2 = line.toDouble(&ok);
-			 for (int i = 0; i < line.size(); ++i) {
-			     if (line.at(i) >= '0' && line.at(i) <= '9')
-			    	 alData[i] = line.at(i);
-			     	 qDebug("data  = %x", line.at(i));
-			 }
-			 dataResult = alData.toDouble(&ok);
-			 ALARMLO2 = dataResult;
-			 qDebug("to ALARMLO2 = %f", dataResult);
-			break;
-		}
-		default :{
-			qDebug("FILE read default = %x", nex);
-			break;
-		}
-	}*/
 }
 void _590_DID_DIG::getDidSettings(void){
 
-	bool ok;
+	//bool ok;
 	unsigned int nex;
 
 	nex = 0;
@@ -3489,8 +2695,9 @@ void _590_DID_DIG::getDidSettings(void){
         return;
 
     while (!file.atEnd()) {
-    	QByteArray line = file.readLine();//
-    	processDid_line(line, nex);
+    	// Commented out by Dione. Line not being used.
+    	// QByteArray line = file.readLine();//
+    	processDid_line(nex);
     	++nex;
     }
 }
@@ -3735,31 +2942,4 @@ double _590_DID_DIG::FlowSampread(void){// ok
 	return valu;
 }
 
-void _590_DID_DIG::powerOnInitSettings(void){
 
-}
-void _590_DID_DIG::polVoltMenu(void){
-
-	/*
-	 * Commented out
-	QPalette palette17;
-	QBrush brush2(QColor(0, 0, 0, 255));
-	palette17.setBrush(QPalette::Active, QPalette::WindowText, brush2);
-	QBrush brush28(QColor(242, 241, 240, 0));
-	brush28.setStyle(Qt::SolidPattern);
-	palette17.setBrush(QPalette::Active, QPalette::Button, brush28);
-	QBrush brush29(QColor(255, 255, 255, 0));
-	brush29.setStyle(Qt::SolidPattern);
-	palette17.setBrush(QPalette::Active, QPalette::Light, brush29);
-	QBrush brush30(QColor(248, 248, 247, 0));
-	brush30.setStyle(Qt::SolidPattern);
-	palette17.setBrush(QPalette::Active, QPalette::Midlight, brush30);
-	QBrush brush31(QColor(121, 120, 120, 0));
-	brush31.setStyle(Qt::SolidPattern);
-	palette17.setBrush(QPalette::Active, QPalette::Dark, brush31);
-
-
-	ui.detDIDPolButton->setPalette(palette17);
-	*/
-
-}

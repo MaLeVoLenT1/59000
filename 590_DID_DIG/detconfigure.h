@@ -24,15 +24,14 @@ public slots:
 	void detGain(void);
 	void detDIDIgnite(void);
 	void detIgn(void);
-	void detPolSet(void);
-	double detPolSig(void);
+
 	double detHvSig(void);
 	double detDIDSig(void);
 	double detTCD_I_Sig(void);
 	void detDID_I_Ctl(void);
 	void detDID_I_OnOffCtl(void);
 	double detDID_I_read(void);
-	void detDID_V_Ctl(void);
+
 	double detDIDZeroCtl(void);
 	void configIO(unsigned int num);
 	void detRead(void);
@@ -44,11 +43,13 @@ public slots:
 	double FlowSampread(void);
 	double FlowMethread(void);
 	QString numIn(void);
+	//QString numInVoltagePopUp(void);
 	QString numInPopUp(void);
 	QString numInPolPopUp(void);
 	QString numInGainPopUp(void);
 	void deleteNumIn(QString);
 	void deleteNumPop(QString txt);
+
 	void deleteGainPop(QString txt);
 	void deletePolPop(QString txt);
 	void powerOnInitSettings(void);
@@ -57,6 +58,17 @@ public slots:
 	void processDid_line(QByteArray line, unsigned int nex);
 	void getDidSettings(void);
 	void setSettings2(void);
+	void detDID_V_Ctl(void);
+	void voltageSET(double voltage);
+	void deleteVoltageNumPop(QString txt);
+	QString callGainAdjust(void);
+
+	void detPolSet(void);
+	double detPolSig(void);
+
+	void polarizationSET(double voltage);
+	void passPolarization(QString txt);
+
 
 private:
     Ui::detConfigureClass ui;

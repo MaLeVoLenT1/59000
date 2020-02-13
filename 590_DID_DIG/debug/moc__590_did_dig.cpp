@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file '_590_did_dig.h'
 **
-** Created: Tue Mar 5 14:49:31 2019
+** Created: Wed Jan 29 14:13:14 2020
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data__590_DID_DIG[] = {
        4,       // revision
        0,       // classname
        0,    0, // classinfo
-      65,   14, // methods
+      62,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -36,100 +36,96 @@ static const uint qt_meta_data__590_DID_DIG[] = {
       33,   13,   13,   13, 0x0a,
       40,   13,   13,   13, 0x0a,
       52,   13,   13,   13, 0x0a,
-      62,   13,   13,   13, 0x0a,
-      82,   13,   13,   13, 0x0a,
-     102,   13,   13,   13, 0x0a,
-     125,   13,   13,   13, 0x0a,
-     144,   13,   13,   13, 0x0a,
-     159,   13,   13,   13, 0x0a,
-     174,   13,   13,   13, 0x0a,
-     189,   13,   13,   13, 0x0a,
-     203,   13,   13,   13, 0x0a,
-     216,   13,   13,   13, 0x0a,
-     227,   13,   13,   13, 0x0a,
-     237,   13,   13,   13, 0x0a,
-     259,   13,  252,   13, 0x0a,
-     275,   13,  252,   13, 0x0a,
-     286,   13,   13,   13, 0x0a,
-     295,   13,   13,   13, 0x0a,
-     307,   13,  252,   13, 0x0a,
-     319,   13,  252,   13, 0x0a,
-     331,   13,  252,   13, 0x0a,
-     346,   13,   13,   13, 0x0a,
-     361,   13,   13,   13, 0x0a,
-     381,   13,   13,   13, 0x0a,
-     400,  396,   13,   13, 0x0a,
-     415,   13,   13,   13, 0x0a,
-     425,   13,   13,   13, 0x0a,
-     443,   13,   13,   13, 0x0a,
-     461,   13,   13,   13, 0x0a,
-     482,   13,  252,   13, 0x0a,
-     495,   13,  252,   13, 0x0a,
-     509,   13,  252,   13, 0x0a,
-     524,   13,  252,   13, 0x0a,
-     547,   13,  539,   13, 0x0a,
-     555,   13,  539,   13, 0x0a,
-     568,   13,  539,   13, 0x0a,
-     592,  585,  539,   13, 0x0a,
-     620,  612,   13,   13, 0x0a,
-     642,   13,  539,   13, 0x0a,
-     659,   13,   13,   13, 0x0a,
-     684,  680,   13,   13, 0x0a,
-     706,  680,   13,   13, 0x0a,
+      72,   13,   13,   13, 0x0a,
+      92,   13,   13,   13, 0x0a,
+     115,   13,   13,   13, 0x0a,
+     134,   13,   13,   13, 0x0a,
+     149,   13,   13,   13, 0x0a,
+     164,   13,   13,   13, 0x0a,
+     178,   13,   13,   13, 0x0a,
+     191,   13,   13,   13, 0x0a,
+     202,   13,   13,   13, 0x0a,
+     212,   13,   13,   13, 0x0a,
+     234,   13,  227,   13, 0x0a,
+     250,   13,  227,   13, 0x0a,
+     261,   13,   13,   13, 0x0a,
+     273,   13,  227,   13, 0x0a,
+     285,   13,  227,   13, 0x0a,
+     297,   13,  227,   13, 0x0a,
+     312,   13,   13,   13, 0x0a,
+     327,   13,   13,   13, 0x0a,
+     351,  347,   13,   13, 0x0a,
+     366,   13,   13,   13, 0x0a,
+     376,   13,   13,   13, 0x0a,
+     394,   13,   13,   13, 0x0a,
+     415,   13,  227,   13, 0x0a,
+     428,   13,  227,   13, 0x0a,
+     442,   13,  227,   13, 0x0a,
+     457,   13,  227,   13, 0x0a,
+     480,   13,  472,   13, 0x0a,
+     488,   13,  472,   13, 0x0a,
+     514,  501,   13,   13, 0x0a,
+     540,   13,  472,   13, 0x0a,
+     565,   13,  472,   13, 0x0a,
+     585,   13,  472,   13, 0x0a,
+     610,  602,   13,   13, 0x0a,
+     632,   13,  472,   13, 0x0a,
+     653,  649,   13,   13, 0x0a,
+     675,  649,   13,   13, 0x0a,
+     698,   13,   13,   13, 0x0a,
+     715,   13,   13,   13, 0x0a,
      729,   13,   13,   13, 0x0a,
-     751,   13,   13,   13, 0x0a,
-     765,   13,   13,   13, 0x0a,
-     792,  783,   13,   13, 0x0a,
-     825,   13,   13,   13, 0x0a,
-     842,   13,   13,   13, 0x0a,
-     857,   13,   13,   13, 0x0a,
-     871,   13,   13,   13, 0x0a,
-     879,   13,   13,   13, 0x0a,
-     887,   13,   13,   13, 0x0a,
-     904,   13,   13,   13, 0x0a,
-     912,   13,   13,   13, 0x0a,
-     920,   13,   13,   13, 0x0a,
-     937,   13,   13,   13, 0x0a,
-     945,   13,   13,   13, 0x0a,
-     953,   13,   13,   13, 0x0a,
-     970,   13,   13,   13, 0x0a,
-     978,   13,   13,   13, 0x0a,
-     986,   13,   13,   13, 0x0a,
-    1003,  680,   13,   13, 0x0a,
+     751,  747,   13,   13, 0x0a,
+     773,   13,   13,   13, 0x0a,
+     790,   13,   13,   13, 0x0a,
+     809,   13,  805,   13, 0x0a,
+     820,   13,   13,   13, 0x0a,
+     828,   13,   13,   13, 0x0a,
+     836,   13,   13,   13, 0x0a,
+     853,   13,   13,   13, 0x0a,
+     861,   13,   13,   13, 0x0a,
+     869,   13,   13,   13, 0x0a,
+     886,   13,   13,   13, 0x0a,
+     894,   13,   13,   13, 0x0a,
+     902,   13,   13,   13, 0x0a,
+     919,   13,   13,   13, 0x0a,
+     927,   13,   13,   13, 0x0a,
+     935,   13,   13,   13, 0x0a,
+     952,  649,   13,   13, 0x0a,
+     974,   13,  227,   13, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata__590_DID_DIG[] = {
     "_590_DID_DIG\0\0calibrat()\0outpt()\0"
-    "data()\0oGainCtrl()\0measure()\0"
-    "displayStatusBusy()\0displayStatusDone()\0"
-    "killSampFuelMethFlow()\0callMain_datalog()\0"
-    "sendSerial_3()\0callViewSigs()\0"
+    "data()\0oGainCtrl()\0displayStatusBusy()\0"
+    "displayStatusDone()\0killSampFuelMethFlow()\0"
+    "callMain_datalog()\0callViewSigs()\0"
     "initSettings()\0shutdownNow()\0shutDwnMsg()\0"
     "detRange()\0detGain()\0detDIDIgnite()\0"
     "double\0detDID_I_read()\0detHvSig()\0"
-    "detIgn()\0detPolSet()\0detPolSig()\0"
-    "detDIDSig()\0detTCD_I_Sig()\0detDID_I_Ctl()\0"
-    "detDID_I_OnOffCtl()\0detDID_V_Ctl()\0"
-    "num\0configIO(uint)\0detRead()\0"
-    "pleaseWaitForIt()\0detMoveBaseline()\0"
+    "detPolSet()\0detPolSig()\0detDIDSig()\0"
+    "detTCD_I_Sig()\0detDID_I_Ctl()\0"
+    "detDID_I_OnOffCtl()\0num\0configIO(uint)\0"
+    "detRead()\0pleaseWaitForIt()\0"
     "detTCDPolarityfCtl()\0FlowH2read()\0"
     "FlowAirread()\0FlowSampread()\0"
     "FlowMethread()\0QString\0numIn()\0"
-    "numInPopUp()\0numInTempPopUp()\0target\0"
-    "numInPolPopUp(uint)\0_t1,_t2\0"
-    "tempSetPoint(int,int)\0numInGainPopUp()\0"
-    "deleteNumIn(QString)\0txt\0deleteNumPop(QString)\0"
-    "deleteGainPop(QString)\0powerOnInitSettings()\0"
-    "setSettings()\0saveDetSettings()\0"
-    "line,nex\0processDid_line(QByteArray,uint)\0"
-    "getDidSettings()\0setSettings2()\0"
-    "polVoltMenu()\0IO20b()\0IO20a()\0"
-    "activateValve1()\0IO19a()\0IO19b()\0"
-    "activateValve2()\0IO18a()\0IO18b()\0"
-    "activateValve3()\0IO17a()\0IO17b()\0"
-    "activateValve4()\0deletePolPop(QString)\0"
+    "numInPopUp()\0txt,OvenType\0"
+    "setTempLabel(QString,int)\0"
+    "numInPolarizationPopUp()\0numInVoltagePopUp()\0"
+    "numInTempPopUp()\0_t1,_t2\0tempSetPoint(int,int)\0"
+    "numInGainPopUp()\0txt\0deleteNumPop(QString)\0"
+    "deleteGainPop(QString)\0externalValves()\0"
+    "setSettings()\0saveDetSettings()\0nex\0"
+    "processDid_line(uint)\0getDidSettings()\0"
+    "setSettings2()\0int\0getRange()\0IO20b()\0"
+    "IO20a()\0activateValve1()\0IO19a()\0"
+    "IO19b()\0activateValve2()\0IO18a()\0"
+    "IO18b()\0activateValve3()\0IO17a()\0"
+    "IO17b()\0activateValve4()\0deletePolPop(QString)\0"
+    "detDIDZeroCtl()\0"
 };
 
 const QMetaObject _590_DID_DIG::staticMetaObject = {
@@ -165,84 +161,84 @@ int _590_DID_DIG::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 1: outpt(); break;
         case 2: data(); break;
         case 3: oGainCtrl(); break;
-        case 4: measure(); break;
-        case 5: displayStatusBusy(); break;
-        case 6: displayStatusDone(); break;
-        case 7: killSampFuelMethFlow(); break;
-        case 8: callMain_datalog(); break;
-        case 9: sendSerial_3(); break;
-        case 10: callViewSigs(); break;
-        case 11: initSettings(); break;
-        case 12: shutdownNow(); break;
-        case 13: shutDwnMsg(); break;
-        case 14: detRange(); break;
-        case 15: detGain(); break;
-        case 16: detDIDIgnite(); break;
-        case 17: { double _r = detDID_I_read();
+        case 4: displayStatusBusy(); break;
+        case 5: displayStatusDone(); break;
+        case 6: killSampFuelMethFlow(); break;
+        case 7: callMain_datalog(); break;
+        case 8: callViewSigs(); break;
+        case 9: initSettings(); break;
+        case 10: shutdownNow(); break;
+        case 11: shutDwnMsg(); break;
+        case 12: detRange(); break;
+        case 13: detGain(); break;
+        case 14: detDIDIgnite(); break;
+        case 15: { double _r = detDID_I_read();
             if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
-        case 18: { double _r = detHvSig();
+        case 16: { double _r = detHvSig();
             if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
-        case 19: detIgn(); break;
-        case 20: detPolSet(); break;
-        case 21: { double _r = detPolSig();
+        case 17: detPolSet(); break;
+        case 18: { double _r = detPolSig();
             if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
-        case 22: { double _r = detDIDSig();
+        case 19: { double _r = detDIDSig();
             if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
-        case 23: { double _r = detTCD_I_Sig();
+        case 20: { double _r = detTCD_I_Sig();
             if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
-        case 24: detDID_I_Ctl(); break;
-        case 25: detDID_I_OnOffCtl(); break;
-        case 26: detDID_V_Ctl(); break;
-        case 27: configIO((*reinterpret_cast< uint(*)>(_a[1]))); break;
-        case 28: detRead(); break;
-        case 29: pleaseWaitForIt(); break;
-        case 30: detMoveBaseline(); break;
-        case 31: detTCDPolarityfCtl(); break;
-        case 32: { double _r = FlowH2read();
+        case 21: detDID_I_Ctl(); break;
+        case 22: detDID_I_OnOffCtl(); break;
+        case 23: configIO((*reinterpret_cast< uint(*)>(_a[1]))); break;
+        case 24: detRead(); break;
+        case 25: pleaseWaitForIt(); break;
+        case 26: detTCDPolarityfCtl(); break;
+        case 27: { double _r = FlowH2read();
             if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
-        case 33: { double _r = FlowAirread();
+        case 28: { double _r = FlowAirread();
             if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
-        case 34: { double _r = FlowSampread();
+        case 29: { double _r = FlowSampread();
             if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
-        case 35: { double _r = FlowMethread();
+        case 30: { double _r = FlowMethread();
             if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
-        case 36: { QString _r = numIn();
+        case 31: { QString _r = numIn();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
-        case 37: { QString _r = numInPopUp();
+        case 32: { QString _r = numInPopUp();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
-        case 38: { QString _r = numInTempPopUp();
+        case 33: setTempLabel((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 34: { QString _r = numInPolarizationPopUp();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
-        case 39: { QString _r = numInPolPopUp((*reinterpret_cast< uint(*)>(_a[1])));
+        case 35: { QString _r = numInVoltagePopUp();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
-        case 40: tempSetPoint((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 41: { QString _r = numInGainPopUp();
+        case 36: { QString _r = numInTempPopUp();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
-        case 42: deleteNumIn((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 43: deleteNumPop((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 44: deleteGainPop((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 45: powerOnInitSettings(); break;
-        case 46: setSettings(); break;
-        case 47: saveDetSettings(); break;
-        case 48: processDid_line((*reinterpret_cast< QByteArray(*)>(_a[1])),(*reinterpret_cast< uint(*)>(_a[2]))); break;
-        case 49: getDidSettings(); break;
-        case 50: setSettings2(); break;
-        case 51: polVoltMenu(); break;
-        case 52: IO20b(); break;
-        case 53: IO20a(); break;
-        case 54: activateValve1(); break;
-        case 55: IO19a(); break;
-        case 56: IO19b(); break;
-        case 57: activateValve2(); break;
-        case 58: IO18a(); break;
-        case 59: IO18b(); break;
-        case 60: activateValve3(); break;
-        case 61: IO17a(); break;
-        case 62: IO17b(); break;
-        case 63: activateValve4(); break;
-        case 64: deletePolPop((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 37: tempSetPoint((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 38: { QString _r = numInGainPopUp();
+            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
+        case 39: deleteNumPop((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 40: deleteGainPop((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 41: externalValves(); break;
+        case 42: setSettings(); break;
+        case 43: saveDetSettings(); break;
+        case 44: processDid_line((*reinterpret_cast< uint(*)>(_a[1]))); break;
+        case 45: getDidSettings(); break;
+        case 46: setSettings2(); break;
+        case 47: { int _r = getRange();
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
+        case 48: IO20b(); break;
+        case 49: IO20a(); break;
+        case 50: activateValve1(); break;
+        case 51: IO19a(); break;
+        case 52: IO19b(); break;
+        case 53: activateValve2(); break;
+        case 54: IO18a(); break;
+        case 55: IO18b(); break;
+        case 56: activateValve3(); break;
+        case 57: IO17a(); break;
+        case 58: IO17b(); break;
+        case 59: activateValve4(); break;
+        case 60: deletePolPop((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 61: { double _r = detDIDZeroCtl();
+            if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
         default: ;
         }
-        _id -= 65;
+        _id -= 62;
     }
     return _id;
 }

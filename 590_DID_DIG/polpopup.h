@@ -4,6 +4,10 @@
 #include <QtGui/QDialog>
 #include "ui_polpopup.h"
 #include "detconfigure.h"
+#include "_590_did_dig.h"
+#include <QtGui/QMainWindow>
+
+
 
 class polPopUp : public QDialog
 {
@@ -13,6 +17,8 @@ public:
     polPopUp(QWidget *parent = 0);
     ~polPopUp();
         detConfigure transfer;
+        //_590_DID_DIG xferToMain;
+        MainWindow xferToMain;
 public slots:
     void processNumIn(void);
     QString popupNumInReturn(void);
