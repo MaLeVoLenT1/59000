@@ -147,6 +147,8 @@ public slots:
 
 	double detDIDZeroCtl(void);
 
+	void fireOvenCommands(void);
+
 
 private:
 

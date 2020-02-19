@@ -2942,4 +2942,7 @@ double _590_DID_DIG::FlowSampread(void){// ok
 	return valu;
 }
 
+void _590_DID_DIG::fireOvenCommands(void){
+	dci2c.runOvenCommands();
+}
 

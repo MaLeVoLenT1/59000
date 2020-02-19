@@ -111,6 +111,8 @@ int main(int argc, char *argv[])
 
 	w.displayStatusBusy();
 
+	w.fireOvenCommands();
+
     qDebug() << "Config valve - MAIN start in main";
     mw_valveConfig.configIO();
     qDebug() << "Config valve - MAIN END in main";

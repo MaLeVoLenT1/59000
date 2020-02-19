@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file '_590_did_dig.h'
 **
-** Created: Wed Jan 29 14:13:14 2020
+** Created: Wed Feb 19 13:16:22 2020
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data__590_DID_DIG[] = {
        4,       // revision
        0,       // classname
        0,    0, // classinfo
-      62,   14, // methods
+      63,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -93,6 +93,7 @@ static const uint qt_meta_data__590_DID_DIG[] = {
      935,   13,   13,   13, 0x0a,
      952,  649,   13,   13, 0x0a,
      974,   13,  227,   13, 0x0a,
+     990,   13,   13,   13, 0x0a,
 
        0        // eod
 };
@@ -125,7 +126,7 @@ static const char qt_meta_stringdata__590_DID_DIG[] = {
     "IO19b()\0activateValve2()\0IO18a()\0"
     "IO18b()\0activateValve3()\0IO17a()\0"
     "IO17b()\0activateValve4()\0deletePolPop(QString)\0"
-    "detDIDZeroCtl()\0"
+    "detDIDZeroCtl()\0fireOvenCommands()\0"
 };
 
 const QMetaObject _590_DID_DIG::staticMetaObject = {
@@ -236,9 +237,10 @@ int _590_DID_DIG::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 60: deletePolPop((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 61: { double _r = detDIDZeroCtl();
             if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
+        case 62: fireOvenCommands(); break;
         default: ;
         }
-        _id -= 62;
+        _id -= 63;
     }
     return _id;
 }

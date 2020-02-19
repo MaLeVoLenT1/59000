@@ -1,5 +1,6 @@
 #include "polpopup.h"
 #include <QString>
+#include "_590_did_dig.h"
 
 polPopUp::polPopUp(QWidget *parent)
     : QDialog(parent)
@@ -79,11 +80,22 @@ void polPopUp::num_Clear(void){
 	ui.lineEdit->clear();//->insert(vall1);
 }
 void polPopUp::processNumIn(void){
-	QString val1;
-	QString txt;
 
-	txt = ui.lineEdit->text();
-	transfer.deletePolPop(txt);//
+	QString txt;
+		if(ui.lineEdit->text() == NULL){
+				qDebug("No Value Entered for Column Temperature.");
+			}
+			else{
+				txt = ui.lineEdit->text();
+
+				((_590_DID_DIG*)(parent()))->ui.collumnTempLine->setText(txt);
+
+
+				xferToMain.setCollumnTemp(txt);
+				qDebug("Setting Column Temperature.");
+				ui.lineEdit->clear();
+			}
+
 }
 QString polPopUp::popupNumInReturn(void){
 	QString txt;
