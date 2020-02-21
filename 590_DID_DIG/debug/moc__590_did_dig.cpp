@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file '_590_did_dig.h'
 **
-** Created: Wed Feb 19 13:16:22 2020
+** Created: Fri Feb 21 09:30:37 2020
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
 **
 ** WARNING! All changes made in this file will be lost!

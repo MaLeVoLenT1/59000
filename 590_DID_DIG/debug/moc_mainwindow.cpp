@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Wed Feb 19 13:04:34 2020
+** Created: Fri Feb 21 09:30:39 2020
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        4,       // revision
        0,       // classname
        0,    0, // classinfo
-      54,   14, // methods
+      56,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -48,45 +48,47 @@ static const uint qt_meta_data_MainWindow[] = {
      375,  371,   11,   11, 0x0a,
      399,  371,   11,   11, 0x0a,
      424,   11,   11,   11, 0x0a,
-     442,   11,  244,   11, 0x0a,
-     461,  453,  244,   11, 0x0a,
-     492,  484,  244,   11, 0x0a,
-     528,  517,  244,   11, 0x0a,
-     564,  557,  244,   11, 0x0a,
-     589,  557,  244,   11, 0x0a,
-     626,  615,  244,   11, 0x0a,
-     655,  615,  244,   11, 0x0a,
-     686,  615,  244,   11, 0x0a,
-     717,  517,  244,   11, 0x0a,
-     751,  748,  244,   11, 0x0a,
-     776,  769,   11,   11, 0x0a,
-     801,  748,   11,   11, 0x0a,
-     822,  748,   11,   11, 0x0a,
-     842,  748,   11,   11, 0x0a,
-     874,  862,  244,   11, 0x0a,
-     914,  898,  891,   11, 0x0a,
-     936,  898,  244,   11, 0x0a,
-     960,   11,   11,   11, 0x0a,
-     983,  977,  972,   11, 0x0a,
-     998,   11,   11,   11, 0x0a,
-    1009,   11,   11,   11, 0x0a,
-    1040, 1021,   11,   11, 0x0a,
-    1051,   11,   11,   11, 0x0a,
-    1064,   11,   11,   11, 0x0a,
-    1079,   11,   11,   11, 0x0a,
-    1099,   11,   11,   11, 0x0a,
-    1119,   11,   11,   11, 0x0a,
-    1138,   11,   11,   11, 0x0a,
-    1158,   11,   11,   11, 0x0a,
-    1166,   11,   11,   11, 0x08,
-    1185,   11,   11,   11, 0x08,
-    1207,   11,   11,   11, 0x08,
-    1227,   11,   11,   11, 0x08,
-    1247,   11,   11,   11, 0x08,
-    1265, 1259,   11,   11, 0x08,
-    1296,   11,   11,   11, 0x08,
-    1327,   11,   11,   11, 0x08,
-    1344,   11,   11,   11, 0x08,
+     459,  450,  442,   11, 0x0a,
+     498,  481,   11,   11, 0x0a,
+     527,   11,  244,   11, 0x0a,
+     546,  538,  244,   11, 0x0a,
+     577,  569,  244,   11, 0x0a,
+     613,  602,  244,   11, 0x0a,
+     649,  642,  244,   11, 0x0a,
+     674,  642,  244,   11, 0x0a,
+     711,  700,  244,   11, 0x0a,
+     740,  700,  244,   11, 0x0a,
+     771,  700,  244,   11, 0x0a,
+     802,  602,  244,   11, 0x0a,
+     836,  833,  244,   11, 0x0a,
+     861,  854,   11,   11, 0x0a,
+     886,  833,   11,   11, 0x0a,
+     907,  833,   11,   11, 0x0a,
+     927,  833,   11,   11, 0x0a,
+     959,  947,  244,   11, 0x0a,
+     999,  983,  976,   11, 0x0a,
+    1021,  983,  244,   11, 0x0a,
+    1045,   11,   11,   11, 0x0a,
+    1068, 1062, 1057,   11, 0x0a,
+    1083,   11,   11,   11, 0x0a,
+    1094,   11,   11,   11, 0x0a,
+    1125, 1106,   11,   11, 0x0a,
+    1136,   11,   11,   11, 0x0a,
+    1149,   11,   11,   11, 0x0a,
+    1164,   11,   11,   11, 0x0a,
+    1184,   11,   11,   11, 0x0a,
+    1204,   11,   11,   11, 0x0a,
+    1223,   11,   11,   11, 0x0a,
+    1243,   11,   11,   11, 0x0a,
+    1251,   11,   11,   11, 0x08,
+    1270,   11,   11,   11, 0x08,
+    1292,   11,   11,   11, 0x08,
+    1312,   11,   11,   11, 0x08,
+    1332,   11,   11,   11, 0x08,
+    1350, 1344,   11,   11, 0x08,
+    1381,   11,   11,   11, 0x08,
+    1412,   11,   11,   11, 0x08,
+    1429,   11,   11,   11, 0x08,
 
        0        // eod
 };
@@ -104,6 +106,8 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "sendRampParameters()\0a,b\0testMainSlot(int,int)\0"
     "txt\0setCollumnTemp(QString)\0"
     "setDetectorTemp(QString)\0runOvenCommands()\0"
+    "QString\0Filename\0readFromFile(QString)\0"
+    "Filename,Content\0writeToFile(QString,QString)\0"
     "init_i2c()\0fd,addr\0i2c_set_slave(int,int)\0"
     "fd,byte\0i2c_write_byte(int,__u8)\0"
     "fd,reg,cmd\0i2c_write_cmd(int,__u8,__u8)\0"
@@ -179,63 +183,66 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 12: setCollumnTemp((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 13: setDetectorTemp((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 14: runOvenCommands(); break;
-        case 15: { int _r = init_i2c();
+        case 15: { QString _r = readFromFile((*reinterpret_cast< QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
+        case 16: writeToFile((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 17: { int _r = init_i2c();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 16: { int _r = i2c_set_slave((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
+        case 18: { int _r = i2c_set_slave((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 17: { int _r = i2c_write_byte((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< __u8(*)>(_a[2])));
+        case 19: { int _r = i2c_write_byte((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< __u8(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 18: { int _r = i2c_write_cmd((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< __u8(*)>(_a[2])),(*reinterpret_cast< __u8(*)>(_a[3])));
+        case 20: { int _r = i2c_write_cmd((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< __u8(*)>(_a[2])),(*reinterpret_cast< __u8(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 19: { int _r = i2c_read_byte((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< __u8*(*)>(_a[2])));
+        case 21: { int _r = i2c_read_byte((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< __u8*(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 20: { int _r = i2c_read_byte4((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< __u8*(*)>(_a[2])));
+        case 22: { int _r = i2c_read_byte4((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< __u8*(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 21: { int _r = i2c_read_reg((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< __u8*(*)>(_a[2])),(*reinterpret_cast< __u8(*)>(_a[3])));
+        case 23: { int _r = i2c_read_reg((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< __u8*(*)>(_a[2])),(*reinterpret_cast< __u8(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 22: { int _r = i2c_read_reg2((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< __u16*(*)>(_a[2])),(*reinterpret_cast< __u8(*)>(_a[3])));
+        case 24: { int _r = i2c_read_reg2((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< __u16*(*)>(_a[2])),(*reinterpret_cast< __u8(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 23: { int _r = i2c_read_reg4((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< __u16*(*)>(_a[2])),(*reinterpret_cast< __u8(*)>(_a[3])));
+        case 25: { int _r = i2c_read_reg4((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< __u16*(*)>(_a[2])),(*reinterpret_cast< __u8(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 24: { int _r = i2c_write_cmd2((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< __u8(*)>(_a[2])),(*reinterpret_cast< __u16(*)>(_a[3])));
+        case 26: { int _r = i2c_write_cmd2((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< __u8(*)>(_a[2])),(*reinterpret_cast< __u16(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 25: { int _r = close_device((*reinterpret_cast< int(*)>(_a[1])));
+        case 27: { int _r = close_device((*reinterpret_cast< int(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 26: test_set_slave((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< uint(*)>(_a[2]))); break;
-        case 27: test_write_byte((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 28: test_write_int((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 29: test_read_byte((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 30: { int _r = setup_spi((*reinterpret_cast< char*(*)>(_a[1])));
+        case 28: test_set_slave((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< uint(*)>(_a[2]))); break;
+        case 29: test_write_byte((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 30: test_write_int((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 31: test_read_byte((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 32: { int _r = setup_spi((*reinterpret_cast< char*(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 31: { double _r = getSig_spi((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< char*(*)>(_a[2])));
+        case 33: { double _r = getSig_spi((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< char*(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
-        case 32: { int _r = transmit_spi((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< char*(*)>(_a[2])));
+        case 34: { int _r = transmit_spi((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< char*(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 33: close_spi(); break;
-        case 34: { __u8 _r = char2hex((*reinterpret_cast< char(*)>(_a[1])));
+        case 35: close_spi(); break;
+        case 36: { __u8 _r = char2hex((*reinterpret_cast< char(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< __u8*>(_a[0]) = _r; }  break;
-        case 35: openVent(); break;
-        case 36: closeVent(); break;
-        case 37: delay((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 38: heatersOff(); break;
-        case 39: TriggerOnOff(); break;
-        case 40: displayStatusBusy(); break;
-        case 41: displayStatusDone(); break;
-        case 42: externalValvesOn(); break;
-        case 43: externalValvesOff(); break;
-        case 44: dtlog(); break;
-        case 45: newConfiguration(); break;
-        case 46: modifyConfiguration(); break;
-        case 47: loadConfiguration(); break;
-        case 48: saveConfiguration(); break;
-        case 49: closePrep(); break;
-        case 50: listViewActivated((*reinterpret_cast< const QModelIndex(*)>(_a[1]))); break;
-        case 51: on_loginLogoutButton_clicked(); break;
-        case 52: loginSuperUser(); break;
-        case 53: logoutSuperUser(); break;
+        case 37: openVent(); break;
+        case 38: closeVent(); break;
+        case 39: delay((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 40: heatersOff(); break;
+        case 41: TriggerOnOff(); break;
+        case 42: displayStatusBusy(); break;
+        case 43: displayStatusDone(); break;
+        case 44: externalValvesOn(); break;
+        case 45: externalValvesOff(); break;
+        case 46: dtlog(); break;
+        case 47: newConfiguration(); break;
+        case 48: modifyConfiguration(); break;
+        case 49: loadConfiguration(); break;
+        case 50: saveConfiguration(); break;
+        case 51: closePrep(); break;
+        case 52: listViewActivated((*reinterpret_cast< const QModelIndex(*)>(_a[1]))); break;
+        case 53: on_loginLogoutButton_clicked(); break;
+        case 54: loginSuperUser(); break;
+        case 55: logoutSuperUser(); break;
         default: ;
         }
-        _id -= 54;
+        _id -= 56;
     }
     return _id;
 }

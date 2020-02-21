@@ -2,6 +2,7 @@
 #include <QAction>
 #include <errno.h>
 #include <QDebug>
+#include <QTextStream> // Added 2/21/2020 by Dione.
 #include "valvecontrol.h"
 #include "configuredialog.h"
 #include "configuredialog2.h"
@@ -89,70 +90,45 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-//void MainWindow::keyReleaseEvent(QKeyEvent *event)
-//{
-//	DetectorWidget detKeyPress;
-//	OvenWidget owValves;
-//	OvenWidget owReadFl;
-//
-//	switch (event->key()){
-//	case Qt::Key_F1:{
-//		qDebug() << "Released F1 Key";
-//		break;
-//	}
-//	case Qt::Key_F2:{
-//		qDebug() << "Released F2 Key";
-//		break;
-//	}
-//	case Qt::Key_F3:{
-//		qDebug() << "Released F3 Key";
-//		break;
-//	}
-//	case Qt::Key_F4:{
-//		qDebug() << "Released F4 Key";
-//		break;
-//	}
-//	case Qt::Key_F5:{
-//		qDebug() << "Released F5 Key (DET 1)";
-//		detNumberDirector = 1;
-//		ui->partStack->setCurrentWidget(currentWidgetList[1]);
-//		ui->partStack->setCurrentIndex(1);
-//		break;
-//	}
-//	case Qt::Key_F6:{
-//		qDebug() << "Released F6 Key (Oven)";
-//		ui->partStack->setCurrentWidget(currentWidgetList[0]);
-//		ui->partStack->setCurrentIndex(0);
-//		break;
-//	}
-//	case Qt::Key_F7:{
-//		owReadFl.owReadFlow();
-//		qDebug() << "Released F7 Key (Flow)";
-//		break;
-//	}
-//	case Qt::Key_F8:{
-//		detNumberDirector = 2;
-//		qDebug() << "Released F8 Key (Det 2)";
-//		ui->partStack->setCurrentWidget(currentWidgetList[2]);
-//		ui->partStack->setCurrentIndex(2);
-//		break;
-//	}
-//	case Qt::Key_F9:{
-//		owValves.owValveControl();
-//		qDebug() << "Released F9 Key (Valve)";
-//		break;
-//	}
-//	case Qt::Key_F10:{
-//		qDebug() << "Released F10 Key (Inj Port)";
-//		ui->partStack->setCurrentWidget(currentWidgetList[3]);
-//		ui->partStack->setCurrentIndex(3);
-//		break;
-//	}
-//	default:{//
-//		break;
-//	}
-//}
-//}
+// Dione QFile Read/Write Functions (2/21/2020)
+/*
+ *  Uses QFile and QTextStream
+ *  - Takes in a Filename for Read. Returns the data from File.
+ *  - Takes in the Filename for Write and the Contents to write. */
+
+QString MainWindow::readFromFile(QString Filename){
+	QFile file(Filename);
+	if(!file.open(QFile::ReadOnly | QFile::Text))
+	{
+		qDebug() << " Could not open the file for reading";
+	    QString errorMessage = "Could not open the file for reading";
+	    return errorMessage;
+	}
+
+	QTextStream in(&file);
+	QString myText = in.readAll();
+	qDebug() << myText;
+
+	file.close();
+	return myText;
+}
+
+void MainWindow::writeToFile(QString Filename, QString Content){
+	QFile file(Filename);
+	// Trying to open in WriteOnly and Text mode
+	if(!file.open(QFile::WriteOnly | QFile::Text))
+	{
+	    qDebug() << " Could not open file for writing";
+	    return;
+	}
+	// a QTextStream on the left
+	// and data types (including QString) on the right
+	QTextStream out(&file);
+	out << Content;
+	file.flush();
+	file.close();
+}
+
 void MainWindow::dtlog(void){
 //	data::saveDatalog();
 }

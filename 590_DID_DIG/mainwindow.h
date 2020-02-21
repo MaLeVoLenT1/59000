@@ -75,6 +75,10 @@ public slots:
     //Added by Dione, 2/19/2020 Function to fire off necessary commands before any Oven Command is ran.
     void runOvenCommands(void);
 
+    // Added by Dione QFile Commands
+    QString readFromFile(QString Filename);
+    void writeToFile(QString Filename, QString Content);
+
     // i2c prototypes //
 	int init_i2c(void);
 	int i2c_set_slave(int fd, int addr);
