@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'rampoven_para_registers.h'
 **
-** Created: Tue Mar 5 14:06:20 2019
+** Created: Mon Feb 24 15:59:02 2020
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
 **
 ** WARNING! All changes made in this file will be lost!

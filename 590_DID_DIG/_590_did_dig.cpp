@@ -167,7 +167,9 @@ void _590_DID_DIG::setTempLabel(QString txt, int ovenType){
 
 	}
 }
-void _590_DID_DIG::callViewSigs(void){
+//This Function is Busted its calling dc which is detconfigure.h
+// Dione 2/24/2020
+/*void _590_DID_DIG::callViewSigs(void){
 
 	th_i2c.delay(200);
 	ui.detDid1LCD->display(dc.detDID_I_read());
@@ -195,7 +197,39 @@ void _590_DID_DIG::callViewSigs(void){
 	}
 
 	qDebug("(detConfigure) callViewSigs ending.");
+}*/
+void _590_DID_DIG::callViewSigs(void){
+
+	th_i2c.delay(200);
+	ui.detDid1LCD->display(detDID_I_read());
+	th_i2c.delay(200);
+
+	ui.detDidHvLCD->display(detHvSig());
+	qDebug("(detConfigure) detHvSig() firing.");
+
+	th_i2c.delay(200);
+	ui.detDidPolVLCD->display(detPolSig());
+
+	th_i2c.delay(500);
+
+	detDIDSig();
+
+	//ui.column_temp_box->display(th_i2c.readTrueValue(1));
+	//qDebug("readTrueValue(1) finished.");
+
+	//th_i2c.delay(500);
+	//ui.detector_temp_box->display(th_i2c.readTrueValue(2));
+	//qDebug("readTrueValue(2) finished.");
+
+/*	if ((detDIDSig() * -2.0 * 1.25)>=5.0){
+		ui.detDidISigLCD->display(12.5 - (detDIDSig() * -2.0 * 1.25));
+	}else{
+		ui.detDidISigLCD->display(detDIDSig() * -2.0 * 1.25);
+	}
+
+	qDebug("(detConfigure) callViewSigs ending.");*/
 }
+
 
 void _590_DID_DIG::calibrat(void)
 {
@@ -1507,12 +1541,30 @@ double _590_DID_DIG::detDIDSig(void){//ok - used for DID / FID- OK
 		resultDsply = (result + 2.5) * (-1);
 		//qDebug("(< 0) DID ResultDsply + 2.5 = %f", resultDsply);
 	}*/
+	//QString getResult = dci2c.readFromFile("tmp/VoltageDigSig.txt");
+////////////////////////////////////////////////////////////////////////////TEst read
+	float num;
+	           FILE *fptr;
+	           if ((fptr = fopen("tmp/VoltageDidSig","rw")) == NULL){
+	               printf("Error! opening file");
+	               // Program exits if the file pointer returns NULL.
+	               exit(1);
+	           }
+	           //fscanf(fptr,"%f", &num);
+	           //printf("Value of n= %f", num);
+	           fclose(fptr);
+//////////////////////////////////////////////////////////////////////////
+//	result = getResult.toDouble();
 
+
+	ui.detDidISigLCD->display(result);
+	qDebug("The Result is %f", result);
 	//ui.detDidISigLCD->display(resultDsply * -2.0 * 1.25);
 
 	ui.busyLineEdit->setText(notBusyState);
 
-	return result - 2.5;
+	return result;
+	//return result - 2.5;
 }
 
 double _590_DID_DIG::detTCD_I_Sig(void){// Ok // good USED FOR 2300 reads any det sig from A/D "Voltage"
@@ -1697,6 +1749,7 @@ void _590_DID_DIG::detDID_I_OnOffCtl(void){//(int valu){// turn on or off curren
 
 void _590_DID_DIG::IO20b(void)// Off I/O Q1 Valve 1
 {
+	qDebug("I020b FIRING!");
 //	MainWindow vc_i2c;
 	__u8 buff[3];//__16
 	int fd;
@@ -1726,6 +1779,7 @@ void _590_DID_DIG::IO20b(void)// Off I/O Q1 Valve 1
 void _590_DID_DIG::IO20a(void)// On I/O Q1 Valve 1 detector boarb slaveIdaddress hard coded
 {
 //	MainWindow vc_i2c;
+	qDebug("I020a FIRING!");
 	__u8 buff[3];//__16
 	int fd;
 	__u8 port_addr;
@@ -1750,6 +1804,7 @@ void _590_DID_DIG::IO20a(void)// On I/O Q1 Valve 1 detector boarb slaveIdaddress
 
 void _590_DID_DIG::activateValve1(void){
 	// Default Button Color
+	qDebug("Valve 1 FIRING!");
 	QPalette defaultColor;
 	QBrush brush28(QColor(170, 255, 255, 255));
 	brush28.setStyle(Qt::SolidPattern);
@@ -1763,11 +1818,13 @@ void _590_DID_DIG::activateValve1(void){
 	if(Valve1toggle == 1){
 		ui.v1_pushButton->setPalette(defaultColor);
 		IO20b();
+		qDebug("Valve Toggle = 1 FIRING (i020b)!");
 		Valve1toggle = 0;
 	}else if (Valve1toggle == 0){
 		ui.v1_pushButton->setPalette(activeColor);
 		IO20a();
-		Valve1toggle = 1;
+		qDebug("Valve Toggle = 1 FIRING (i020a)!");
+		Valve1toggle = 2;
 	}
 
 }

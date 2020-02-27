@@ -97,7 +97,18 @@ MainWindow::~MainWindow()
  *  - Takes in the Filename for Write and the Contents to write. */
 
 QString MainWindow::readFromFile(QString Filename){
-	QFile file(Filename);
+	QFile file(QCoreApplication::applicationDirPath() + Filename);
+	//QFile file(Filename);
+
+	if (!file.open(QIODevice::ReadOnly)){
+	    qDebug() << "Failed to open file:" << file.fileName() << "Error:" << file.errorString();
+	}
+	else{
+		QTextStream in(&file);
+		QString myText = in.readAll();
+	    qDebug() << myText;
+	}
+
 	if(!file.open(QFile::ReadOnly | QFile::Text))
 	{
 		qDebug() << " Could not open the file for reading";
@@ -114,7 +125,7 @@ QString MainWindow::readFromFile(QString Filename){
 }
 
 void MainWindow::writeToFile(QString Filename, QString Content){
-	QFile file(Filename);
+	QFile file(QCoreApplication::applicationDirPath() + Filename);
 	// Trying to open in WriteOnly and Text mode
 	if(!file.open(QFile::WriteOnly | QFile::Text))
 	{

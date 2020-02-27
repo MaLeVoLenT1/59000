@@ -23,6 +23,7 @@
 #include "polarizepopup.h"
 #include "voltagenumpopup.h"
 #include "ovenwidget.h"
+#include <string>
 
 class _590_DID_DIG : public QMainWindow
 {
