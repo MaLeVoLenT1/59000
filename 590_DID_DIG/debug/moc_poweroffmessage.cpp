@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'poweroffmessage.h'
 **
-** Created: Fri Feb 21 09:30:47 2020
+** Created: Fri Feb 28 12:07:43 2020
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
 **
 ** WARNING! All changes made in this file will be lost!

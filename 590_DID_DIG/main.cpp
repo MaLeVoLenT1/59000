@@ -119,7 +119,7 @@ int main(int argc, char *argv[])
 
 	detConfig.configIO(1);
 	qDebug() << "Config IO - MAIN END in main";
-
+	//
 	Range = 4;
 	dcGain2 = 1;
 	dcGain2 = 0;

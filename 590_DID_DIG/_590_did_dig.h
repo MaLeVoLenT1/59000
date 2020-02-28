@@ -23,6 +23,7 @@
 #include "polarizepopup.h"
 #include "voltagenumpopup.h"
 #include "ovenwidget.h"
+#include <string>
 
 class _590_DID_DIG : public QMainWindow
 {
@@ -148,6 +149,9 @@ public slots:
 	double detDIDZeroCtl(void);
 
 	void fireOvenCommands(void);
+
+	int getModBusTemp(int SlaveAddress);
+	void SetModBusTemp(int SlaveAddress, int Temp);
 
 
 private:

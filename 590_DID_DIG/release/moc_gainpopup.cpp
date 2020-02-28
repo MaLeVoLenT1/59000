@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'gainpopup.h'
 **
-** Created: Tue Mar 5 14:06:27 2019
+** Created: Fri Feb 28 11:21:07 2020
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_gainPopUp[] = {
        4,       // revision
        0,       // classname
        0,    0, // classinfo
-      15,   14, // methods
+      16,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -46,6 +46,7 @@ static const uint qt_meta_data_gainPopUp[] = {
      133,   10,   10,   10, 0x0a,
      145,   10,   10,   10, 0x0a,
      158,   10,   10,   10, 0x0a,
+     176,  170,   10,   10, 0x0a,
 
        0        // eod
 };
@@ -55,7 +56,8 @@ static const char qt_meta_stringdata_gainPopUp[] = {
     "popupNumInReturn()\0num_1()\0num_2()\0"
     "num_3()\0num_4()\0num_5()\0num_6()\0num_7()\0"
     "num_8()\0num_9()\0num_0()\0num_minus()\0"
-    "num_period()\0num_Clear()\0"
+    "num_period()\0num_Clear()\0Range\0"
+    "detectRange(int)\0"
 };
 
 const QMetaObject gainPopUp::staticMetaObject = {
@@ -103,9 +105,10 @@ int gainPopUp::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 12: num_minus(); break;
         case 13: num_period(); break;
         case 14: num_Clear(); break;
+        case 15: detectRange((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
-        _id -= 15;
+        _id -= 16;
     }
     return _id;
 }

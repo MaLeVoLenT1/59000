@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file '_590_did_dig.h'
 **
-** Created: Fri Feb 21 09:30:37 2020
+** Created: Fri Feb 28 12:07:34 2020
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data__590_DID_DIG[] = {
        4,       // revision
        0,       // classname
        0,    0, // classinfo
-      63,   14, // methods
+      65,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -94,6 +94,8 @@ static const uint qt_meta_data__590_DID_DIG[] = {
      952,  649,   13,   13, 0x0a,
      974,   13,  227,   13, 0x0a,
      990,   13,   13,   13, 0x0a,
+    1022, 1009,  805,   13, 0x0a,
+    1059, 1041,   13,   13, 0x0a,
 
        0        // eod
 };
@@ -127,6 +129,8 @@ static const char qt_meta_stringdata__590_DID_DIG[] = {
     "IO18b()\0activateValve3()\0IO17a()\0"
     "IO17b()\0activateValve4()\0deletePolPop(QString)\0"
     "detDIDZeroCtl()\0fireOvenCommands()\0"
+    "SlaveAddress\0getModBusTemp(int)\0"
+    "SlaveAddress,Temp\0SetModBusTemp(int,int)\0"
 };
 
 const QMetaObject _590_DID_DIG::staticMetaObject = {
@@ -238,9 +242,12 @@ int _590_DID_DIG::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 61: { double _r = detDIDZeroCtl();
             if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
         case 62: fireOvenCommands(); break;
+        case 63: { int _r = getModBusTemp((*reinterpret_cast< int(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
+        case 64: SetModBusTemp((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         default: ;
         }
-        _id -= 63;
+        _id -= 65;
     }
     return _id;
 }

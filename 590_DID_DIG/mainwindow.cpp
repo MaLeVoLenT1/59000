@@ -97,7 +97,18 @@ MainWindow::~MainWindow()
  *  - Takes in the Filename for Write and the Contents to write. */
 
 QString MainWindow::readFromFile(QString Filename){
-	QFile file(Filename);
+	QFile file(QCoreApplication::applicationDirPath() + Filename);
+	//QFile file(Filename);
+
+	if (!file.open(QIODevice::ReadOnly)){
+	    qDebug() << "Failed to open file:" << file.fileName() << "Error:" << file.errorString();
+	}
+	else{
+		QTextStream in(&file);
+		QString myText = in.readAll();
+	    qDebug() << myText;
+	}
+
 	if(!file.open(QFile::ReadOnly | QFile::Text))
 	{
 		qDebug() << " Could not open the file for reading";
@@ -114,7 +125,7 @@ QString MainWindow::readFromFile(QString Filename){
 }
 
 void MainWindow::writeToFile(QString Filename, QString Content){
-	QFile file(Filename);
+	QFile file(QCoreApplication::applicationDirPath() + Filename);
 	// Trying to open in WriteOnly and Text mode
 	if(!file.open(QFile::WriteOnly | QFile::Text))
 	{
@@ -367,12 +378,16 @@ delay(200);
         int ret = -1;
         bool writeAccess = false;
 
+        // https://github.com/stephane/libmodbus/blob/master/doc/modbus_set_slave.txt
         modbus_set_slave( m_modbus, slaveID );
         delay(MDT);
 
+
+        // This method I cant find. In the newest documentation.
         modbus_rtu_set_echohw_mode(m_modbus, 0x01);// added 8/27/2014 wtr for test
         delay(MDT);
 
+        // https://github.com/stephane/libmodbus/blob/master/doc/modbus_write_register.txt
         ret = modbus_write_register( m_modbus, addr, tempSP);
         delay(MDT);
         writeAccess = true;
@@ -2072,6 +2087,88 @@ void MainWindow::setDetectorTemp(QString txt){
 		qDebug() << "********OVEN TEMP SET TO: %d" << tempVar;
 		writeTempSetpoint(2,tempVar);
 }
+
+// Copy This
+QString MainWindow::getModBusTemp(int SlaveAddress){
+	QString program = "./modbus_read_ttyO1";
+	qDebug("starting Modbus Read");
+	QStringList arguments;
+	arguments << SlaveAddress;
+	QProcess *myProcess = new QProcess();
+	myProcess->start(program, arguments);
+	myProcess->waitForFinished();
+	if(myProcess->FailedToStart){
+		qDebug("Modbus Failed to Start");
+		qDebug(myProcess->errorString());
+		return myProcess->errorString();
+	}
+	if(myProcess->Crashed){
+		qDebug("Modbus Crashed");
+		qDebug(myProcess->errorString());
+		return myProcess->errorString();
+	}
+	if(myProcess->Timedout){
+		qDebug("Modbus Timedout");
+		qDebug(myProcess->errorString());
+		return myProcess->errorString();
+	}
+	if(myProcess->WriteError){
+		qDebug("Modbus WriteError");
+		qDebug(myProcess->errorString());
+		return myProcess->errorString();
+	}
+	if(myProcess->ReadError){
+		qDebug("Modbus ReadError");
+		qDebug(myProcess->errorString());
+		return myProcess->errorString();
+	}
+	if(myProcess->UnknownError){
+		qDebug("Modbus UnknownError");
+		qDebug(myProcess->errorString());
+		return myProcess->errorString();
+	}
+	qDebug(myProcess->readAll());
+
+}
+// Copy This
+void MainWindow::SetModBusTemp(QString SlaveAddress, QString Temp){
+	QString program = "./modbus_set_ttyO1";
+		qDebug("starting Modbus Set");
+		QStringList arguments;
+		arguments << Temp << SlaveAddress;
+		QProcess *myProcess = new QProcess();
+
+		myProcess->start(program, arguments);
+		myProcess->waitForFinished();
+		qDebug(myProcess->errorString());
+		/*
+		if(myProcess->FailedToStart){
+			qDebug("Modbus Failed to Start");
+			qDebug(myProcess->errorString());
+		}
+		if(myProcess->Crashed){
+			qDebug("Modbus Crashed");
+			qDebug(myProcess->errorString());
+		}
+		if(myProcess->Timedout){
+			qDebug("Modbus Timedout");
+			qDebug(myProcess->errorString());
+		}
+		if(myProcess->WriteError){
+			qDebug("Modbus WriteError");
+			qDebug(myProcess->errorString());
+		}
+		if(myProcess->ReadError){
+			qDebug("Modbus ReadError");
+			qDebug(myProcess->errorString());
+		}
+		if(myProcess->UnknownError){
+			qDebug("Modbus UnknownError");
+			qDebug(myProcess->errorString());
+		}*/
+}
+
+
 ////////////////////////////////////////////SPI/////////////////////END
 //*************** END MainWindow initialization FUNCTIONS ************************
 

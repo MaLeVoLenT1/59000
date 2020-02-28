@@ -79,6 +79,10 @@ public slots:
     QString readFromFile(QString Filename);
     void writeToFile(QString Filename, QString Content);
 
+    // Added by Dione Modbus methods
+    QString getModBusTemp(int SlaveAddress);
+    void SetModBusTemp(QString SlaveAddress, QString Temp);
+
     // i2c prototypes //
 	int init_i2c(void);
 	int i2c_set_slave(int fd, int addr);

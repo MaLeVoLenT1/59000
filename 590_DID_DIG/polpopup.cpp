@@ -79,11 +79,13 @@ void polPopUp::num_Clear(void){
 //	vall1 = '\b';
 	ui.lineEdit->clear();//->insert(vall1);
 }
+// Copy this
 void polPopUp::processNumIn(void){
 
 	QString txt;
+	qDebug(ui.lineEdit->text());
 		if(ui.lineEdit->text() == NULL){
-				qDebug("No Value Entered for Column Temperature.");
+				qDebug("No Value Entered for Oven Temperature.");
 			}
 			else{
 				txt = ui.lineEdit->text();
@@ -91,9 +93,10 @@ void polPopUp::processNumIn(void){
 				((_590_DID_DIG*)(parent()))->ui.collumnTempLine->setText(txt);
 
 
-				xferToMain.setCollumnTemp(txt);
+				//xferToMain.setCollumnTemp(txt);
+				xferToMain.SetModBusTemp("1", txt);
 				qDebug("Setting Column Temperature.");
-				ui.lineEdit->clear();
+				//ui.lineEdit->clear();
 			}
 
 }

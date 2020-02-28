@@ -79,6 +79,7 @@ void numPopUp::num_clear(void){
 //	vall1 = '\b';
 	ui.lineEdit->clear();//->insert(vall1);
 }
+// Copy this
 void numPopUp::processNumIn(void){
 	QString val1;
 	QString txt;
@@ -93,9 +94,10 @@ void numPopUp::processNumIn(void){
 			((_590_DID_DIG*)(parent()))->ui.detectorTempLine->setText(txt);
 
 
-			xferToMain.setDetectorTemp(txt);
+			//xferToMain.setDetectorTemp(txt);
+			xferToMain.SetModBusTemp("2", txt);
 			qDebug("Setting Detector Temperature.");
-			ui.lineEdit->clear();
+			//ui.lineEdit->clear();
 		}
 
 }
